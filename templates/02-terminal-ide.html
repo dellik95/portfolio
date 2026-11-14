@@ -404,11 +404,21 @@
 
     /* Git Log Experience Timeline */
     .git-graph {
-      border-left: 2px solid #30363d;
-      margin-left: 14px;
-      padding-left: 26px;
+      position: relative;
+      margin-left: 10px;
+      padding-left: 34px;
       display: grid;
       gap: 28px;
+    }
+
+    .git-graph::before {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #30363d;
     }
 
     .git-commit {
@@ -422,7 +432,8 @@
     .git-commit::before {
       content: "";
       position: absolute;
-      left: -34px;
+      left: -26px;
+      transform: translateX(-50%);
       top: 26px;
       width: 14px;
       height: 14px;
@@ -430,6 +441,7 @@
       background: var(--green);
       border: 3px solid var(--bg-editor);
       box-shadow: 0 0 0 2px var(--green);
+      z-index: 2;
     }
 
     .commit-meta {

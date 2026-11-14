@@ -262,8 +262,19 @@
   }
 
   function getCurrentTemplateMeta() {
-    const currentFile = window.location.pathname.split('/').pop() || 'index.html';
+    const metaEl = document.querySelector('meta[name="ol-template-file"]');
+    const metaFile = metaEl ? metaEl.getAttribute('content') : '';
+    const currentFile = metaFile || window.location.pathname.split('/').pop() || 'index.html';
     return TEMPLATES.find((t) => t.file === currentFile) || null;
+  }
+
+  function isPhotoLocked() {
+    const isStandalone = !!document.querySelector('meta[name="ol-standalone-resume"]');
+    const host = window.location.hostname || '';
+    const isRemoteHttp = window.location.protocol.startsWith('http') &&
+      host !== '' &&
+      !/^(localhost|127\.0\.0\.1)$/i.test(host);
+    return isStandalone || isRemoteHttp;
   }
 
   function getCurrentTheme() {
@@ -322,6 +333,15 @@
   }
 
   function initPhotoSlots() {
+    if (isPhotoLocked()) {
+      document.documentElement.classList.add('ol-photo-locked');
+      document.querySelectorAll('.ol-photo-slot').forEach((slot) => {
+        slot.style.cursor = 'default';
+        slot.removeAttribute('title');
+      });
+      return;
+    }
+
     let fileInput = document.getElementById('ol-hidden-photo-input');
     if (!fileInput) {
       fileInput = document.createElement('input');
@@ -379,7 +399,10 @@
     const redisLandingUrl = isInTemplatesDir ? '../projects/redis-gui.html' : 'projects/redis-gui.html';
 
     if (projectId === 'redis-gui') {
-      window.location.href = redisLandingUrl;
+      const win = window.open(redisLandingUrl, '_blank', 'noopener');
+      if (!win) {
+        window.location.href = redisLandingUrl;
+      }
       return;
     }
 
@@ -507,6 +530,369 @@
       }
       .ol-photo-slot:hover .ol-photo-overlay {
         opacity: 1;
+      }
+      html.ol-photo-locked .ol-photo-slot {
+        cursor: default !important;
+      }
+      html.ol-photo-locked .ol-photo-overlay,
+      html.ol-photo-locked [data-i18n="photo_hint"] {
+        display: none !important;
+      }
+
+      /* Native Header Actions (Theme / Language / Print) Styled Per Template */
+      .ol-hdr-actions {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        flex-shrink: 0;
+        flex-wrap: wrap;
+      }
+      .ol-hdr-seg {
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
+        padding: 2px;
+      }
+      .ol-hdr-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        border: 1px solid transparent;
+        background: transparent;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 11.5px;
+        font-weight: 600;
+        line-height: 1;
+        transition: all 0.16s ease;
+        white-space: nowrap;
+      }
+      body.in-iframe .ol-hdr-actions {
+        display: none !important;
+      }
+
+      /* tpl-01: Bento Glass Header Actions */
+      html.tpl-01 .ol-hdr-actions { margin-left: auto; margin-right: 4px; }
+      html.tpl-01 .ol-hdr-seg {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+      }
+      html.tpl-01 .ol-hdr-btn {
+        color: var(--text-muted);
+        padding: 5px 8px;
+        border-radius: 7px;
+      }
+      html.tpl-01 .ol-hdr-btn:hover { color: var(--text); background: rgba(255, 255, 255, 0.08); }
+      html.tpl-01 .ol-hdr-btn.active {
+        background: rgba(139, 92, 246, 0.24);
+        border-color: rgba(139, 92, 246, 0.45);
+        color: #fff;
+      }
+      html.tpl-01 .ol-hdr-print {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        color: var(--text);
+        padding: 7px 11px;
+      }
+      html.tpl-01 .ol-hdr-print:hover {
+        border-color: var(--border-hi);
+        background: rgba(139, 92, 246, 0.14);
+      }
+      html.tpl-01[data-theme="light"] .ol-hdr-seg,
+      html.tpl-01[data-theme="light"] .ol-hdr-print {
+        background: rgba(15, 23, 42, 0.04);
+        border-color: var(--border);
+        color: #334155;
+      }
+      html.tpl-01[data-theme="light"] .ol-hdr-btn.active {
+        background: #ede9fe;
+        border-color: #c4b5fd;
+        color: #5b21b6;
+      }
+
+      /* tpl-02: Terminal & IDE Titlebar Actions */
+      html.tpl-02 .ol-hdr-actions {
+        font-family: 'JetBrains Mono', monospace;
+        gap: 6px;
+      }
+      html.tpl-02 .ol-hdr-seg {
+        background: #0d1117;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+      }
+      html.tpl-02 .ol-hdr-btn {
+        color: var(--text-muted);
+        padding: 4px 7px;
+        border-radius: 4px;
+        font-size: 11px;
+      }
+      html.tpl-02 .ol-hdr-btn:hover { color: #fff; background: rgba(56, 189, 248, 0.12); }
+      html.tpl-02 .ol-hdr-btn.active {
+        background: rgba(16, 185, 129, 0.18);
+        border-color: rgba(16, 185, 129, 0.45);
+        color: #34d399;
+      }
+      html.tpl-02 .ol-hdr-print {
+        background: #0d1117;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--cyan);
+        padding: 5px 9px;
+        font-size: 11px;
+      }
+      html.tpl-02 .ol-hdr-print:hover {
+        border-color: var(--cyan);
+        color: #fff;
+      }
+      html.tpl-02[data-theme="light"] .ol-hdr-seg,
+      html.tpl-02[data-theme="light"] .ol-hdr-print {
+        background: #ffffff;
+        border-color: #cbd5e1;
+        color: #0f172a;
+      }
+      html.tpl-02[data-theme="light"] .ol-hdr-btn:hover {
+        color: #0284c7;
+        background: #e0f2fe;
+      }
+      html.tpl-02[data-theme="light"] .ol-hdr-btn.active {
+        background: #ecfdf5;
+        border-color: #a7f3d0;
+        color: #047857;
+      }
+      html.tpl-02[data-theme="light"] .ol-hdr-print {
+        color: #0284c7;
+      }
+
+      /* tpl-03: Swiss Editorial Masthead Actions */
+      html.tpl-03 .masthead > .m-col-3 {
+        flex-wrap: wrap;
+        gap: 6px 10px;
+      }
+      html.tpl-03 .ol-hdr-actions {
+        font-family: 'JetBrains Mono', monospace;
+        gap: 5px;
+      }
+      html.tpl-03 .ol-hdr-seg {
+        border: 1px solid var(--ink);
+        border-radius: 0;
+        padding: 1px;
+        background: transparent;
+      }
+      html.tpl-03 .ol-hdr-btn {
+        color: var(--ink);
+        padding: 3px 6px;
+        border-radius: 0;
+        font-size: 10.5px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      html.tpl-03 .ol-hdr-btn:hover { background: rgba(220, 56, 45, 0.12); color: var(--vermilion); }
+      html.tpl-03 .ol-hdr-btn.active {
+        background: var(--ink);
+        color: var(--paper);
+      }
+      html.tpl-03 .ol-hdr-print {
+        border: 1px solid var(--ink);
+        border-radius: 0;
+        padding: 4px 8px;
+        font-size: 10.5px;
+      }
+      html.tpl-03 .ol-hdr-print:hover {
+        background: var(--vermilion);
+        border-color: var(--vermilion);
+        color: #fff;
+      }
+
+      /* tpl-04: Nordic FinTech (Stripe) Navbar Actions */
+      html.tpl-04 .ol-hdr-actions { margin-left: auto; margin-right: 4px; }
+      html.tpl-04 .ol-hdr-seg {
+        background: var(--surface-subtle);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+      }
+      html.tpl-04 .ol-hdr-btn {
+        color: var(--text-muted);
+        padding: 5px 8px;
+        border-radius: 6px;
+      }
+      html.tpl-04 .ol-hdr-btn:hover { color: var(--text-main); }
+      html.tpl-04 .ol-hdr-btn.active {
+        background: var(--surface);
+        color: var(--indigo);
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+        border-color: var(--border);
+      }
+      html.tpl-04 .ol-hdr-print {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text-main);
+        padding: 6px 11px;
+      }
+      html.tpl-04 .ol-hdr-print:hover {
+        border-color: var(--indigo);
+        color: var(--indigo);
+      }
+
+      /* tpl-05: Executive Split Left-Pane Header Actions */
+      html.tpl-05 .ol-hdr-actions {
+        margin-bottom: 14px;
+        width: 100%;
+      }
+      html.tpl-05 .ol-hdr-seg {
+        background: var(--slate-card);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+      }
+      html.tpl-05 .ol-hdr-btn {
+        color: var(--text-mid);
+        padding: 4px 9px;
+        border-radius: 999px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+      }
+      html.tpl-05 .ol-hdr-btn:hover { color: var(--text-hi); }
+      html.tpl-05 .ol-hdr-btn.active {
+        background: rgba(45, 212, 191, 0.16);
+        border-color: rgba(45, 212, 191, 0.45);
+        color: var(--teal);
+      }
+      html.tpl-05 .ol-hdr-print {
+        background: var(--slate-card);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        color: var(--text-hi);
+        padding: 5px 11px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+      }
+      html.tpl-05 .ol-hdr-print:hover {
+        border-color: var(--teal);
+        color: var(--teal);
+      }
+      html.tpl-05[data-theme="light"] .ol-hdr-btn.active {
+        background: #f0fdfa;
+        border-color: #5eead4;
+        color: #0f766e;
+      }
+
+      /* tpl-07: Executive Dossier Top-Bar Actions */
+      html.tpl-07 .ol-hdr-seg {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 6px;
+      }
+      html.tpl-07 .ol-hdr-btn {
+        color: #cbd5e1;
+        padding: 5px 8px;
+        border-radius: 4px;
+        font-size: 11.5px;
+      }
+      html.tpl-07 .ol-hdr-btn:hover { color: #fff; background: rgba(255, 255, 255, 0.1); }
+      html.tpl-07 .ol-hdr-btn.active {
+        background: #2563eb;
+        color: #fff;
+      }
+      html.tpl-07 .ol-hdr-print {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 6px;
+        color: #fff;
+        padding: 6px 10px;
+      }
+      html.tpl-07 .ol-hdr-print:hover { background: rgba(255, 255, 255, 0.2); }
+
+      /* tpl-08: Cloud Architect Portal Top-Bar Actions */
+      html.tpl-08 .ol-hdr-seg {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 6px;
+      }
+      html.tpl-08 .ol-hdr-btn {
+        color: rgba(255, 255, 255, 0.85);
+        padding: 5px 8px;
+        border-radius: 4px;
+        font-size: 11.5px;
+      }
+      html.tpl-08 .ol-hdr-btn:hover { color: #fff; background: rgba(255, 255, 255, 0.14); }
+      html.tpl-08 .ol-hdr-btn.active {
+        background: #ffffff;
+        color: #0f172a;
+      }
+      html.tpl-08 .ol-hdr-print {
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.24);
+        border-radius: 6px;
+        color: #fff;
+        padding: 6px 10px;
+      }
+      html.tpl-08 .ol-hdr-print:hover { background: rgba(255, 255, 255, 0.22); }
+
+      /* tpl-09: Minimal Mono Craft Nav Actions */
+      html.tpl-09 .ol-hdr-seg {
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+      }
+      html.tpl-09 .ol-hdr-btn {
+        color: var(--muted);
+        padding: 5px 8px;
+        border-radius: 6px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+      }
+      html.tpl-09 .ol-hdr-btn:hover { color: var(--ink); }
+      html.tpl-09 .ol-hdr-btn.active {
+        background: var(--ink);
+        color: var(--bg);
+      }
+      html.tpl-09 .ol-hdr-print {
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--ink);
+        padding: 6px 10px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+      }
+      html.tpl-09 .ol-hdr-print:hover {
+        border-color: var(--ink);
+      }
+
+      /* tpl-10: Emerald Engineering Matrix Header Actions */
+      html.tpl-10 .ol-hdr-seg {
+        background: var(--card);
+        border: 1px solid var(--border-dim);
+        border-radius: 8px;
+      }
+      html.tpl-10 .ol-hdr-btn {
+        color: var(--muted);
+        padding: 5px 8px;
+        border-radius: 6px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+      }
+      html.tpl-10 .ol-hdr-btn:hover { color: var(--text); }
+      html.tpl-10 .ol-hdr-btn.active {
+        background: var(--emerald-soft);
+        border-color: var(--border);
+        color: var(--emerald);
+      }
+      html.tpl-10 .ol-hdr-print {
+        background: var(--card);
+        border: 1px solid var(--border-dim);
+        border-radius: 8px;
+        color: var(--text);
+        padding: 6px 10px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+      }
+      html.tpl-10 .ol-hdr-print:hover {
+        border-color: var(--emerald);
+        color: var(--emerald);
       }
 
       #ol-floating-switcher {
@@ -985,8 +1371,8 @@
       html.tpl-02[data-theme="light"] .json-key {
         color: #047857;
       }
-      html.tpl-02[data-theme="light"] .git-graph {
-        border-left-color: #cbd5e1;
+      html.tpl-02[data-theme="light"] .git-graph::before {
+        background: #cbd5e1;
       }
       html.tpl-02[data-theme="light"] .git-commit::before {
         border-color: #ffffff;
@@ -1420,6 +1806,7 @@
         #ol-floating-switcher,
         #ol-project-landing-modal,
         #ol-hidden-photo-input,
+        .ol-hdr-actions,
         #spotlight,
         .top-nav,
         .ide-titlebar,
@@ -1891,13 +2278,148 @@
       document.body.classList.add('in-iframe');
     }
 
+    function injectHeaderActions(tplClass) {
+      if (document.querySelector('.ol-hdr-actions')) return;
+      const box = document.createElement('div');
+      box.className = 'ol-hdr-actions';
+      box.setAttribute('role', 'group');
+      box.setAttribute('aria-label', 'Resume Display Controls');
+      box.innerHTML = `
+        <div class="ol-hdr-seg" title="Light / Dark Theme">
+          <button type="button" class="ol-hdr-btn" data-theme-btn="light" aria-label="Light theme">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          </button>
+          <button type="button" class="ol-hdr-btn" data-theme-btn="dark" aria-label="Dark theme">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          </button>
+        </div>
+        <div class="ol-hdr-seg" title="Language">
+          <button type="button" class="ol-hdr-btn" data-lang-btn="en">EN</button>
+          <button type="button" class="ol-hdr-btn" data-lang-btn="uk">UA</button>
+        </div>
+        <button type="button" class="ol-hdr-btn ol-hdr-print" data-print-btn="1" title="Print / Save as PDF" aria-label="Print resume">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          <span>Print</span>
+        </button>
+      `;
+
+      let mounted = false;
+      const mountMap = {
+        'tpl-01': () => {
+          const inner = document.querySelector('.top-nav-inner');
+          const cta = inner && inner.querySelector('.nav-cta');
+          if (inner) {
+            if (cta) inner.insertBefore(box, cta);
+            else inner.appendChild(box);
+            return true;
+          }
+          return false;
+        },
+        'tpl-02': () => {
+          const bar = document.querySelector('.ide-titlebar');
+          if (bar) {
+            bar.appendChild(box);
+            return true;
+          }
+          return false;
+        },
+        'tpl-03': () => {
+          const col = document.querySelector('.masthead > .m-col-3') || document.querySelector('.masthead');
+          if (col) {
+            col.appendChild(box);
+            return true;
+          }
+          return false;
+        },
+        'tpl-04': () => {
+          const nav = document.querySelector('.navbar .nav-container');
+          const cta = nav && nav.querySelector('.btn-indigo');
+          if (nav) {
+            if (cta) nav.insertBefore(box, cta);
+            else nav.appendChild(box);
+            return true;
+          }
+          return false;
+        },
+        'tpl-05': () => {
+          const paneTop = document.querySelector('.left-pane > div');
+          if (paneTop) {
+            paneTop.prepend(box);
+            return true;
+          }
+          return false;
+        },
+        'tpl-07': () => {
+          const nav = document.querySelector('.top-bar .top-nav');
+          const pdf = nav && nav.querySelector('a[download]');
+          if (nav) {
+            if (pdf) nav.insertBefore(box, pdf);
+            else nav.appendChild(box);
+            return true;
+          }
+          return false;
+        },
+        'tpl-08': () => {
+          const nav = document.querySelector('.portal-nav .portal-links');
+          const pdf = nav && nav.querySelector('a[download]');
+          if (nav) {
+            if (pdf) nav.insertBefore(box, pdf);
+            else nav.appendChild(box);
+            return true;
+          }
+          return false;
+        },
+        'tpl-09': () => {
+          const nav = document.querySelector('.mono-nav .mono-menu');
+          const pdf = nav && nav.querySelector('.btn-dark');
+          if (nav) {
+            if (pdf) nav.insertBefore(box, pdf);
+            else nav.appendChild(box);
+            return true;
+          }
+          return false;
+        },
+        'tpl-10': () => {
+          const nav = document.querySelector('.em-header .em-nav');
+          if (nav) {
+            nav.appendChild(box);
+            return true;
+          }
+          return false;
+        }
+      };
+
+      if (tplClass && mountMap[tplClass]) {
+        mounted = mountMap[tplClass]();
+      }
+      if (!mounted) {
+        const hdr = document.querySelector('header');
+        if (hdr) hdr.appendChild(box);
+      }
+
+      box.querySelectorAll('[data-lang-btn]').forEach((btn) => {
+        btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang-btn')));
+      });
+      box.querySelectorAll('[data-theme-btn]').forEach((btn) => {
+        btn.addEventListener('click', () => setTheme(btn.getAttribute('data-theme-btn'), true));
+      });
+      box.querySelectorAll('[data-print-btn]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          syncPrintBackground();
+          window.print();
+        });
+      });
+    }
+
+    injectHeaderActions(meta && meta.tplClass);
+
     const isStandaloneResume = !!document.querySelector('meta[name="ol-standalone-resume"]');
-    if (isStandaloneResume || currentFile !== 'index.html') {
+    if (!isStandaloneResume && currentFile !== 'index.html' && !isIframe) {
       const bar = document.createElement('nav');
       bar.id = 'ol-floating-switcher';
-      bar.setAttribute('aria-label', isStandaloneResume ? 'Resume Controls' : 'Template Switcher');
+      bar.setAttribute('aria-label', 'Template Switcher');
 
-      const itemsHtml = isStandaloneResume ? '' : TEMPLATES.map((t) => {
+      const itemsHtml = TEMPLATES.map((t) => {
         const active = currentFile === t.file ? 'active' : '';
         return `<a href="${prefix}${t.file}" class="ol-sw-item ${active}" title="${t.tag}">
           <span class="ol-sw-dot" style="background:${t.accent}"></span>
@@ -1905,37 +2427,12 @@
         </a>`;
       }).join('');
 
-      const hubSwitchHtml = isStandaloneResume ? '' : `
+      bar.innerHTML = `
         <a href="${hubHref}" class="ol-sw-hub">⊞ All 9</a>
-      `;
-      const templatesDividerHtml = isStandaloneResume ? '' : `
         <div class="ol-sw-divider"></div>
         ${itemsHtml}
       `;
-
-      bar.innerHTML = `
-        ${hubSwitchHtml}
-        <a href="${isInTemplatesDir ? '../projects/redis-gui.html' : 'projects/redis-gui.html'}" class="ol-sw-hub" style="background:rgba(239,68,68,0.16);border-color:rgba(239,68,68,0.4);color:#fca5a5;">🚀 RedisGUI</a>
-        <button type="button" class="ol-sw-hub" onclick="window.print()" title="Print / Save as PDF">🖨 Print</button>
-        ${templatesDividerHtml}
-        <div class="ol-sw-divider"></div>
-        <div class="ol-sw-lang-group" title="Light / Dark Theme">
-          <button type="button" class="ol-sw-lang" data-theme-btn="light">☀</button>
-          <button type="button" class="ol-sw-lang" data-theme-btn="dark">🌙</button>
-        </div>
-        <div class="ol-sw-lang-group">
-          <button type="button" class="ol-sw-lang" data-lang-btn="en">EN</button>
-          <button type="button" class="ol-sw-lang" data-lang-btn="uk">UA</button>
-        </div>
-      `;
       document.body.appendChild(bar);
-
-      bar.querySelectorAll('[data-lang-btn]').forEach((btn) => {
-        btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang-btn')));
-      });
-      bar.querySelectorAll('[data-theme-btn]').forEach((btn) => {
-        btn.addEventListener('click', () => setTheme(btn.getAttribute('data-theme-btn'), true));
-      });
     }
 
     document.querySelectorAll('[data-open-landing]').forEach((btn) => {
@@ -2002,7 +2499,7 @@
       if (ev.data && ev.data.type === 'OL_OPEN_MODAL') {
         openProjectModal(ev.data.project || 'redis-gui');
       }
-      if (ev.data && ev.data.type === 'OL_SET_PHOTO') {
+      if (ev.data && ev.data.type === 'OL_SET_PHOTO' && !isPhotoLocked()) {
         applySavedPhoto(ev.data.photo);
       }
       if (ev.data && ev.data.type === 'OL_PRINT') {

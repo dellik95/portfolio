@@ -26,12 +26,21 @@ function copyRecursive(src, dest) {
   }
 }
 
-function rewriteRootPaths(html, injectStandaloneMeta) {
+function rewriteRootPaths(html, injectStandaloneMeta, templateFile) {
   let out = html
     .replaceAll('../assets/', 'assets/')
     .replaceAll('../CV_OleksandrLutskov_.NetFull-Stack.pdf', 'CV_OleksandrLutskov_.NetFull-Stack.pdf');
-  if (injectStandaloneMeta && !out.includes('ol-standalone-resume')) {
-    out = out.replace('</head>', '  <meta name="ol-standalone-resume" content="1" />\n</head>');
+  if (injectStandaloneMeta) {
+    const metaTags = [];
+    if (!out.includes('ol-standalone-resume')) {
+      metaTags.push('  <meta name="ol-standalone-resume" content="1" />');
+    }
+    if (templateFile && !out.includes('ol-template-file')) {
+      metaTags.push(`  <meta name="ol-template-file" content="${templateFile}" />`);
+    }
+    if (metaTags.length) {
+      out = out.replace('</head>', `${metaTags.join('\n')}\n</head>`);
+    }
   }
   return out;
 }
@@ -70,7 +79,7 @@ if (target === 'landing') {
   }
   console.log(`[build-deploy] Target: resume | Template: ${safeTemplate}`);
   const html = fs.readFileSync(srcTemplate, 'utf8');
-  fs.writeFileSync(path.join(outDir, 'index.html'), rewriteRootPaths(html, true), 'utf8');
+  fs.writeFileSync(path.join(outDir, 'index.html'), rewriteRootPaths(html, true, `${safeTemplate}.html`), 'utf8');
   copyRecursive(path.join(root, 'CV_OleksandrLutskov_.NetFull-Stack.pdf'), path.join(outDir, 'CV_OleksandrLutskov_.NetFull-Stack.pdf'));
   copyRecursive(path.join(root, 'assets'), path.join(outDir, 'assets'));
   // Keep RedisGUI landing reachable via /projects/redis-gui.html when clicked from the resume

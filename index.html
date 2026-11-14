@@ -687,20 +687,29 @@
       }
     });
 
-    // Hub photo uploader
-    document.getElementById('hub-photo-input').addEventListener('change', (e) => {
-      const file = e.target.files && e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function (ev) {
-        try { localStorage.setItem('ol_profile_photo', ev.target.result); } catch (err) {}
-        const frame = document.getElementById('preview-frame');
-        if (frame && frame.contentWindow) {
-          frame.contentWindow.postMessage({ type: 'OL_SET_PHOTO', photo: ev.target.result }, '*');
-        }
-      };
-      reader.readAsDataURL(file);
-    });
+    // Hub photo uploader (disabled after remote deployment so visitors cannot replace author portrait)
+    const isRemoteHub = window.location.protocol.startsWith('http') &&
+      window.location.hostname &&
+      !/^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname);
+    if (isRemoteHub) {
+      document.querySelectorAll('[onclick*="hub-photo-input"], #hub-photo-input').forEach((el) => {
+        el.style.display = 'none';
+      });
+    } else {
+      document.getElementById('hub-photo-input').addEventListener('change', (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function (ev) {
+          try { localStorage.setItem('ol_profile_photo', ev.target.result); } catch (err) {}
+          const frame = document.getElementById('preview-frame');
+          if (frame && frame.contentWindow) {
+            frame.contentWindow.postMessage({ type: 'OL_SET_PHOTO', photo: ev.target.result }, '*');
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+    }
 
     try {
       const saved = localStorage.getItem('ol_cv_lang') || 'en';

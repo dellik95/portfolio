@@ -1,0 +1,925 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oleksandr Lutskov — Senior .NET Full-Stack Engineer (Terminal & IDE Style)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-root: #090d16;
+      --bg-sidebar: #0d1117;
+      --bg-editor: #111622;
+      --bg-panel: #161c2b;
+      --border: #21283b;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --green: #10b981;
+      --cyan: #38bdf8;
+      --purple: #c084fc;
+      --amber: #f59e0b;
+      --red: #f87171;
+      --blue: #60a5fa;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg-root);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      padding-bottom: 85px;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* IDE Window Frame */
+    .ide-shell {
+      max-width: 1360px;
+      margin: 18px auto;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--bg-editor);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.75);
+      overflow: hidden;
+    }
+
+    /* Window Top Bar */
+    .ide-titlebar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 18px;
+      background: #090c12;
+      border-bottom: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .win-dots {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .win-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+    .win-dot.r { background: #ef4444; }
+    .win-dot.y { background: #f59e0b; }
+    .win-dot.g { background: #10b981; }
+
+    .ide-title {
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .telemetry-pills {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .t-pill {
+      padding: 3px 9px;
+      border-radius: 5px;
+      font-size: 11px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+    }
+
+    .t-pill.cyan {
+      background: rgba(56, 189, 248, 0.1);
+      border-color: rgba(56, 189, 248, 0.3);
+      color: #38bdf8;
+    }
+
+    /* Main Workspace Layout */
+    .ide-body {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 85vh;
+    }
+
+    /* Left File Explorer */
+    .ide-sidebar {
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      padding: 18px 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+    }
+
+    .explorer-heading {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 0 8px 10px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+
+    .tree-folder {
+      color: #93c5fd;
+      font-weight: 600;
+      padding: 6px 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tree-file {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px 7px 24px;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+
+    .tree-file:hover, .tree-file.active {
+      background: rgba(56, 189, 248, 0.1);
+      color: #fff;
+    }
+
+    .ext-cs { color: #10b981; font-weight: 700; }
+    .ext-sln { color: #c084fc; font-weight: 700; }
+    .ext-git { color: #f59e0b; font-weight: 700; }
+    .ext-json { color: #38bdf8; font-weight: 700; }
+    .ext-pdf { color: #f87171; font-weight: 700; }
+
+    .sidebar-card {
+      margin-top: 24px;
+      padding: 14px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 12px;
+    }
+
+    /* Right Editor Content */
+    .ide-content {
+      padding: 32px 40px;
+      overflow-x: hidden;
+    }
+
+    .code-comment {
+      font-family: 'JetBrains Mono', monospace;
+      color: #6a9955;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    .cs-decl {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .kw { color: #c084fc; }
+    .tp { color: #38bdf8; }
+    .str { color: #fca5a5; }
+    .fn { color: #fde047; }
+
+    /* Terminal Hero Card */
+    .term-hero {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--green);
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 40px;
+    }
+
+    .term-prompt {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+
+    .hero-name {
+      font-size: clamp(30px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .hero-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      color: var(--cyan);
+      margin-bottom: 16px;
+    }
+
+    .hero-summary {
+      color: #cbd5e1;
+      font-size: 15px;
+      max-width: 75ch;
+      margin-bottom: 22px;
+    }
+
+    .cmd-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn-cmd {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      padding: 9px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #0d1117;
+      color: var(--text);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+
+    .btn-cmd:hover {
+      border-color: var(--cyan);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .btn-cmd.primary {
+      background: rgba(16, 185, 129, 0.16);
+      border-color: var(--green);
+      color: #6ee7b7;
+      font-weight: 600;
+    }
+
+    .btn-cmd.primary:hover {
+      background: rgba(16, 185, 129, 0.28);
+    }
+
+    /* Section Header */
+    .sec-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 44px 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .sec-header h2 {
+      font-size: 20px;
+      color: #fff;
+    }
+
+    /* Portfolio Solution Box */
+    .sln-showcase {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .sln-topbar {
+      background: #0d1117;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .sln-body {
+      padding: 26px;
+      display: grid;
+      grid-template-columns: 1.05fr 1.15fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .arch-diagram {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      background: #090d16;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #93c5fd;
+      margin: 14px 0;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    .term-shot-box {
+      background: #090d16;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .term-shot-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      background: #0d1117;
+      overflow-x: auto;
+    }
+
+    .term-shot-tab {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 8px 12px;
+      background: transparent;
+      color: var(--text-muted);
+      border: none;
+      border-right: 1px solid var(--border);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .term-shot-tab.active {
+      background: var(--bg-panel);
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    .sln-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .pkg-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .pkg-card h3 {
+      font-size: 16px;
+      margin: 8px 0;
+      color: #fff;
+    }
+
+    .pkg-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    /* Git Log Experience Timeline */
+    .git-graph {
+      border-left: 2px solid #30363d;
+      margin-left: 14px;
+      padding-left: 26px;
+      display: grid;
+      gap: 28px;
+    }
+
+    .git-commit {
+      position: relative;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .git-commit::before {
+      content: "";
+      position: absolute;
+      left: -34px;
+      top: 26px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--green);
+      border: 3px solid var(--bg-editor);
+      box-shadow: 0 0 0 2px var(--green);
+    }
+
+    .commit-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .commit-hash {
+      color: var(--amber);
+      background: rgba(245, 158, 11, 0.12);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .commit-branch {
+      color: var(--cyan);
+      background: rgba(56, 189, 248, 0.12);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .commit-title {
+      font-size: 19px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .commit-list {
+      list-style: none;
+      display: grid;
+      gap: 7px;
+      margin-bottom: 16px;
+    }
+
+    .commit-list li {
+      font-size: 14px;
+      color: #cbd5e1;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .commit-list li::before {
+      content: "+";
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--green);
+      font-weight: 700;
+      position: absolute;
+      left: 2px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .code-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      padding: 4px 9px;
+      border-radius: 5px;
+      background: #0d1117;
+      border: 1px solid var(--border);
+      color: #93c5fd;
+    }
+
+    /* Skills JSON Block */
+    .json-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .json-box {
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+    }
+
+    .json-key {
+      color: #7ee787;
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    @media screen and (max-width: 980px) {
+      .ide-body { grid-template-columns: 1fr; }
+      .ide-sidebar { display: none; }
+      .ide-content { padding: 20px; }
+      .sln-body, .sln-grid-3, .json-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ide-shell">
+    <!-- Top IDE Bar -->
+    <header class="ide-titlebar">
+      <div class="win-dots">
+        <span class="win-dot r"></span>
+        <span class="win-dot y"></span>
+        <span class="win-dot g"></span>
+        <span style="margin-left:8px;color:#fff;font-weight:600;">OleksandrLutskov.Solution</span>
+      </div>
+      <div class="ide-title">
+        <span>SDK: .NET 11.0 / Angular 22</span>
+        <span>•</span>
+        <span data-i18n="location">Spain (Remote / Hybrid)</span>
+      </div>
+      <div class="telemetry-pills">
+        <span class="t-pill">● BUILD: PASSING</span>
+        <span class="t-pill cyan">EXP: 9+ YEARS (2Y TECH LEAD)</span>
+      </div>
+    </header>
+
+    <div class="ide-body">
+      <!-- Left Explorer Sidebar -->
+      <aside class="ide-sidebar">
+        <div class="explorer-heading">Solution Explorer</div>
+        <div class="tree-folder">▾ src / Oleksandr.Lutskov</div>
+        <a href="#about" class="tree-file active"><span class="ext-cs">C#</span> EngineerProfile.cs</a>
+        <a href="#portfolio" class="tree-file"><span class="ext-sln">SLN</span> RedisGUI.Studio.slnx</a>
+        <a href="#experience" class="tree-file"><span class="ext-git">GIT</span> career-history.log</a>
+        <a href="#skills" class="tree-file"><span class="ext-json">{ }</span> skills.matrix.json</a>
+        <a href="#education" class="tree-file"><span class="ext-cs">MD</span> education-contact.md</a>
+        <a href="../CV_OleksandrLutskov_.NetFull-Stack.pdf" download class="tree-file"><span class="ext-pdf">PDF</span> CV_OleksandrLutskov.pdf</a>
+
+        <div class="sidebar-card">
+          <div style="color:#fff;font-weight:700;margin-bottom:8px;">Quick Endpoints</div>
+          <div style="display:grid;gap:6px;">
+            <a href="mailto:dellik95@gmail.com" style="color:var(--cyan);text-decoration:none;">✉ dellik95@gmail.com</a>
+            <a href="tel:+380978281303" style="color:var(--text-muted);text-decoration:none;">📞 +380978281303</a>
+            <a href="https://github.com/dellik95" target="_blank" rel="noopener" style="color:var(--green);text-decoration:none;">⌘ github.com/dellik95</a>
+            <a href="https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/" target="_blank" rel="noopener" style="color:var(--purple);text-decoration:none;">in LinkedIn Profile</a>
+            <a href="https://t.me/alexluts" target="_blank" rel="noopener" style="color:var(--amber);text-decoration:none;">✈ t.me/alexluts</a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Code/Terminal View -->
+      <main class="ide-content">
+        <section id="about">
+          <div class="code-comment">// File: src/Identity/EngineerProfile.cs — Compiled with .NET 11 &amp; Angular 22</div>
+          <div class="cs-decl">
+            <span class="kw">namespace</span> <span class="tp">Enterprise.Engineering</span>; <span class="kw">public sealed record</span> <span class="fn">SeniorFullStackEngineer</span>(<span class="str">"9+ Years"</span>, <span class="str">"2 Years Tech Lead"</span>);
+          </div>
+
+          <div class="term-hero">
+            <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin-bottom:14px;">
+              <div class="ol-photo-slot" style="width:120px;height:135px;border-radius:10px;background:#0d1117;border:1.5px solid var(--green);flex-shrink:0;">
+                <div>
+                  <div class="mono" style="font-size:26px;font-weight:800;color:var(--green);">[OL]</div>
+                  <div style="font-size:10px;color:var(--text-muted);margin-top:4px;" data-i18n="photo_hint">Click to upload photo</div>
+                </div>
+                <div class="ol-photo-overlay">📷 Upload</div>
+              </div>
+              <div style="flex:1;min-width:240px;">
+                <div class="term-prompt">$ whoami --verbose --location="Spain"</div>
+                <h1 class="hero-name">Oleksandr Lutskov</h1>
+                <div class="hero-role" style="margin-bottom:0;" data-i18n="role">Senior Full Stack Software Engineer</div>
+              </div>
+            </div>
+            <p class="hero-summary" data-i18n="summary_text">
+              I am a Senior .NET & Full-Stack Software Engineer with over 9 years of commercial experience, including 2 years as a Tech Lead. Throughout my career, I have architected and delivered high-load enterprise applications — across Healthcare (Automated Payments), CRM, and Warehouse Management Systems (WMS) — leveraging .NET, Angular, React.js, RabbitMQ, Redis, SQL, and AWS/Azure.
+            </p>
+            <div class="cmd-actions">
+              <button class="btn-cmd primary" data-open-landing="redis-gui">
+                <span>▶</span>
+                <span data-i18n="open_landing_cta">Explore RedisGUI →</span>
+              </button>
+              <a href="../CV_OleksandrLutskov_.NetFull-Stack.pdf" download class="btn-cmd">
+                <span>⬇</span>
+                <span data-i18n="download_cv">Download PDF CV</span>
+              </a>
+              <a href="https://github.com/dellik95" target="_blank" rel="noopener" class="btn-cmd">git remote: @dellik95 ↗</a>
+              <a href="https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/" target="_blank" rel="noopener" class="btn-cmd">LinkedIn ↗</a>
+              <a href="https://t.me/alexluts" target="_blank" rel="noopener" class="btn-cmd">Telegram ↗</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- PORTFOLIO SECTION -->
+        <section id="portfolio">
+          <div class="sec-header">
+            <span style="color:var(--purple);">[01/PORTFOLIO]</span>
+            <h2 data-i18n="portfolio_title">Featured Portfolio & Products</h2>
+          </div>
+
+          <div class="sln-showcase">
+            <div class="sln-topbar">
+              <div>
+                <span style="color:var(--red);font-weight:700;">● RedisGUI.slnx</span>
+                <span style="color:var(--text-muted);margin-left:10px;" data-i18n="rg_badge">Open-Source Product • .NET 11 + Angular 22 + SignalR</span>
+              </div>
+              <div>
+                <span style="color:var(--green);">Clean Architecture / CQRS</span> • <span style="color:var(--cyan);">SignalR Real-Time</span>
+              </div>
+            </div>
+            <div class="sln-body">
+              <div>
+                <h3 style="font-size:22px;font-weight:800;color:#fff;margin-bottom:10px;" data-i18n="rg_title">
+                  RedisGUI — Modern Redis Studio & Observability Platform
+                </h3>
+                <p style="font-size:14px;color:#cbd5e1;margin-bottom:12px;" data-i18n="rg_desc">
+                  Enterprise-grade, high-performance Redis management studio and diagnostics platform built on .NET 11, ASP.NET Core Minimal APIs, Clean Architecture (CQRS / MediatR), SignalR WebSockets, and Angular 22 Signals.
+                </p>
+                <div class="arch-diagram">[Angular 22 Signals] &lt;==SignalR/REST==&gt; [ASP.NET Core 11 APIs]
+       │                                         │
+  [Monaco/CLI]                           [MediatR CQRS Pipeline]
+                                                 │
+                                      [StackExchange.Redis 7/8]</div>
+                <ul class="commit-list" style="margin-bottom:18px;">
+                  <li data-i18n="rg_f1">Visual Strategy-based editors for Strings, Hashes, Lists, Sets, ZSets & Streams</li>
+                  <li data-i18n="rg_f2">Sub-second SignalR telemetry (Ops/sec, Memory RSS, CPU) & Slowlog diagnostics</li>
+                  <li data-i18n="rg_f3">Built-in multi-DB CLI drawer, Synthetic Load Tester (p50/p95/p99) & 10k Key Seeder</li>
+                </ul>
+                <div class="cmd-actions">
+                  <button class="btn-cmd primary" data-open-landing="redis-gui" data-i18n="open_landing_cta">Explore RedisGUI →</button>
+                  <a href="https://github.com/dellik95/redis-gui" target="_blank" rel="noopener" class="btn-cmd" data-i18n="github_cta">GitHub Repository</a>
+                </div>
+              </div>
+
+              <div class="term-shot-box">
+                <div class="term-shot-tabs">
+                  <button class="term-shot-tab active" onclick="setTermShot(this, '../assets/redis-gui/03_storage_table.png')">storage_table.png</button>
+                  <button class="term-shot-tab" onclick="setTermShot(this, '../assets/redis-gui/02_dashboard.png')">telemetry_dash.png</button>
+                  <button class="term-shot-tab" onclick="setTermShot(this, '../assets/redis-gui/05_stream_visual_editor.png')">stream_editor.png</button>
+                  <button class="term-shot-tab" onclick="setTermShot(this, '../assets/redis-gui/10_redis_cli_drawer.png')">redis_cli.png</button>
+                </div>
+                <img id="term-shot-img" src="../assets/redis-gui/03_storage_table.png" alt="RedisGUI" style="width:100%;height:280px;object-fit:cover;object-position:top;display:block;" />
+              </div>
+            </div>
+          </div>
+
+          <div class="sln-grid-3">
+            <div class="pkg-card">
+              <div>
+                <span class="mono" style="font-size:11px;color:var(--purple);" data-i18n="tm_badge">Modular Monolith + Design System</span>
+                <h3 data-i18n="tm_title">TalentMind & @dellik95/ui — AI Recruitment Platform</h3>
+                <p data-i18n="tm_desc">Full-scale recruitment platform built as an ASP.NET Core Modular Monolith + Angular 22 SPA with an AI Copilot, workflow automation engine, GraphQL DSL generator, multi-tenancy, and a private npm design-system (@dellik95/ui).</p>
+              </div>
+              <button class="btn-cmd" data-open-landing="talent-mind" style="justify-content:center;">inspect --overview →</button>
+            </div>
+
+            <div class="pkg-card">
+              <div>
+                <span class="mono" style="font-size:11px;color:var(--cyan);" data-i18n="cl_badge">AI Agent Tooling • MCP Server</span>
+                <h3 data-i18n="cl_title">Claudy (Context Platform) — Codebase Memory & Hybrid Search</h3>
+                <p data-i18n="cl_desc">Token-efficient codebase intelligence and persistent memory platform for AI coding agents using hybrid search (FTS5 + vector cosine + tree-sitter AST symbol graph), live SignalR dashboard, and MCP server tools.</p>
+              </div>
+              <button class="btn-cmd" data-open-landing="claudy" style="justify-content:center;">inspect --overview →</button>
+            </div>
+
+            <div class="pkg-card">
+              <div>
+                <span class="mono" style="font-size:11px;color:var(--green);" data-i18n="yt_badge">Engineering Education • 40+ Modules</span>
+                <h3 data-i18n="yt_title">.NET Engineering Academy — Deep-Dive Technical Courses</h3>
+                <p data-i18n="yt_desc">Comprehensive curriculum and interactive learning hub covering AI in .NET (Microsoft Agent Framework, RAG, Qdrant, MCP), Docker & Kubernetes for .NET Developers, C# CLR Internals, and ASP.NET Core Security.</p>
+              </div>
+              <button class="btn-cmd" data-open-landing="courses" style="justify-content:center;">inspect --overview →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- EXPERIENCE GIT LOG -->
+        <section id="experience">
+          <div class="sec-header">
+            <span style="color:var(--amber);">[02/GIT-LOG]</span>
+            <h2 data-i18n="exp_title">Professional Experience</h2>
+          </div>
+
+          <div class="git-graph">
+            <!-- DataArt -->
+            <article class="git-commit">
+              <div class="commit-meta">
+                <span class="commit-hash">commit da202509</span>
+                <span class="commit-branch">HEAD -&gt; main, origin/DataArt-Healthcare-AutoPay</span>
+                <span style="color:var(--text-muted);" data-i18n="da_date">September 2025 – Present</span>
+              </div>
+              <div class="commit-title">DataArt — <span style="color:var(--cyan);" data-i18n="da_role">Senior Full Stack Software Engineer</span></div>
+              <p style="font-size:13.5px;color:var(--green);font-weight:600;margin-bottom:10px;" data-i18n="da_domain">
+                Large-Scale Healthcare Platform — Automated Payments (AutoPay) Team
+              </p>
+              <ul class="commit-list">
+                <li data-i18n="da_b1">Driving development and end-to-end automation of recurring payment workflows (AutoPay) within a large-scale enterprise Healthcare platform.</li>
+                <li data-i18n="da_b2">Owned architecture and integration with the internal Payment Gateway, ensuring reliable, idempotent, and compliant payment processing.</li>
+                <li data-i18n="da_b3">Designed and built internal operational &amp; support tools from scratch for production data remediation, automated data backfills, and high-volume bulk operations.</li>
+                <li data-i18n="da_b4">Engineered event-driven serverless workflows on AWS using Lambda, Step Functions, EventBridge, SNS, S3, API Gateway, DynamoDB, and SQL, backed by Playwright E2E automation.</li>
+              </ul>
+              <div class="tag-row">
+                <span class="code-tag">.NET / C#</span>
+                <span class="code-tag">React.js</span>
+                <span class="code-tag">AWS Lambda</span>
+                <span class="code-tag">AWS Step Functions</span>
+                <span class="code-tag">Amazon EventBridge</span>
+                <span class="code-tag">AWS API Gateway</span>
+                <span class="code-tag">DynamoDB &amp; SQL</span>
+                <span class="code-tag">Amazon S3 &amp; SNS</span>
+                <span class="code-tag">Playwright</span>
+              </div>
+            </article>
+
+            <!-- FluentPro -->
+            <article class="git-commit">
+              <div class="commit-meta">
+                <span class="commit-hash">commit f10e2025</span>
+                <span class="commit-branch">tag: FluentPro</span>
+                <span style="color:var(--text-muted);" data-i18n="fp_date">April 2025 – September 2025</span>
+              </div>
+              <div class="commit-title">FluentPro — <span style="color:var(--cyan);" data-i18n="fp_role">Senior Full Stack Software Engineer</span></div>
+              <ul class="commit-list">
+                <li data-i18n="fp_b1">Developed new features and enhanced existing functionality within a scalable analytics platform leveraging AI for enriched data interpretation and dynamic content generation.</li>
+                <li data-i18n="fp_b2">Implemented an admin interface for configuring dynamic templates and placeholder queries, enabling flexible data retrieval and AI-augmented insights.</li>
+                <li data-i18n="fp_b3">Integrated Semantic Kernel to orchestrate AI workflows, combining structured data with advanced natural language processing and generation capabilities using OpenAI services.</li>
+                <li data-i18n="fp_b4">Designed and maintained backend services using Azure Functions and Azure Service Bus to support reliable, event-driven, and asynchronous data processing.</li>
+                <li data-i18n="fp_b5">Authored comprehensive automated tests and conducted thorough code reviews to guarantee code quality and maintainability.</li>
+              </ul>
+              <div class="tag-row">
+                <span class="code-tag">Angular</span>
+                <span class="code-tag">ASP.NET Core</span>
+                <span class="code-tag">Azure Functions</span>
+                <span class="code-tag">Azure Service Bus</span>
+                <span class="code-tag">Azure Key Vault</span>
+                <span class="code-tag">Semantic Kernel</span>
+                <span class="code-tag">OpenAI Integration</span>
+              </div>
+            </article>
+
+            <!-- GlobalLogic -->
+            <article class="git-commit">
+              <div class="commit-meta">
+                <span class="commit-hash">commit c98a2022</span>
+                <span class="commit-branch">tag: GlobalLogic</span>
+                <span style="color:var(--text-muted);" data-i18n="gl_date">October 2022 – April 2025</span>
+              </div>
+              <div class="commit-title">GlobalLogic — <span style="color:var(--cyan);" data-i18n="gl_role">Senior Software Engineer</span></div>
+              <ul class="commit-list">
+                <li data-i18n="gl_b1">Developed resilient microservices for a high-throughput Warehouse Management & Automation System (WMS).</li>
+                <li data-i18n="gl_b2">Drove monolith decomposition into independent, scalable microservices.</li>
+                <li data-i18n="gl_b3">Expanded unit and component test coverage across mission-critical services.</li>
+                <li data-i18n="gl_b4">Investigated and resolved complex production issues and executed system-wide performance optimizations.</li>
+                <li data-i18n="gl_b5">Built new API integrations and developed stub/mock applications for external hardware and ERP systems.</li>
+                <li data-i18n="gl_b6">Collaborated closely with product owners and cross-functional engineering teams.</li>
+              </ul>
+              <div class="tag-row">
+                <span class="code-tag">C#</span>
+                <span class="code-tag">ASP.NET Core</span>
+                <span class="code-tag">XAML / WPF</span>
+                <span class="code-tag">Angular & Material</span>
+                <span class="code-tag">Redis</span>
+                <span class="code-tag">RabbitMQ</span>
+                <span class="code-tag">Docker</span>
+                <span class="code-tag">Kubernetes</span>
+              </div>
+            </article>
+
+            <!-- Rozetka -->
+            <article class="git-commit">
+              <div class="commit-meta">
+                <span class="commit-hash">commit d42b2018</span>
+                <span class="commit-branch">tag: LLC-Rozetka / Tech-Lead</span>
+                <span style="color:var(--text-muted);" data-i18n="rz_date">May 2018 – October 2022</span>
+              </div>
+              <div class="commit-title">LLC “Rozetka” — <span style="color:var(--cyan);" data-i18n="rz_role">Full-Stack Engineer / Tech Leader</span></div>
+              <p style="font-size:13.5px;color:#9ca3af;margin-bottom:10px;" data-i18n="rz_desc">
+                Led engineering on a large-scale Digital Document Flow & CRM ecosystem (based on Bpm’Online CRM) and architected a custom Request Processing System from scratch.
+              </p>
+              <ul class="commit-list">
+                <li data-i18n="rz_b1">Built the frontend architecture from scratch and created a reusable UI component library powered by GraphQL (dynamic dropdowns, virtual tables, configurable pages).</li>
+                <li data-i18n="rz_b2">Created and maintained the core Digital Document Flow system and high-volume API integrations.</li>
+                <li data-i18n="rz_b3">Communicated directly with business stakeholders, managed production deployments, and resolved critical incidents.</li>
+                <li data-i18n="rz_b4">Led and mentored developers as Tech Lead with close cross-team coordination.</li>
+              </ul>
+              <div class="tag-row">
+                <span class="code-tag">C# / ASP.NET Core</span>
+                <span class="code-tag">.NET Framework / WCF</span>
+                <span class="code-tag">Angular / TypeScript</span>
+                <span class="code-tag">RxJS / NgRx</span>
+                <span class="code-tag">GraphQL</span>
+                <span class="code-tag">MS SQL Server</span>
+                <span class="code-tag">RabbitMQ</span>
+                <span class="code-tag">Redis</span>
+                <span class="code-tag">Entity Framework</span>
+              </div>
+            </article>
+
+            <!-- Avon -->
+            <article class="git-commit">
+              <div class="commit-meta">
+                <span class="commit-hash">commit a01c2017</span>
+                <span class="commit-branch">tag: Avon-Cosmetics</span>
+                <span style="color:var(--text-muted);" data-i18n="av_date">July 2017 – May 2018</span>
+              </div>
+              <div class="commit-title">Avon Cosmetics — <span style="color:var(--cyan);" data-i18n="av_role">Junior Software Developer (.NET)</span></div>
+              <ul class="commit-list">
+                <li data-i18n="av_b1">Designed and developed modular, extensible object-oriented .NET code.</li>
+                <li data-i18n="av_b2">Maintained and enhanced enterprise applications across both client and server tiers.</li>
+              </ul>
+              <div class="tag-row">
+                <span class="code-tag">C#</span>
+                <span class="code-tag">.NET Framework</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- SKILLS & EDUCATION -->
+        <section id="skills">
+          <div class="sec-header">
+            <span style="color:var(--cyan);">[03/CONFIG]</span>
+            <h2 data-i18n="skills_title">Technical Arsenal & Skills</h2>
+          </div>
+
+          <div class="json-grid">
+            <div class="json-box">
+              <span class="json-key">"backendAndArchitecture": [</span>
+              <div class="tag-row">
+                <span class="code-tag">C#</span>
+                <span class="code-tag">.NET / ASP.NET Core</span>
+                <span class="code-tag">Entity Framework</span>
+                <span class="code-tag">Web API</span>
+                <span class="code-tag">GraphQL</span>
+                <span class="code-tag">Microservices</span>
+                <span class="code-tag">CQRS &amp; Clean Arch</span>
+              </div>
+              <span class="json-key" style="margin-top:8px;">]</span>
+            </div>
+
+            <div class="json-box">
+              <span class="json-key">"frontendAndTesting": [</span>
+              <div class="tag-row">
+                <span class="code-tag">Angular</span>
+                <span class="code-tag">React.js</span>
+                <span class="code-tag">Angular Material</span>
+                <span class="code-tag">NgRx &amp; RxJS</span>
+                <span class="code-tag">TypeScript / JS</span>
+                <span class="code-tag">Playwright E2E</span>
+                <span class="code-tag">HTML5 / CSS3</span>
+              </div>
+              <span class="json-key" style="margin-top:8px;">]</span>
+            </div>
+
+            <div class="json-box">
+              <span class="json-key">"awsAzureDataAndAi": [</span>
+              <div class="tag-row">
+                <span class="code-tag">AWS Lambda &amp; Step Functions</span>
+                <span class="code-tag">EventBridge, SNS, S3, API Gateway</span>
+                <span class="code-tag">DynamoDB, MS SQL, MongoDB, Redis</span>
+                <span class="code-tag">RabbitMQ &amp; Kafka</span>
+                <span class="code-tag">Azure Functions &amp; Service Bus</span>
+                <span class="code-tag">Semantic Kernel / OpenAI</span>
+                <span class="code-tag">Docker &amp; Kubernetes</span>
+              </div>
+              <span class="json-key" style="margin-top:8px;">]</span>
+            </div>
+
+            <div class="json-box" id="education">
+              <span class="json-key">"educationAndLanguages": {</span>
+              <div style="color:#cbd5e1;padding-left:10px;line-height:1.8;">
+                <div>"university": "<span style="color:#fde047;" data-i18n="edu_uni">National Aviation University (NAU)</span>",</div>
+                <div>"degree": "<span style="color:#38bdf8;" data-i18n="edu_degree">Master's Degree in Computer Engineering</span>",</div>
+                <div>"ukrainian": "<span style="color:#6ee7b7;" data-i18n="lang_uk">Ukrainian — Native</span>",</div>
+                <div>"english": "<span style="color:#6ee7b7;" data-i18n="lang_en">English — Intermediate (B1+/B2)</span>"</div>
+              </div>
+              <span class="json-key">}</span>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    function setTermShot(btn, src) {
+      document.querySelectorAll('.term-shot-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('term-shot-img').src = src;
+    }
+  </script>
+  <script src="../assets/switcher.js"></script>
+</body>
+</html>
+

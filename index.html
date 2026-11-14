@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oleksandr Lutskov — Resume & Portfolio Style Switcher (9 Professional Templates)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07080c;
+      --bar: #0e111a;
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --accent: #8b5cf6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Top Control Bar */
+    .switcher-header {
+      background: var(--bar);
+      border-bottom: 1px solid var(--border);
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      z-index: 50;
+    }
+
+    .sw-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .sw-badge {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #8b5cf6, #38bdf8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 12px;
+      color: #fff;
+    }
+
+    .sw-title-wrap h1 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .sw-title-wrap span {
+      font-size: 10.5px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Style Tabs */
+    .style-tabs {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 4px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      overflow-x: auto;
+      max-width: 100%;
+    }
+
+    .style-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 7px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--muted);
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.16s;
+      white-space: nowrap;
+    }
+
+    .style-tab:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .style-tab.active {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.24);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Right Controls */
+    .sw-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .seg-group {
+      display: inline-flex;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2px;
+    }
+
+    .seg-btn {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .seg-btn.active {
+      background: #fff;
+      color: #090a0f;
+    }
+
+    .action-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 11px;
+      border-radius: 8px;
+      background: rgba(139, 92, 246, 0.16);
+      border: 1px solid rgba(139, 92, 246, 0.4);
+      color: #ddd6fe;
+      font-size: 11.5px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .action-link:hover {
+      background: rgba(139, 92, 246, 0.28);
+      color: #fff;
+    }
+
+    /* Style Info Subbar */
+    .style-subbar {
+      background: #0a0c14;
+      border-bottom: 1px solid var(--border);
+      padding: 6px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: var(--muted);
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .style-desc strong {
+      color: #fff;
+    }
+
+    /* Main Stage */
+    .stage-wrap {
+      flex: 1;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      background: #050609;
+      overflow: hidden;
+    }
+
+    #preview-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #090a0f;
+      transition: width 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    #preview-frame.vp-tablet {
+      width: 900px;
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      box-shadow: 0 0 80px rgba(0, 0, 0, 0.8);
+    }
+
+    #preview-frame.vp-mobile {
+      width: 412px;
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      box-shadow: 0 0 80px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Overview Grid Overlay (All 10 Cards) */
+    #overview-drawer {
+      position: absolute;
+      inset: 0;
+      background: rgba(7, 8, 13, 0.96);
+      backdrop-filter: blur(16px);
+      z-index: 40;
+      padding: 32px 24px;
+      overflow-y: auto;
+      display: none;
+    }
+
+    #overview-drawer.open {
+      display: block;
+    }
+
+    .ov-container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .ov-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .ov-card {
+      background: #111522;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .ov-card:hover {
+      border-color: rgba(139, 92, 246, 0.5);
+      transform: translateY(-3px);
+    }
+
+    .ov-card h3 {
+      font-size: 17.5px;
+      color: #fff;
+      margin: 8px 0;
+    }
+
+    .ov-card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 16px;
+    }
+
+    .ov-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    @media print {
+      .switcher-header,
+      .style-subbar,
+      #overview-drawer {
+        display: none !important;
+      }
+      body, .stage-wrap {
+        height: auto !important;
+        overflow: visible !important;
+        background: #fff !important;
+      }
+      #preview-frame {
+        width: 100% !important;
+        height: 100vh !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="switcher-header">
+    <div class="sw-brand">
+      <div class="sw-badge">OL</div>
+      <div class="sw-title-wrap">
+        <h1>Oleksandr Lutskov — 9 Resume Templates</h1>
+        <span>Portrait Photo • Skill Progress Bars • Light/Dark Theme • Print-Ready</span>
+      </div>
+    </div>
+
+    <div class="style-tabs" role="tablist">
+      <button class="style-tab" onclick="selectTemplate(0)" id="tab-0">
+        <span class="dot" style="background:#8b5cf6;"></span><span>01. Bento</span>
+      </button>
+      <button class="style-tab" onclick="selectTemplate(1)" id="tab-1">
+        <span class="dot" style="background:#10b981;"></span><span>02. Terminal</span>
+      </button>
+      <button class="style-tab" onclick="selectTemplate(2)" id="tab-2">
+        <span class="dot" style="background:#dc382d;"></span><span>03. Swiss</span>
+      </button>
+      <button class="style-tab" onclick="selectTemplate(3)" id="tab-3">
+        <span class="dot" style="background:#4f46e5;"></span><span>04. Stripe</span>
+      </button>
+      <button class="style-tab" onclick="selectTemplate(4)" id="tab-4">
+        <span class="dot" style="background:#2dd4bf;"></span><span>05. Split</span>
+      </button>
+      <button class="style-tab active" onclick="selectTemplate(5)" id="tab-5">
+        <span class="dot" style="background:#2563eb;"></span><span>06. Dossier CV ★</span>
+      </button>
+      <button class="style-tab" onclick="selectTemplate(6)" id="tab-6">
+        <span class="dot" style="background:#0066ff;"></span><span>07. Cloud Arch ★</span>
+      </button>
+      <button class="style-tab" onclick="selectTemplate(7)" id="tab-7">
+        <span class="dot" style="background:#e4e4e7;"></span><span>08. Mono Craft ★</span>
+      </button>
+      <button class="style-tab" onclick="selectTemplate(8)" id="tab-8">
+        <span class="dot" style="background:#10b981;"></span><span>09. Matrix ★</span>
+      </button>
+      <button class="style-tab" onclick="toggleOverview()" id="tab-ov" style="color:#38bdf8;">
+        <span>⊞ All 9</span>
+      </button>
+      <button class="style-tab" onclick="openRedisLandingInHub()" id="tab-redis" style="border-color:rgba(239,68,68,0.45);color:#fca5a5;">
+        <span class="dot" style="background:#ef4444;"></span><span>🚀 RedisGUI Landing ★</span>
+      </button>
+    </div>
+
+    <div class="sw-controls">
+      <input type="file" id="hub-photo-input" accept="image/*" style="display:none;" />
+      <button type="button" class="action-link" onclick="document.getElementById('hub-photo-input').click()" title="Завантажити своє фото у всі 9 шаблонів">
+        📷 Фото
+      </button>
+      <button type="button" class="action-link" onclick="printActiveTemplate()" title="Роздрукувати або зберегти поточний шаблон у PDF (Ctrl+P)">
+        🖨 Print
+      </button>
+
+      <div class="seg-group" title="Тема (для друку рекомендується ☀ Light)">
+        <button class="seg-btn" id="theme-light" onclick="switchTheme('light')">☀ Light</button>
+        <button class="seg-btn" id="theme-dark" onclick="switchTheme('dark')">🌙 Dark</button>
+      </div>
+
+      <div class="seg-group" title="Language Switcher">
+        <button class="seg-btn active" id="lang-en" onclick="switchLang('en')">EN</button>
+        <button class="seg-btn" id="lang-uk" onclick="switchLang('uk')">UA</button>
+      </div>
+
+      <div class="seg-group" title="Viewport Preview">
+        <button class="seg-btn active" id="vp-desktop" onclick="setViewport('desktop')">🖥</button>
+        <button class="seg-btn" id="vp-tablet" onclick="setViewport('tablet')">📱</button>
+        <button class="seg-btn" id="vp-mobile" onclick="setViewport('mobile')">📲</button>
+      </div>
+
+      <a id="open-direct-link" href="templates/07-architect-sidebar-cv.html" target="_blank" class="action-link">
+        Open ↗
+      </a>
+    </div>
+  </header>
+
+  <div class="style-subbar">
+    <div class="style-desc" id="active-style-desc">
+      <strong>06. Classic Two-Column Dossier CV (NEW ★):</strong> Класичне двоколонкове резюме із сайдбаром, круглим фото, детальними прогрес-барами скілів та випадаючим меню портфоліо.
+    </div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;">
+      Перед друком (<strong>🖨 Print</strong>) можна перемкнути на <strong>☀ Light</strong> для чистого світлого друку на папері
+    </div>
+  </div>
+
+  <div class="stage-wrap">
+    <iframe id="preview-frame" src="templates/07-architect-sidebar-cv.html" title="Resume Template Preview"></iframe>
+
+    <!-- Compare All 9 Drawer -->
+    <div id="overview-drawer">
+      <div class="ov-container">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+          <div>
+            <h2 style="font-size:25px;font-weight:800;">Усі 9 професійних шаблонів сайту-резюме</h2>
+            <p style="color:var(--muted);font-size:13.5px;margin-top:4px;">
+              Кожен шаблон підтримує перемикач <strong>☀ Light / 🌙 Dark</strong>, завантаження фото та адаптований до друку на A4. Шаблони <strong>06–09 (NEW ★)</strong> також мають випадаюче меню <em>Featured Portfolio &amp; Products ▾</em> та прогрес-бари скілів.
+            </p>
+          </div>
+          <button class="action-link" onclick="toggleOverview()">✕ Закрити огляд</button>
+        </div>
+
+        <div class="ov-grid">
+          <div class="ov-card" onclick="selectTemplate(5)" style="border-color:rgba(37,99,235,0.4);">
+            <div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#60a5fa;">NEW ★ STYLE 06 • TWO-COLUMN DOSSIER CV</span>
+              <h3>06. Classic Two-Column Executive Dossier</h3>
+              <p>Класичний двоколонковий формат резюме (лівий сайдбар із круглим фото, контактами та основними шкалами + права колонка з детальними прогрес-барами скілів та досвідом) і випадаючим меню портфоліо.</p>
+            </div>
+            <div class="ov-actions">
+              <span class="action-link">Переглянути стиль →</span>
+              <a href="templates/07-architect-sidebar-cv.html" target="_blank" class="action-link" style="background:transparent;" onclick="event.stopPropagation()">Файл ↗</a>
+            </div>
+          </div>
+
+          <div class="ov-card" onclick="selectTemplate(6)" style="border-color:rgba(0,102,255,0.4);">
+            <div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#38bdf8;">NEW ★ STYLE 07 • CLOUD ARCHITECT PORTAL</span>
+              <h3>07. Cloud Solutions Architect (Fluent / AWS &amp; Azure)</h3>
+              <p>Корпоративний портал архітектора з фото, 2-колонковим мега-дропдауном <strong>Featured Portfolio &amp; Products ▾</strong> та інтерактивними прогрес-барами скілів із фільтрацією за категоріями (Backend, Frontend, AWS/Azure, Data).</p>
+            </div>
+            <div class="ov-actions">
+              <span class="action-link">Переглянути стиль →</span>
+              <a href="templates/08-azure-cloud-portal.html" target="_blank" class="action-link" style="background:transparent;" onclick="event.stopPropagation()">Файл ↗</a>
+            </div>
+          </div>
+
+          <div class="ov-card" onclick="selectTemplate(7)" style="border-color:rgba(255,255,255,0.3);">
+            <div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#e4e4e7;">NEW ★ STYLE 08 • MINIMAL MONO CRAFT</span>
+              <h3>08. Minimal Mono Craft (Apple / Geist)</h3>
+              <p>Ультра-чистий монохромний продуктовий дизайн із портретним фото, випадаючим поповером портфоліо у верхній навігації та мінімалістичними прогрес-барами з моноширинними відсотками.</p>
+            </div>
+            <div class="ov-actions">
+              <span class="action-link">Переглянути стиль →</span>
+              <a href="templates/09-minimal-mono-craft.html" target="_blank" class="action-link" style="background:transparent;" onclick="event.stopPropagation()">Файл ↗</a>
+            </div>
+          </div>
+
+          <div class="ov-card" onclick="selectTemplate(8)" style="border-color:rgba(16,185,129,0.4);">
+            <div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#34d399;">NEW ★ STYLE 09 • EMERALD MATRIX WORKSTATION</span>
+              <h3>09. Emerald Matrix &amp; Sticky Profile Card</h3>
+              <p>Двопанельна робоча станція із закріпленою карткою профілю зліва (велике фото, KPI, контакти), випадаючим меню портфоліо зверху та 10-сегментними індикаторами рівня володіння кожною технологією.</p>
+            </div>
+            <div class="ov-actions">
+              <span class="action-link">Переглянути стиль →</span>
+              <a href="templates/10-interactive-tabbed-folio.html" target="_blank" class="action-link" style="background:transparent;" onclick="event.stopPropagation()">Файл ↗</a>
+            </div>
+          </div>
+
+          <div class="ov-card" onclick="selectTemplate(0)">
+            <div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#a78bfa;">STYLE 01 • DARK SAAS / BENTO</span>
+              <h3>01. Bento Grid &amp; Glassmorphism</h3>
+              <p>Модульна Bento-сітка у стилі Linear / Raycast із місцем під фото, інтерактивними вкладками скриншотів RedisGUI та хронологією досвіду.</p>
+            </div>
+            <div class="ov-actions">
+              <span class="action-link">Переглянути стиль →</span>
+              <a href="templates/01-bento-glass.html" target="_blank" class="action-link" style="background:transparent;" onclick="event.stopPropagation()">Файл ↗</a>
+            </div>
+          </div>
+
+          <div class="ov-card" onclick="selectTemplate(1)">
+            <div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#34d399;">STYLE 02 • DEVOPS / IDE TERMINAL</span>
+              <h3>02. Terminal &amp; System Architecture IDE</h3>
+              <p>Інженерний інтерфейс у стилі VS Code / Rider із деревом проєкту, фото-слотом, C# заголовком та Git-графом кар’єри.</p>
+            </div>
+            <div class="ov-actions">
+              <span class="action-link">Переглянути стиль →</span>
+              <a href="templates/02-terminal-ide.html" target="_blank" class="action-link" style="background:transparent;" onclick="event.stopPropagation()">Файл ↗</a>
+            </div>
+          </div>
+
+          <div class="ov-card" onclick="selectTemplate(2)">
+            <div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#f87171;">STYLE 03 • SWISS PRINT / EDITORIAL</span>
+              <h3>03. Swiss Minimalist Editorial (Light)</h3>
+              <p>Швейцарська типографіка на теплому паперовому фоні з портретним слотом, відкритою сіткою ліній та акцентами Redis Vermilion.</p>
+            </div>
+            <div class="ov-actions">
+              <span class="action-link">Переглянути стиль →</span>
+              <a href="templates/03-swiss-editorial.html" target="_blank" class="action-link" style="background:transparent;" onclick="event.stopPropagation()">Файл ↗</a>
+            </div>
+          </div>
+
+          <div class="ov-card" onclick="selectTemplate(3)">
+            <div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#818cf8;">STYLE 04 • STRIPE / FINTECH CLEAN</span>
+              <h3>04. Stripe / FinTech Clean SaaS (Light)</h3>
+              <p>Світлий корпоративний стиль у дусі Stripe з портретним фото у правих KPI, м’якими тінями та акцентами Indigo/Emerald.</p>
+            </div>
+            <div class="ov-actions">
+              <span class="action-link">Переглянути стиль →</span>
+              <a href="templates/04-nordic-fintech.html" target="_blank" class="action-link" style="background:transparent;" onclick="event.stopPropagation()">Файл ↗</a>
+            </div>
+          </div>
+
+          <div class="ov-card" onclick="selectTemplate(4)">
+            <div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#2dd4bf;">STYLE 05 • STAFF+ SPLIT-SCREEN</span>
+              <h3>05. Executive Split-Screen Dossier</h3>
+              <p>Двоколонковий макет із закріпленим лівим сайдбаром, круглим аватаром, Scroll-Spy навігацією та інтерактивним курсор-світлом.</p>
+            </div>
+            <div class="ov-actions">
+              <span class="action-link">Переглянути стиль →</span>
+              <a href="templates/05-executive-split.html" target="_blank" class="action-link" style="background:transparent;" onclick="event.stopPropagation()">Файл ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STYLES = [
+      {
+        file: 'templates/01-bento-glass.html',
+        nativeTheme: 'dark',
+        desc: '<strong>01. Bento Glass (Linear / Raycast):</strong> Модульна Bento-сітка з місцем під фото, матовим склом, інтерактивним прев’ю скриншотів RedisGUI та хронологією досвіду.'
+      },
+      {
+        file: 'templates/02-terminal-ide.html',
+        nativeTheme: 'dark',
+        desc: '<strong>02. Terminal &amp; IDE (DevOps / Architecture):</strong> Інтерфейс у стилі IDE з деревом файлів рішення, фото-слотом, схемою Clean Architecture для RedisGUI та Git-графом кар’єри.'
+      },
+      {
+        file: 'templates/03-swiss-editorial.html',
+        nativeTheme: 'light',
+        desc: '<strong>03. Swiss Editorial (Editorial &amp; Vermilion):</strong> Журнальна швейцарська типографіка з портретним слотом та відкритою архітектурною сіткою.'
+      },
+      {
+        file: 'templates/04-nordic-fintech.html',
+        nativeTheme: 'light',
+        desc: '<strong>04. Stripe / FinTech Clean SaaS:</strong> Чистий продуктовий дизайн у стилі Stripe з фото-слотом та індиго-смарагдовими акцентами.'
+      },
+      {
+        file: 'templates/05-executive-split.html',
+        nativeTheme: 'dark',
+        desc: '<strong>05. Executive Split-Screen (Nordic Slate &amp; Teal):</strong> Двоколонковий макет із закріпленим лівим сайдбаром, круглим фото та Scroll-Spy меню.'
+      },
+      {
+        file: 'templates/07-architect-sidebar-cv.html',
+        nativeTheme: 'light',
+        desc: '<strong>06. Classic Two-Column Dossier CV (NEW ★):</strong> Класичне двоколонкове резюме із сайдбаром, круглим фото, детальними прогрес-барами скілів та випадаючим меню портфоліо.'
+      },
+      {
+        file: 'templates/08-azure-cloud-portal.html',
+        nativeTheme: 'light',
+        desc: '<strong>07. Cloud Solutions Architect Portal (NEW ★):</strong> Корпоративний портал із портретом, 2-колонковим мега-меню портфоліо та інтерактивними прогрес-барами скілів із фільтрацією.'
+      },
+      {
+        file: 'templates/09-minimal-mono-craft.html',
+        nativeTheme: 'light',
+        desc: '<strong>08. Minimal Mono Craft (NEW ★):</strong> Ультра-чистий монохромний дизайн у дусі Apple / Geist із фото, випадаючим меню портфоліо у навігації та точними прогрес-барами.'
+      },
+      {
+        file: 'templates/10-interactive-tabbed-folio.html',
+        nativeTheme: 'dark',
+        desc: '<strong>09. Emerald Matrix Workstation (NEW ★):</strong> Закріплена ліва картка профілю з великим фото + верхнє меню портфоліо + 10-сегментні індикатори рівня володіння технологіями.'
+      }
+    ];
+
+    let currentIdx = 5;
+
+    function updateThemeButtons(theme) {
+      document.getElementById('theme-light').classList.toggle('active', theme === 'light');
+      document.getElementById('theme-dark').classList.toggle('active', theme === 'dark');
+    }
+
+    function syncHubThemeUI() {
+      let savedTheme = null;
+      try { savedTheme = localStorage.getItem('ol_cv_theme'); } catch (e) {}
+      const effective = savedTheme || (STYLES[currentIdx] && STYLES[currentIdx].nativeTheme) || 'light';
+      updateThemeButtons(effective);
+    }
+
+    function selectTemplate(idx) {
+      currentIdx = idx;
+      const item = STYLES[idx];
+      const frame = document.getElementById('preview-frame');
+      frame.src = item.file;
+      document.getElementById('open-direct-link').href = item.file;
+      document.getElementById('active-style-desc').innerHTML = item.desc;
+
+      for (let i = 0; i < STYLES.length; i++) {
+        const t = document.getElementById('tab-' + i);
+        if (t) t.classList.toggle('active', i === idx);
+      }
+      const rTab = document.getElementById('tab-redis');
+      if (rTab) rTab.classList.remove('active');
+      document.getElementById('overview-drawer').classList.remove('open');
+      document.getElementById('tab-ov').classList.remove('active');
+      syncHubThemeUI();
+    }
+
+    function openRedisLandingInHub() {
+      const frame = document.getElementById('preview-frame');
+      frame.src = 'projects/redis-gui.html';
+      document.getElementById('open-direct-link').href = 'projects/redis-gui.html';
+      document.getElementById('active-style-desc').innerHTML =
+        '<strong>★ RedisStudio V2.2 (RedisGUI) — Product Landing Page:</strong> Продуктовий лендінг із 3D-паралаксом, перекриттями, анімаціями, інтерактивним CLI/Strategy симулятором та детальним описом усіх 4 скриншотів.';
+      for (let i = 0; i < STYLES.length; i++) {
+        const t = document.getElementById('tab-' + i);
+        if (t) t.classList.remove('active');
+      }
+      const rTab = document.getElementById('tab-redis');
+      if (rTab) rTab.classList.add('active');
+      document.getElementById('overview-drawer').classList.remove('open');
+      document.getElementById('tab-ov').classList.remove('active');
+    }
+
+    function toggleOverview() {
+      const dr = document.getElementById('overview-drawer');
+      const isOpen = dr.classList.toggle('open');
+      document.getElementById('tab-ov').classList.toggle('active', isOpen);
+    }
+
+    function switchTheme(theme) {
+      try { localStorage.setItem('ol_cv_theme', theme); } catch (e) {}
+      updateThemeButtons(theme);
+      const frame = document.getElementById('preview-frame');
+      if (frame && frame.contentWindow) {
+        frame.contentWindow.postMessage({ type: 'OL_SET_THEME', theme }, '*');
+      }
+    }
+
+    window.addEventListener('message', (ev) => {
+      if (ev.data && ev.data.type === 'OL_THEME_STATE') {
+        updateThemeButtons(ev.data.theme);
+      }
+    });
+
+    function switchLang(lang) {
+      try { localStorage.setItem('ol_cv_lang', lang); } catch (e) {}
+      document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+      document.getElementById('lang-uk').classList.toggle('active', lang === 'uk');
+      const frame = document.getElementById('preview-frame');
+      if (frame && frame.contentWindow) {
+        frame.contentWindow.postMessage({ type: 'OL_SET_LANG', lang }, '*');
+      }
+    }
+
+    function setViewport(vp) {
+      const frame = document.getElementById('preview-frame');
+      frame.classList.remove('vp-tablet', 'vp-mobile');
+      if (vp === 'tablet') frame.classList.add('vp-tablet');
+      if (vp === 'mobile') frame.classList.add('vp-mobile');
+      document.getElementById('vp-desktop').classList.toggle('active', vp === 'desktop');
+      document.getElementById('vp-tablet').classList.toggle('active', vp === 'tablet');
+      document.getElementById('vp-mobile').classList.toggle('active', vp === 'mobile');
+    }
+
+    function printActiveTemplate() {
+      const frame = document.getElementById('preview-frame');
+      if (frame && frame.contentWindow) {
+        frame.contentWindow.focus();
+        frame.contentWindow.postMessage({ type: 'OL_PRINT' }, '*');
+      } else {
+        window.print();
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p') {
+        e.preventDefault();
+        printActiveTemplate();
+      }
+    });
+
+    // Hub photo uploader
+    document.getElementById('hub-photo-input').addEventListener('change', (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (ev) {
+        try { localStorage.setItem('ol_profile_photo', ev.target.result); } catch (err) {}
+        const frame = document.getElementById('preview-frame');
+        if (frame && frame.contentWindow) {
+          frame.contentWindow.postMessage({ type: 'OL_SET_PHOTO', photo: ev.target.result }, '*');
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+
+    try {
+      const saved = localStorage.getItem('ol_cv_lang') || 'en';
+      document.getElementById('lang-en').classList.toggle('active', saved === 'en');
+      document.getElementById('lang-uk').classList.toggle('active', saved === 'uk');
+    } catch (e) {}
+    syncHubThemeUI();
+  </script>
+</body>
+</html>

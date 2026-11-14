@@ -1,0 +1,912 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oleksandr Lutskov — Senior Full Stack Software Engineer (Stripe / FinTech Clean Style)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-subtle: #f1f5f9;
+      --border: #e2e8f0;
+      --border-hover: #cbd5e1;
+      --text-main: #0f172a;
+      --text-body: #334155;
+      --text-muted: #64748b;
+      --indigo: #4f46e5;
+      --indigo-soft: #eef2ff;
+      --emerald: #059669;
+      --emerald-soft: #ecfdf5;
+      --amber-soft: #fffbeb;
+      --amber: #d97706;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
+      --shadow-md: 0 10px 30px -5px rgba(15, 23, 42, 0.06), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-body);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.65;
+      padding-bottom: 95px;
+      background-image: radial-gradient(ellipse 80% 40% at 50% -10%, rgba(79, 70, 229, 0.08), transparent);
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Sticky Top Navigation */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--indigo);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.28);
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 24px;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.18s;
+    }
+
+    .nav-menu a:hover {
+      color: var(--indigo);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 13.5px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.18s;
+    }
+
+    .btn-indigo {
+      background: var(--indigo);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.22);
+    }
+
+    .btn-indigo:hover {
+      background: #4338ca;
+      transform: translateY(-1px);
+    }
+
+    .btn-white {
+      background: var(--surface);
+      color: var(--text-main);
+      border-color: var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-white:hover {
+      border-color: var(--border-hover);
+      background: var(--surface-subtle);
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero Section */
+    .hero-card {
+      margin-top: 36px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 44px;
+      box-shadow: var(--shadow-md);
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .badge-avail {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 13px;
+      border-radius: 999px;
+      background: var(--emerald-soft);
+      color: var(--emerald);
+      font-size: 12.5px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--emerald);
+    }
+
+    .hero-title {
+      font-size: clamp(34px, 4.2vw, 48px);
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .hero-role {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--indigo);
+      margin-bottom: 6px;
+    }
+
+    .hero-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .hero-summary {
+      font-size: 15.5px;
+      color: var(--text-body);
+      margin-bottom: 26px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .summary-aside {
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 26px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .kpi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .kpi-card strong {
+      display: block;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.1;
+    }
+
+    .kpi-card span {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .contact-list {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+
+    .contact-list a {
+      color: var(--indigo);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* Section Headers */
+    .sec-head {
+      margin: 64px 0 26px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .sec-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--indigo);
+      margin-bottom: 4px;
+    }
+
+    .sec-head h2 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.025em;
+    }
+
+    /* Portfolio Showcase */
+    .product-showcase {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 36px;
+      box-shadow: var(--shadow-md);
+      display: grid;
+      grid-template-columns: 1.05fr 1.15fr;
+      gap: 36px;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .pill-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: var(--indigo-soft);
+      color: var(--indigo);
+      font-size: 11.5px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .clean-list {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      margin: 16px 0 22px;
+    }
+
+    .clean-list li {
+      font-size: 14px;
+      color: var(--text-body);
+      padding-left: 22px;
+      position: relative;
+    }
+
+    .clean-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--emerald);
+      font-weight: 800;
+    }
+
+    .shot-browser {
+      background: #0f172a;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+      border: 1px solid #1e293b;
+    }
+
+    .shot-browser-bar {
+      display: flex;
+      gap: 6px;
+      padding: 10px 14px;
+      background: #1e293b;
+      overflow-x: auto;
+    }
+
+    .sb-tab {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 6px;
+      border: none;
+      background: rgba(255, 255, 255, 0.06);
+      color: #94a3b8;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .sb-tab.active {
+      background: var(--indigo);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .sub-projects {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .clean-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+
+    .clean-card:hover {
+      border-color: var(--indigo);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .clean-card h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 8px 0;
+    }
+
+    /* Experience Cards */
+    .exp-list {
+      display: grid;
+      gap: 20px;
+    }
+
+    .exp-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 28px;
+    }
+
+    .exp-item.current {
+      border-left: 4px solid var(--indigo);
+    }
+
+    .exp-company {
+      font-size: 21px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .exp-role {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--indigo);
+      margin: 4px 0 10px;
+    }
+
+    .exp-date-pill {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: var(--surface-subtle);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    .domain-banner {
+      display: inline-block;
+      background: var(--amber-soft);
+      color: var(--amber);
+      border: 1px solid rgba(217, 119, 6, 0.2);
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 14px;
+    }
+
+    .chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: var(--surface-subtle);
+      color: var(--text-body);
+      border: 1px solid var(--border);
+    }
+
+    .chip.indigo {
+      background: var(--indigo-soft);
+      color: var(--indigo);
+      border-color: rgba(79, 70, 229, 0.2);
+      font-weight: 600;
+    }
+
+    .chip.emerald {
+      background: var(--emerald-soft);
+      color: var(--emerald);
+      border-color: rgba(5, 150, 105, 0.2);
+      font-weight: 600;
+    }
+
+    /* Skills Grid */
+    .skills-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    @media screen and (max-width: 980px) {
+      .hero-card, .product-showcase, .sub-projects, .exp-item, .skills-grid-3 {
+        grid-template-columns: 1fr;
+      }
+      .nav-menu {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-brand">
+        <span class="brand-mark">OL</span>
+        <span>Oleksandr Lutskov</span>
+      </a>
+      <nav class="nav-menu">
+        <a href="#about" data-i18n="summary_title">About Me</a>
+        <a href="#portfolio" data-i18n="portfolio_title">Portfolio</a>
+        <a href="#experience" data-i18n="exp_title">Experience</a>
+        <a href="#skills" data-i18n="skills_title">Skills</a>
+        <a href="#education" data-i18n="edu_title">Education</a>
+      </nav>
+      <a href="../CV_OleksandrLutskov_.NetFull-Stack.pdf" download class="btn btn-indigo">
+        <span>⬇</span>
+        <span data-i18n="download_cv">Download PDF CV</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section id="about" class="hero-card">
+      <div>
+        <div class="badge-avail">
+          <span class="badge-dot"></span>
+          <span data-i18n="exp_badge">9+ Years Experience • 2 Years as Tech Lead</span>
+        </div>
+        <h1 class="hero-title">Oleksandr Lutskov</h1>
+        <div class="hero-role" data-i18n="role">Senior Full Stack Software Engineer</div>
+        <div class="hero-sub" data-i18n="role_sub">.NET, Angular &amp; React Architect • AWS &amp; Azure Serverless • AI Workflows</div>
+        <p class="hero-summary" data-i18n="summary_text">
+          I am a Senior .NET &amp; Full-Stack Software Engineer with over 9 years of commercial experience, including 2 years as a Tech Lead. Throughout my career, I have designed and delivered mission-critical enterprise platforms across Healthcare (Automated Payments), CRM, and Warehouse Management Systems (WMS) — leveraging .NET, Angular, React.js, RabbitMQ, Redis, SQL, DynamoDB, and MongoDB. My core expertise lies in building resilient microservices and serverless cloud architectures on AWS (Lambda, Step Functions, EventBridge, API Gateway, S3, SNS) and Azure, as well as AI-orchestrated workflows (Semantic Kernel, OpenAI).
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-indigo" data-open-landing="redis-gui" data-i18n="open_landing_cta">Explore RedisGUI →</button>
+          <a href="https://github.com/dellik95" target="_blank" rel="noopener" class="btn btn-white">GitHub (@dellik95) ↗</a>
+          <a href="https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/" target="_blank" rel="noopener" class="btn btn-white">LinkedIn ↗</a>
+          <a href="https://t.me/alexluts" target="_blank" rel="noopener" class="btn btn-white">Telegram ↗</a>
+        </div>
+      </div>
+
+      <aside class="summary-aside">
+        <div class="ol-photo-slot" style="width:100%;height:185px;border-radius:14px;background:#e0e7ff;border:2px solid var(--indigo);">
+          <div>
+            <div style="font-size:36px;font-weight:800;color:var(--indigo);">OL</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;" data-i18n="photo_hint">Click to upload photo</div>
+          </div>
+          <div class="ol-photo-overlay">📷 Upload Portrait</div>
+        </div>
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <strong>9+ Yrs</strong>
+            <span>Commercial Engineering</span>
+          </div>
+          <div class="kpi-card">
+            <strong>2 Yrs</strong>
+            <span>Tech Lead Experience</span>
+          </div>
+          <div class="kpi-card">
+            <strong>AWS + Azure</strong>
+            <span>Serverless &amp; Cloud</span>
+          </div>
+          <div class="kpi-card">
+            <strong>190+</strong>
+            <span>Microservices Scale</span>
+          </div>
+        </div>
+        <ul class="contact-list">
+          <li>📍 <strong data-i18n="location">Spain (Remote / Hybrid)</strong></li>
+          <li>✉ <a href="mailto:dellik95@gmail.com">dellik95@gmail.com</a></li>
+          <li>📞 <a href="tel:+380978281303">+380 97 828 13 03</a></li>
+          <li>🎓 <span data-i18n="edu_degree">Master's Degree in Computer Engineering</span></li>
+        </ul>
+      </aside>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio">
+      <div class="sec-head">
+        <div>
+          <div class="sec-eyebrow">01 / ENGINEERING PORTFOLIO</div>
+          <h2 data-i18n="portfolio_title">Featured Portfolio &amp; Products</h2>
+        </div>
+        <p style="color:var(--text-muted);font-size:14px;" data-i18n="portfolio_sub">
+          Production-grade open-source tools, platforms &amp; engineering systems
+        </p>
+      </div>
+
+      <div class="product-showcase">
+        <div>
+          <span class="pill-badge" data-i18n="rg_badge">Open-Source Product • .NET 11 + Angular 22 + SignalR</span>
+          <h3 style="font-size:24px;font-weight:800;color:var(--text-main);margin-bottom:10px;" data-i18n="rg_title">
+            RedisGUI — Modern Redis Studio &amp; Observability Platform
+          </h3>
+          <p style="font-size:14.5px;color:var(--text-body);" data-i18n="rg_desc">
+            Enterprise-grade, high-performance Redis management studio and diagnostics platform built on .NET 11, ASP.NET Core Minimal APIs, Clean Architecture (CQRS / MediatR), SignalR WebSockets, and Angular 22 Signals.
+          </p>
+          <ul class="clean-list">
+            <li data-i18n="rg_f1">Visual Strategy-based editors for Strings, Hashes, Lists, Sets, ZSets &amp; Streams</li>
+            <li data-i18n="rg_f2">Sub-second SignalR telemetry (Ops/sec, Memory RSS, CPU) &amp; Slowlog diagnostics</li>
+            <li data-i18n="rg_f3">Built-in multi-DB CLI drawer, Synthetic Load Tester (p50/p95/p99) &amp; 10k Key Seeder</li>
+            <li data-i18n="rg_f4">Enterprise RBAC, JWT Auth, Audit Logging &amp; Production Safe Mode</li>
+          </ul>
+          <div class="hero-actions">
+            <button class="btn btn-indigo" data-open-landing="redis-gui" data-i18n="open_landing_cta">Explore RedisGUI →</button>
+            <a href="https://github.com/dellik95/redis-gui" target="_blank" rel="noopener" class="btn btn-white" data-i18n="github_cta">GitHub Repository</a>
+          </div>
+        </div>
+
+        <div class="shot-browser">
+          <div class="shot-browser-bar">
+            <button class="sb-tab active" onclick="setCleanShot(this, '../assets/redis-gui/03_storage_table.png')">01. Storage Table</button>
+            <button class="sb-tab" onclick="setCleanShot(this, '../assets/redis-gui/02_dashboard.png')">02. Live Telemetry</button>
+            <button class="sb-tab" onclick="setCleanShot(this, '../assets/redis-gui/05_stream_visual_editor.png')">03. Stream Editor</button>
+            <button class="sb-tab" onclick="setCleanShot(this, '../assets/redis-gui/10_redis_cli_drawer.png')">04. CLI Drawer</button>
+          </div>
+          <img id="clean-shot-img" src="../assets/redis-gui/03_storage_table.png" alt="RedisGUI" style="width:100%;height:280px;object-fit:cover;object-position:top;display:block;" />
+        </div>
+      </div>
+
+      <div class="sub-projects">
+        <div class="clean-card">
+          <div>
+            <span class="pill-badge" data-i18n="tm_badge">Modular Monolith + Design System</span>
+            <h3 data-i18n="tm_title">TalentMind &amp; @dellik95/ui — AI Recruitment Platform</h3>
+            <p style="font-size:13.5px;color:var(--text-muted);margin-bottom:16px;" data-i18n="tm_desc">
+              Full-scale recruitment platform built as an ASP.NET Core Modular Monolith + Angular 22 SPA with an AI Copilot, workflow automation engine, GraphQL DSL generator, multi-tenancy, and a private npm design-system (@dellik95/ui).
+            </p>
+          </div>
+          <button class="btn btn-white" data-open-landing="talent-mind" style="justify-content:center;">Overview →</button>
+        </div>
+
+        <div class="clean-card">
+          <div>
+            <span class="pill-badge" data-i18n="cl_badge">AI Agent Tooling • MCP Server</span>
+            <h3 data-i18n="cl_title">Claudy (Context Platform) — Codebase Memory &amp; Hybrid Search</h3>
+            <p style="font-size:13.5px;color:var(--text-muted);margin-bottom:16px;" data-i18n="cl_desc">
+              Token-efficient codebase intelligence and persistent memory platform for AI coding agents using hybrid search (FTS5 + vector cosine + tree-sitter AST symbol graph), live SignalR dashboard, and MCP server tools.
+            </p>
+          </div>
+          <button class="btn btn-white" data-open-landing="claudy" style="justify-content:center;">Overview →</button>
+        </div>
+
+        <div class="clean-card">
+          <div>
+            <span class="pill-badge" data-i18n="yt_badge">Engineering Education • 40+ Modules</span>
+            <h3 data-i18n="yt_title">.NET Engineering Academy — Deep-Dive Technical Courses</h3>
+            <p style="font-size:13.5px;color:var(--text-muted);margin-bottom:16px;" data-i18n="yt_desc">
+              Comprehensive curriculum and interactive learning hub covering AI in .NET (Microsoft Agent Framework, RAG, Qdrant, MCP), Docker &amp; Kubernetes for .NET Developers, C# CLR Internals, and ASP.NET Core Security.
+            </p>
+          </div>
+          <button class="btn btn-white" data-open-landing="courses" style="justify-content:center;">Overview →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="sec-head">
+        <div>
+          <div class="sec-eyebrow">02 / CAREER HISTORY</div>
+          <h2 data-i18n="exp_title">Professional Experience</h2>
+        </div>
+      </div>
+
+      <div class="exp-list">
+        <!-- DataArt -->
+        <article class="exp-item current">
+          <div>
+            <div class="exp-company">DataArt</div>
+            <div class="exp-role" data-i18n="da_role">Senior Full Stack Software Engineer</div>
+            <span class="exp-date-pill" data-i18n="da_date">September 2025 – Present</span>
+          </div>
+          <div>
+            <span class="domain-banner" data-i18n="da_domain">Large-Scale Healthcare Platform — Automated Payments (AutoPay) Team</span>
+            <ul class="clean-list" style="margin-top:6px;">
+              <li data-i18n="da_b1">Driving development and end-to-end automation of recurring payment workflows (AutoPay) within a large-scale enterprise Healthcare platform.</li>
+              <li data-i18n="da_b2">Owned architecture and integration with the internal Payment Gateway, ensuring reliable, idempotent, and compliant payment processing.</li>
+              <li data-i18n="da_b3">Designed and built internal operational &amp; support tools from scratch for production data remediation, automated data backfills, and high-volume bulk operations.</li>
+              <li data-i18n="da_b4">Engineered event-driven serverless workflows on AWS using Lambda, Step Functions, EventBridge, SNS, S3, API Gateway, DynamoDB, and SQL, backed by Playwright E2E automation.</li>
+            </ul>
+            <div class="chips">
+              <span class="chip indigo">.NET / C#</span>
+              <span class="chip indigo">React.js</span>
+              <span class="chip emerald">AWS Lambda</span>
+              <span class="chip emerald">AWS Step Functions</span>
+              <span class="chip emerald">Amazon EventBridge</span>
+              <span class="chip emerald">AWS API Gateway</span>
+              <span class="chip">DynamoDB</span>
+              <span class="chip">Amazon S3 &amp; SNS</span>
+              <span class="chip">SQL Server</span>
+              <span class="chip">Playwright</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- FluentPro -->
+        <article class="exp-item">
+          <div>
+            <div class="exp-company">FluentPro</div>
+            <div class="exp-role" data-i18n="fp_role">Senior Full Stack Software Engineer</div>
+            <span class="exp-date-pill" data-i18n="fp_date">April 2025 – September 2025</span>
+          </div>
+          <div>
+            <ul class="clean-list" style="margin-top:0;">
+              <li data-i18n="fp_b1">Developed new features and enhanced existing functionality within a scalable analytics platform leveraging AI for enriched data interpretation and dynamic content generation.</li>
+              <li data-i18n="fp_b2">Implemented an admin interface for configuring dynamic templates and placeholder queries, enabling flexible data retrieval and AI-augmented insights.</li>
+              <li data-i18n="fp_b3">Integrated Semantic Kernel to orchestrate AI workflows, combining structured data with advanced natural language processing and generation capabilities using OpenAI services.</li>
+              <li data-i18n="fp_b4">Designed and maintained backend services using Azure Functions and Azure Service Bus to support reliable, event-driven, and asynchronous data processing.</li>
+              <li data-i18n="fp_b5">Authored comprehensive automated tests and conducted thorough code reviews to guarantee code quality and maintainability.</li>
+            </ul>
+            <div class="chips">
+              <span class="chip indigo">Angular</span>
+              <span class="chip indigo">ASP.NET Core</span>
+              <span class="chip emerald">Semantic Kernel</span>
+              <span class="chip emerald">OpenAI Integration</span>
+              <span class="chip">Azure Functions</span>
+              <span class="chip">Azure Service Bus</span>
+              <span class="chip">Azure Key Vault</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- GlobalLogic -->
+        <article class="exp-item">
+          <div>
+            <div class="exp-company">GlobalLogic</div>
+            <div class="exp-role" data-i18n="gl_role">Senior Software Engineer</div>
+            <span class="exp-date-pill" data-i18n="gl_date">October 2022 – April 2025</span>
+          </div>
+          <div>
+            <ul class="clean-list" style="margin-top:0;">
+              <li data-i18n="gl_b1">Developed resilient microservices for a high-throughput Warehouse Management &amp; Automation System (WMS).</li>
+              <li data-i18n="gl_b2">Drove monolith decomposition into independent, scalable microservices.</li>
+              <li data-i18n="gl_b3">Expanded unit and component test coverage across mission-critical services.</li>
+              <li data-i18n="gl_b4">Investigated and resolved complex production issues and executed system-wide performance optimizations.</li>
+              <li data-i18n="gl_b5">Built new API integrations and developed stub/mock applications for external hardware and ERP systems.</li>
+              <li data-i18n="gl_b6">Collaborated closely with product owners and cross-functional engineering teams.</li>
+            </ul>
+            <div class="chips">
+              <span class="chip indigo">C# / ASP.NET Core</span>
+              <span class="chip indigo">Angular &amp; Material</span>
+              <span class="chip">Redis</span>
+              <span class="chip">RabbitMQ</span>
+              <span class="chip">Docker &amp; Kubernetes</span>
+              <span class="chip">WPF / XAML</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Rozetka -->
+        <article class="exp-item">
+          <div>
+            <div class="exp-company">LLC “Rozetka”</div>
+            <div class="exp-role" data-i18n="rz_role">Full-Stack Engineer / Tech Leader</div>
+            <span class="exp-date-pill" data-i18n="rz_date">May 2018 – October 2022</span>
+          </div>
+          <div>
+            <p style="font-size:14px;color:var(--text-muted);margin-bottom:10px;" data-i18n="rz_desc">
+              Led engineering on a large-scale Digital Document Flow &amp; CRM ecosystem (based on Bpm’Online CRM) and architected a custom Request Processing System from scratch.
+            </p>
+            <ul class="clean-list" style="margin-top:0;">
+              <li data-i18n="rz_b1">Built the frontend architecture from scratch and created a reusable UI component library powered by GraphQL (dynamic dropdowns, virtual tables, configurable pages).</li>
+              <li data-i18n="rz_b2">Created and maintained the core Digital Document Flow system and high-volume API integrations.</li>
+              <li data-i18n="rz_b3">Communicated directly with business stakeholders, managed production deployments, and resolved critical incidents.</li>
+              <li data-i18n="rz_b4">Led and mentored developers as Tech Lead with close cross-team coordination.</li>
+            </ul>
+            <div class="chips">
+              <span class="chip indigo">C# / ASP.NET Core</span>
+              <span class="chip indigo">Angular / NgRx / RxJS</span>
+              <span class="chip emerald">GraphQL</span>
+              <span class="chip">MS SQL Server</span>
+              <span class="chip">RabbitMQ</span>
+              <span class="chip">Redis</span>
+              <span class="chip">Entity Framework</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Avon -->
+        <article class="exp-item">
+          <div>
+            <div class="exp-company">Avon Cosmetics</div>
+            <div class="exp-role" data-i18n="av_role">Junior Software Developer (.NET)</div>
+            <span class="exp-date-pill" data-i18n="av_date">July 2017 – May 2018</span>
+          </div>
+          <div>
+            <ul class="clean-list" style="margin-top:0;">
+              <li data-i18n="av_b1">Designed and developed modular, extensible object-oriented .NET code.</li>
+              <li data-i18n="av_b2">Maintained and enhanced enterprise applications across both client and server tiers.</li>
+            </ul>
+            <div class="chips">
+              <span class="chip">C#</span>
+              <span class="chip">.NET Framework</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SKILLS & EDUCATION -->
+    <section id="skills">
+      <div class="sec-head">
+        <div>
+          <div class="sec-eyebrow">03 / TECHNICAL CAPABILITIES</div>
+          <h2 data-i18n="skills_title">Technical Arsenal &amp; Skills</h2>
+        </div>
+      </div>
+
+      <div class="skills-grid-3">
+        <div class="clean-card">
+          <div>
+            <h3>Backend &amp; Distributed Systems</h3>
+            <div class="chips">
+              <span class="chip indigo">C# / .NET</span>
+              <span class="chip indigo">ASP.NET Core</span>
+              <span class="chip">Entity Framework Core</span>
+              <span class="chip">Microservices Architecture</span>
+              <span class="chip">Clean Architecture / CQRS</span>
+              <span class="chip">REST WebApi &amp; GraphQL</span>
+              <span class="chip">RabbitMQ &amp; Kafka</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="clean-card">
+          <div>
+            <h3>Frontend &amp; E2E Quality</h3>
+            <div class="chips">
+              <span class="chip indigo">Angular (v2–v22)</span>
+              <span class="chip indigo">React.js</span>
+              <span class="chip">TypeScript &amp; JavaScript</span>
+              <span class="chip">NgRx &amp; RxJS</span>
+              <span class="chip">Angular Material</span>
+              <span class="chip emerald">Playwright E2E</span>
+              <span class="chip">Unit &amp; Component Tests</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="clean-card">
+          <div>
+            <h3>AWS, Azure, Data &amp; AI</h3>
+            <div class="chips">
+              <span class="chip emerald">AWS Lambda &amp; Step Functions</span>
+              <span class="chip emerald">EventBridge &amp; API Gateway</span>
+              <span class="chip emerald">Amazon S3 &amp; SNS</span>
+              <span class="chip">DynamoDB &amp; MongoDB</span>
+              <span class="chip">MS SQL &amp; Redis</span>
+              <span class="chip indigo">Azure Functions &amp; Service Bus</span>
+              <span class="chip indigo">Semantic Kernel &amp; OpenAI</span>
+              <span class="chip">Docker &amp; Kubernetes</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" style="margin-top:32px;">
+      <div class="clean-card" style="flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+        <div>
+          <span class="sec-eyebrow" data-i18n="edu_title">EDUCATION</span>
+          <h3 style="margin:4px 0;" data-i18n="edu_uni">National Aviation University (NAU)</h3>
+          <p style="color:var(--indigo);font-weight:700;" data-i18n="edu_degree">Master's Degree in Computer Engineering</p>
+        </div>
+        <div class="chips">
+          <span class="chip indigo" data-i18n="lang_uk">Ukrainian — Native</span>
+          <span class="chip" data-i18n="lang_en">English — Intermediate (B1+/B2)</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function setCleanShot(btn, src) {
+      document.querySelectorAll('.sb-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('clean-shot-img').src = src;
+    }
+  </script>
+  <script src="../assets/switcher.js"></script>
+</body>
+</html>
+

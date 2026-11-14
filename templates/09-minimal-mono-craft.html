@@ -1,0 +1,642 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oleksandr Lutskov — Senior Full Stack Software Engineer (Minimal Mono Craft Style)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fafafa;
+      --card: #ffffff;
+      --ink: #09090b;
+      --body: #27272a;
+      --muted: #71717a;
+      --border: #e4e4e7;
+      --emerald: #10b981;
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--body);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.62;
+      padding-bottom: 95px;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Minimal Top Header with Dropdown */
+    .mono-nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(250, 250, 250, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mono-nav-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .mono-brand {
+      font-weight: 800;
+      font-size: 15px;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.03em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mono-menu {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .m-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 7px 12px;
+      border-radius: 8px;
+      background: transparent;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.16s;
+    }
+
+    .m-link:hover {
+      color: var(--ink);
+      background: #f4f4f5;
+    }
+
+    .mono-dd {
+      position: relative;
+    }
+
+    .mono-dd-btn {
+      color: var(--ink);
+      border-color: var(--border);
+      background: var(--card);
+      font-weight: 600;
+    }
+
+    .mono-dd-panel {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      width: 390px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+      padding: 10px;
+      display: none;
+      z-index: 300;
+    }
+
+    .mono-dd:hover .mono-dd-panel,
+    .mono-dd.open .mono-dd-panel {
+      display: block;
+    }
+
+    .mono-dd-item {
+      padding: 10px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .mono-dd-item:hover {
+      background: #f4f4f5;
+    }
+
+    .mono-dd-item strong {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--ink);
+    }
+
+    .mono-dd-item p {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .container {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero */
+    .mono-hero {
+      margin: 40px 0 56px;
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    .mono-photo {
+      width: 180px;
+      height: 210px;
+      border-radius: 16px;
+      background: #f4f4f5;
+      border: 1px solid var(--border);
+      color: var(--ink);
+    }
+
+    .mono-h1 {
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      line-height: 1.05;
+    }
+
+    .mono-role {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--muted);
+      margin: 6px 0 16px;
+    }
+
+    .btn-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
+      border-radius: 8px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-light {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 8px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    /* Section */
+    .mono-sec {
+      margin-bottom: 56px;
+    }
+
+    .mono-sec-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+      margin-bottom: 24px;
+    }
+
+    .mono-sec-head h2 {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+
+    /* Precision Skill Progress Bars */
+    .mono-bars-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .mono-bar-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+
+    .mono-bar-box h3 {
+      font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .m-bar-row {
+      margin-bottom: 13px;
+    }
+
+    .m-bar-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .m-bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 5px;
+    }
+
+    .m-bar-track {
+      height: 6px;
+      background: #f4f4f5;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .m-bar-fill {
+      height: 100%;
+      background: var(--ink);
+      border-radius: 999px;
+    }
+
+    /* Experience Rows */
+    .mono-exp-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px;
+      margin-bottom: 16px;
+    }
+
+    .mono-exp-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .mono-ul {
+      list-style: none;
+      display: grid;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .mono-ul li {
+      font-size: 14px;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .mono-ul li::before {
+      content: "–";
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+
+    .mono-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .m-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: #f4f4f5;
+      border: 1px solid var(--border);
+      color: var(--ink);
+    }
+
+    @media screen and (max-width: 900px) {
+      .mono-hero, .mono-bars-grid {
+        grid-template-columns: 1fr;
+      }
+      .mono-dd-panel {
+        width: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="mono-nav">
+    <div class="mono-nav-inner">
+      <a href="#" class="mono-brand">
+        <span style="width:10px;height:10px;border-radius:50%;background:var(--emerald);"></span>
+        <span>oleksandr.lutskov</span>
+      </a>
+
+      <nav class="mono-menu">
+        <a href="#about" class="m-link" data-i18n="summary_title">About</a>
+        <a href="#skills" class="m-link" data-i18n="skills_title">Skills</a>
+        <a href="#experience" class="m-link" data-i18n="exp_title">Experience</a>
+
+        <!-- Dropdown for Portfolio -->
+        <div class="mono-dd">
+          <button type="button" class="m-link mono-dd-btn" onclick="this.parentElement.classList.toggle('open')">
+            Featured Portfolio &amp; Products ▾
+          </button>
+          <div class="mono-dd-panel">
+            <div class="mono-dd-item" data-open-landing="redis-gui">
+              <strong><span>RedisGUI Studio</span><span class="mono" style="font-size:11px;color:var(--emerald);">Open ↗</span></strong>
+              <p>.NET 11, Angular 22 Signals, Clean Arch / CQRS, SignalR Redis Studio.</p>
+            </div>
+            <div class="mono-dd-item" data-open-landing="talent-mind">
+              <strong><span>TalentMind &amp; @dellik95/ui</span><span class="mono" style="font-size:11px;">Monolith ↗</span></strong>
+              <p>ASP.NET Core Modular Monolith + Angular 22 AI Recruitment Platform.</p>
+            </div>
+            <div class="mono-dd-item" data-open-landing="claudy">
+              <strong><span>Claudy — Context Platform</span><span class="mono" style="font-size:11px;">MCP ↗</span></strong>
+              <p>Hybrid FTS5 + Vector + AST Symbol Graph memory for AI coding agents.</p>
+            </div>
+            <div class="mono-dd-item" data-open-landing="courses">
+              <strong><span>.NET Engineering Academy</span><span class="mono" style="font-size:11px;">40+ Modules ↗</span></strong>
+              <p>Deep-dive engineering courses: AI in .NET, Docker/K8s, CLR Internals.</p>
+            </div>
+          </div>
+        </div>
+
+        <a href="../CV_OleksandrLutskov_.NetFull-Stack.pdf" download class="btn-dark">⬇ PDF</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO WITH PHOTO -->
+    <section id="about" class="mono-hero">
+      <div class="mono-photo ol-photo-slot">
+        <div>
+          <div style="font-size:32px;font-weight:800;">OL</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px;" data-i18n="photo_hint">Click to upload photo</div>
+        </div>
+        <div class="ol-photo-overlay">📷 Upload Photo</div>
+      </div>
+
+      <div>
+        <div class="mono" style="font-size:11.5px;color:var(--emerald);font-weight:600;margin-bottom:6px;" data-i18n="exp_badge">
+          9+ Years Experience • 2 Years as Tech Lead
+        </div>
+        <h1 class="mono-h1">Oleksandr Lutskov</h1>
+        <div class="mono-role" data-i18n="role">Senior Full Stack Software Engineer</div>
+        <p style="font-size:15px;margin-bottom:20px;" data-i18n="summary_text">
+          I am a Senior .NET &amp; Full-Stack Software Engineer with over 9 years of commercial experience, including 2 years as a Tech Lead. Throughout my career, I have designed and delivered mission-critical enterprise platforms across Healthcare (Automated Payments), CRM, and Warehouse Management Systems (WMS) — leveraging .NET, Angular, React.js, RabbitMQ, Redis, SQL, DynamoDB, and MongoDB. My core expertise lies in building resilient microservices and serverless cloud architectures on AWS (Lambda, Step Functions, EventBridge, API Gateway, S3, SNS) and Azure, as well as AI-orchestrated workflows (Semantic Kernel, OpenAI).
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <button class="btn-dark" data-open-landing="redis-gui" data-i18n="open_landing_cta">Explore RedisGUI →</button>
+          <a href="mailto:dellik95@gmail.com" class="btn-light">dellik95@gmail.com</a>
+          <a href="https://github.com/dellik95" target="_blank" rel="noopener" class="btn-light">GitHub ↗</a>
+          <a href="https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/" target="_blank" rel="noopener" class="btn-light">LinkedIn ↗</a>
+          <a href="https://t.me/alexluts" target="_blank" rel="noopener" class="btn-light">Telegram ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILL PROGRESS BARS -->
+    <section id="skills" class="mono-sec">
+      <div class="mono-sec-head">
+        <h2 data-i18n="skills_title">Technical Arsenal &amp; Skills</h2>
+        <span class="mono" style="font-size:11.5px;color:var(--muted);">PROFICIENCY METERS</span>
+      </div>
+
+      <div class="mono-bars-grid">
+        <div class="mono-bar-box">
+          <h3>01 / Backend &amp; Architecture</h3>
+          <div class="m-bar-row">
+            <div class="m-bar-label"><span>C# / .NET / ASP.NET Core</span><span class="mono">98%</span></div>
+            <div class="m-bar-track"><div class="m-bar-fill" style="width:98%;"></div></div>
+          </div>
+          <div class="m-bar-row">
+            <div class="m-bar-label"><span>Microservices &amp; Clean Architecture / CQRS</span><span class="mono">95%</span></div>
+            <div class="m-bar-track"><div class="m-bar-fill" style="width:95%;"></div></div>
+          </div>
+          <div class="m-bar-row">
+            <div class="m-bar-label"><span>Entity Framework Core, WebApi &amp; GraphQL</span><span class="mono">94%</span></div>
+            <div class="m-bar-track"><div class="m-bar-fill" style="width:94%;"></div></div>
+          </div>
+        </div>
+
+        <div class="mono-bar-box">
+          <h3>02 / Frontend &amp; E2E Quality</h3>
+          <div class="m-bar-row">
+            <div class="m-bar-label"><span>Angular (v2–v22), Signals, NgRx &amp; RxJS</span><span class="mono">95%</span></div>
+            <div class="m-bar-track"><div class="m-bar-fill" style="width:95%;"></div></div>
+          </div>
+          <div class="m-bar-row">
+            <div class="m-bar-label"><span>React.js, TypeScript &amp; JavaScript</span><span class="mono">88%</span></div>
+            <div class="m-bar-track"><div class="m-bar-fill" style="width:88%;"></div></div>
+          </div>
+          <div class="m-bar-row">
+            <div class="m-bar-label"><span>Playwright E2E, Unit &amp; Component Testing</span><span class="mono">92%</span></div>
+            <div class="m-bar-track"><div class="m-bar-fill" style="width:92%;"></div></div>
+          </div>
+        </div>
+
+        <div class="mono-bar-box">
+          <h3>03 / AWS &amp; Azure Cloud</h3>
+          <div class="m-bar-row">
+            <div class="m-bar-label"><span>AWS Lambda, Step Functions &amp; EventBridge</span><span class="mono">90%</span></div>
+            <div class="m-bar-track"><div class="m-bar-fill" style="width:90%;"></div></div>
+          </div>
+          <div class="m-bar-row">
+            <div class="m-bar-label"><span>AWS API Gateway, S3, SNS &amp; DynamoDB</span><span class="mono">88%</span></div>
+            <div class="m-bar-track"><div class="m-bar-fill" style="width:88%;"></div></div>
+          </div>
+          <div class="m-bar-row">
+            <div class="m-bar-label"><span>Azure Functions, Service Bus &amp; Semantic Kernel AI</span><span class="mono">90%</span></div>
+            <div class="m-bar-track"><div class="m-bar-fill" style="width:90%;"></div></div>
+          </div>
+        </div>
+
+        <div class="mono-bar-box">
+          <h3>04 / Databases, Messaging &amp; Containers</h3>
+          <div class="m-bar-row">
+            <div class="m-bar-label"><span>MS SQL Server, Redis &amp; MongoDB</span><span class="mono">94%</span></div>
+            <div class="m-bar-track"><div class="m-bar-fill" style="width:94%;"></div></div>
+          </div>
+          <div class="m-bar-row">
+            <div class="m-bar-label"><span>RabbitMQ &amp; Apache Kafka</span><span class="mono">90%</span></div>
+            <div class="m-bar-track"><div class="m-bar-fill" style="width:90%;"></div></div>
+          </div>
+          <div class="m-bar-row">
+            <div class="m-bar-label"><span>Docker &amp; Kubernetes</span><span class="mono">86%</span></div>
+            <div class="m-bar-track"><div class="m-bar-fill" style="width:86%;"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="mono-sec">
+      <div class="mono-sec-head">
+        <h2 data-i18n="exp_title">Professional Experience</h2>
+      </div>
+
+      <article class="mono-exp-card">
+        <div class="mono-exp-top">
+          <h3 style="font-size:18px;color:var(--ink);">DataArt · <span style="font-weight:500;color:var(--muted);" data-i18n="da_role">Senior Full Stack Software Engineer</span></h3>
+          <span class="mono" style="font-size:12px;color:var(--muted);" data-i18n="da_date">September 2025 – Present</span>
+        </div>
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:8px;" data-i18n="da_domain">
+          Large-Scale Healthcare Platform — Automated Payments (AutoPay) Team
+        </div>
+        <ul class="mono-ul">
+          <li data-i18n="da_b1">Driving development and end-to-end automation of recurring payment workflows (AutoPay) within a large-scale enterprise Healthcare platform.</li>
+          <li data-i18n="da_b2">Owned architecture and integration with the internal Payment Gateway, ensuring reliable, idempotent, and compliant payment processing.</li>
+          <li data-i18n="da_b3">Designed and built internal operational &amp; support tools from scratch for production data remediation, automated data backfills, and high-volume bulk operations.</li>
+          <li data-i18n="da_b4">Engineered event-driven serverless workflows on AWS using Lambda, Step Functions, EventBridge, SNS, S3, API Gateway, DynamoDB, and SQL, backed by Playwright E2E automation.</li>
+        </ul>
+        <div class="mono-pills">
+          <span class="m-pill">.NET / C#</span>
+          <span class="m-pill">React.js</span>
+          <span class="m-pill">AWS Lambda</span>
+          <span class="m-pill">Step Functions</span>
+          <span class="m-pill">EventBridge</span>
+          <span class="m-pill">API Gateway</span>
+          <span class="m-pill">DynamoDB &amp; SQL</span>
+          <span class="m-pill">S3 &amp; SNS</span>
+          <span class="m-pill">Playwright</span>
+        </div>
+      </article>
+
+      <article class="mono-exp-card">
+        <div class="mono-exp-top">
+          <h3 style="font-size:18px;color:var(--ink);">FluentPro · <span style="font-weight:500;color:var(--muted);" data-i18n="fp_role">Senior Full Stack Software Engineer</span></h3>
+          <span class="mono" style="font-size:12px;color:var(--muted);" data-i18n="fp_date">April 2025 – September 2025</span>
+        </div>
+        <ul class="mono-ul">
+          <li data-i18n="fp_b1">Developed new features and enhanced existing functionality within a scalable analytics platform leveraging AI for enriched data interpretation and dynamic content generation.</li>
+          <li data-i18n="fp_b3">Integrated Semantic Kernel to orchestrate AI workflows, combining structured data with advanced natural language processing and generation capabilities using OpenAI services.</li>
+          <li data-i18n="fp_b4">Designed and maintained backend services using Azure Functions and Azure Service Bus to support reliable, event-driven, and asynchronous data processing.</li>
+        </ul>
+        <div class="mono-pills">
+          <span class="m-pill">Angular</span>
+          <span class="m-pill">ASP.NET Core</span>
+          <span class="m-pill">Semantic Kernel</span>
+          <span class="m-pill">OpenAI</span>
+          <span class="m-pill">Azure Functions &amp; Service Bus</span>
+        </div>
+      </article>
+
+      <article class="mono-exp-card">
+        <div class="mono-exp-top">
+          <h3 style="font-size:18px;color:var(--ink);">GlobalLogic · <span style="font-weight:500;color:var(--muted);" data-i18n="gl_role">Senior Software Engineer</span></h3>
+          <span class="mono" style="font-size:12px;color:var(--muted);" data-i18n="gl_date">October 2022 – April 2025</span>
+        </div>
+        <ul class="mono-ul">
+          <li data-i18n="gl_b1">Developed resilient microservices for a high-throughput Warehouse Management &amp; Automation System (WMS).</li>
+          <li data-i18n="gl_b2">Drove monolith decomposition into independent, scalable microservices.</li>
+          <li data-i18n="gl_b4">Investigated and resolved complex production issues and executed system-wide performance optimizations.</li>
+        </ul>
+        <div class="mono-pills">
+          <span class="m-pill">C# / ASP.NET Core</span>
+          <span class="m-pill">Angular &amp; Material</span>
+          <span class="m-pill">Redis &amp; RabbitMQ</span>
+          <span class="m-pill">Docker &amp; Kubernetes</span>
+        </div>
+      </article>
+
+      <article class="mono-exp-card">
+        <div class="mono-exp-top">
+          <h3 style="font-size:18px;color:var(--ink);">LLC “Rozetka” · <span style="font-weight:500;color:var(--muted);" data-i18n="rz_role">Full-Stack Engineer / Tech Leader</span></h3>
+          <span class="mono" style="font-size:12px;color:var(--muted);" data-i18n="rz_date">May 2018 – October 2022</span>
+        </div>
+        <ul class="mono-ul">
+          <li data-i18n="rz_b1">Built the frontend architecture from scratch and created a reusable UI component library powered by GraphQL (dynamic dropdowns, virtual tables, configurable pages).</li>
+          <li data-i18n="rz_b2">Created and maintained the core Digital Document Flow system and high-volume API integrations.</li>
+          <li data-i18n="rz_b4">Led and mentored developers as Tech Lead with close cross-team coordination.</li>
+        </ul>
+        <div class="mono-pills">
+          <span class="m-pill">C# / ASP.NET Core</span>
+          <span class="m-pill">Angular / NgRx / RxJS</span>
+          <span class="m-pill">GraphQL</span>
+          <span class="m-pill">MS SQL / Redis / RabbitMQ</span>
+        </div>
+      </article>
+
+      <article class="mono-exp-card">
+        <div class="mono-exp-top">
+          <h3 style="font-size:18px;color:var(--ink);">Avon Cosmetics · <span style="font-weight:500;color:var(--muted);" data-i18n="av_role">Junior Software Developer (.NET)</span></h3>
+          <span class="mono" style="font-size:12px;color:var(--muted);" data-i18n="av_date">July 2017 – May 2018</span>
+        </div>
+        <ul class="mono-ul">
+          <li data-i18n="av_b1">Designed and developed modular, extensible object-oriented .NET code.</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="mono-sec">
+      <div class="mono-exp-card" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+        <div>
+          <strong style="color:var(--ink);font-size:16px;" data-i18n="edu_uni">National Aviation University (NAU)</strong>
+          <div style="font-size:14px;color:var(--muted);" data-i18n="edu_degree">Master's Degree in Computer Engineering</div>
+        </div>
+        <div class="mono-pills">
+          <span class="m-pill" data-i18n="lang_uk">Ukrainian — Native</span>
+          <span class="m-pill" data-i18n="lang_en">English — Intermediate</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED PRODUCT -->
+    <section class="mono-sec" style="padding-top:16px;">
+      <div class="mono-exp-card" style="display:grid;grid-template-columns:1.15fr 0.85fr;gap:20px;align-items:center;">
+        <div>
+          <div class="mono" style="font-size:11px;color:var(--emerald);font-weight:700;margin-bottom:6px;" data-i18n="rg_badge">Open-Source Product • .NET 11 + Angular 22 + SignalR</div>
+          <h3 style="font-size:19px;color:var(--ink);margin-bottom:6px;" data-i18n="rg_title">RedisGUI — Modern Redis Studio &amp; Observability Platform</h3>
+          <p style="font-size:13.5px;color:var(--muted);margin-bottom:14px;" data-i18n="rg_desc">Enterprise-grade, high-performance Redis management studio and diagnostics platform built on .NET 11, ASP.NET Core Minimal APIs, Clean Architecture (CQRS / MediatR), SignalR WebSockets, and Angular 22 Signals.</p>
+          <button type="button" class="btn-dark" data-open-landing="redis-gui" data-i18n="open_landing_cta">Explore RedisGUI →</button>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+          <img src="../assets/redis-gui/03_storage_table.png" alt="RedisGUI Storage" style="width:100%;height:110px;object-fit:cover;object-position:top;border-radius:8px;border:1px solid var(--border);" />
+          <img src="../assets/redis-gui/05_stream_visual_editor.png" alt="RedisGUI Stream Editor" style="width:100%;height:110px;object-fit:cover;object-position:top;border-radius:8px;border:1px solid var(--border);" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../assets/switcher.js"></script>
+</body>
+</html>
+

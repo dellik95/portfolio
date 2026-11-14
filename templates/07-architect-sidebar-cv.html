@@ -1,0 +1,820 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oleksandr Lutskov — Senior Full Stack Software Engineer (Classic Two-Column Dossier CV)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-page: #e2e8f0;
+      --sidebar-bg: #0f172a;
+      --sidebar-card: #1e293b;
+      --main-bg: #ffffff;
+      --blue: #2563eb;
+      --sky: #38bdf8;
+      --emerald: #10b981;
+      --ink: #0f172a;
+      --ink-body: #334155;
+      --ink-muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg-page);
+      color: var(--ink-body);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      padding-bottom: 95px;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Top Bar with Portfolio Dropdown */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: #090d16;
+      color: #fff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .top-bar-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .top-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .t-link {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 7px 13px;
+      border-radius: 8px;
+      transition: all 0.18s;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .t-link:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Dropdown */
+    .dd-container {
+      position: relative;
+    }
+
+    .dd-btn {
+      background: rgba(37, 99, 235, 0.25);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #fff;
+    }
+
+    .dd-panel {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      width: 420px;
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 14px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+      padding: 12px;
+      display: none;
+      z-index: 300;
+    }
+
+    .dd-container:hover .dd-panel,
+    .dd-container.open .dd-panel {
+      display: block;
+    }
+
+    .dd-row {
+      display: flex;
+      gap: 12px;
+      padding: 10px;
+      border-radius: 10px;
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .dd-row:hover {
+      background: rgba(56, 189, 248, 0.12);
+    }
+
+    .dd-row strong {
+      font-size: 13.5px;
+      display: block;
+      color: #38bdf8;
+    }
+
+    .dd-row span {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    /* Two-Column CV Paper Sheet */
+    .cv-paper {
+      max-width: 1240px;
+      margin: 28px auto;
+      background: var(--main-bg);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 25px 70px rgba(15, 23, 42, 0.14);
+      display: grid;
+      grid-template-columns: 360px 1fr;
+    }
+
+    /* Left Navy Sidebar */
+    .cv-sidebar {
+      background: var(--sidebar-bg);
+      color: #f8fafc;
+      padding: 40px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .avatar-circle {
+      width: 168px;
+      height: 168px;
+      border-radius: 50%;
+      margin: 0 auto 18px;
+      background: linear-gradient(135deg, #1e293b, #334155);
+      border: 4px solid var(--sky);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+    }
+
+    .avatar-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    .avatar-initials {
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--sky);
+      line-height: 1;
+    }
+
+    .sb-name {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .sb-role {
+      text-align: center;
+      font-size: 13.5px;
+      color: var(--sky);
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .sb-sec-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--sky);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+    }
+
+    .sb-contact-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .sb-contact-list a {
+      color: #e2e8f0;
+      text-decoration: none;
+    }
+
+    .sb-contact-list a:hover {
+      color: var(--sky);
+    }
+
+    /* Sidebar Core Skill Bars */
+    .sb-bar-item {
+      margin-bottom: 12px;
+    }
+
+    .sb-bar-head {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12.5px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #e2e8f0;
+    }
+
+    .sb-bar-track {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .sb-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--sky), var(--emerald));
+      border-radius: 999px;
+    }
+
+    /* Right Main Column */
+    .cv-main {
+      padding: 44px 48px;
+    }
+
+    .main-sec {
+      margin-bottom: 44px;
+    }
+
+    .main-sec-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 10px;
+    }
+
+    .main-sec-head h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--ink);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    /* Detailed Main Skill Progress Grid */
+    .main-skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .ms-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .ms-box h3 {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .ms-row {
+      margin-bottom: 12px;
+    }
+
+    .ms-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .ms-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-body);
+      margin-bottom: 4px;
+    }
+
+    .ms-track {
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .ms-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--sky));
+      border-radius: 999px;
+    }
+
+    /* Timeline Experience */
+    .timeline-wrap {
+      border-left: 2px solid #cbd5e1;
+      padding-left: 24px;
+      margin-left: 8px;
+      display: grid;
+      gap: 28px;
+    }
+
+    .tl-item {
+      position: relative;
+    }
+
+    .tl-item::before {
+      content: "";
+      position: absolute;
+      left: -31px;
+      top: 5px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--blue);
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 2px var(--blue);
+    }
+
+    .tl-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .tl-co {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .tl-role {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .tl-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-muted);
+      background: #f1f5f9;
+      padding: 3px 9px;
+      border-radius: 6px;
+    }
+
+    .tl-ul {
+      list-style: none;
+      display: grid;
+      gap: 6px;
+      margin: 10px 0 12px;
+    }
+
+    .tl-ul li {
+      font-size: 14px;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .tl-ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+      font-weight: 800;
+    }
+
+    .tl-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tl-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 5px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+
+    @media screen and (max-width: 980px) {
+      .cv-paper, .main-skills-grid {
+        grid-template-columns: 1fr;
+      }
+      .cv-main {
+        padding: 28px 20px;
+      }
+      .dd-panel {
+        width: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <div style="font-weight:800;font-size:14px;">OLEKSANDR LUTSKOV • EXECUTIVE DOSSIER CV</div>
+      <nav class="top-nav">
+        <a href="#about" class="t-link" data-i18n="summary_title">Summary</a>
+        <a href="#skills" class="t-link" data-i18n="skills_title">Skills &amp; Bars</a>
+        <a href="#experience" class="t-link" data-i18n="exp_title">Experience</a>
+
+        <div class="dd-container">
+          <button type="button" class="t-link dd-btn" onclick="this.parentElement.classList.toggle('open')">
+            📂 Featured Portfolio &amp; Products ▾
+          </button>
+          <div class="dd-panel">
+            <div class="dd-row" data-open-landing="redis-gui">
+              <div>
+                <strong>01. RedisGUI — Modern Redis Studio</strong>
+                <span>.NET 11, Angular 22 Signals, Clean Arch / CQRS, SignalR →</span>
+              </div>
+            </div>
+            <div class="dd-row" data-open-landing="talent-mind">
+              <div>
+                <strong>02. TalentMind &amp; @dellik95/ui</strong>
+                <span>Enterprise AI Recruitment Modular Monolith + Private Angular Component Library.</span>
+              </div>
+            </div>
+            <div class="dd-row" data-open-landing="claudy">
+              <div>
+                <strong>03. Claudy — AI Context &amp; Memory Platform</strong>
+                <span>Hybrid FTS5 + Vector + Tree-sitter AST Graph &amp; MCP Server for AI Agents.</span>
+              </div>
+            </div>
+            <div class="dd-row" data-open-landing="courses">
+              <div>
+                <strong>04. .NET Engineering Academy</strong>
+                <span>40+ Deep-dive courses: MS Agent Framework, Docker/K8s, C# CLR Internals.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="../CV_OleksandrLutskov_.NetFull-Stack.pdf" download class="t-link" style="background:#2563eb;color:#fff;">⬇ PDF CV</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="cv-paper">
+    <!-- Left Dark Sidebar -->
+    <aside class="cv-sidebar">
+      <div>
+        <div class="avatar-circle ol-photo-slot">
+          <div class="avatar-inner">
+            <span class="avatar-initials">OL</span>
+            <span style="font-size:10.5px;color:#94a3b8;margin-top:4px;" data-i18n="photo_hint">Click to upload photo</span>
+          </div>
+          <div class="ol-photo-overlay">📷 Upload Photo</div>
+        </div>
+        <h1 class="sb-name">Oleksandr Lutskov</h1>
+        <div class="sb-role" data-i18n="role">Senior Full Stack Software Engineer</div>
+      </div>
+
+      <div>
+        <div class="sb-sec-title" data-i18n="contact_title">Contact &amp; Links</div>
+        <ul class="sb-contact-list">
+          <li>📍 <span data-i18n="location">Spain (Remote / Hybrid)</span></li>
+          <li>📞 <a href="tel:+380978281303">+380 97 828 13 03</a></li>
+          <li>✉ <a href="mailto:dellik95@gmail.com">dellik95@gmail.com</a></li>
+          <li>⌘ <a href="https://github.com/dellik95" target="_blank" rel="noopener">github.com/dellik95 ↗</a></li>
+          <li>in <a href="https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/" target="_blank" rel="noopener">LinkedIn Profile ↗</a></li>
+          <li>✈ <a href="https://t.me/alexluts" target="_blank" rel="noopener">Telegram (@alexluts) ↗</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="sb-sec-title">Core Stack Mastery</div>
+        <div class="sb-bar-item">
+          <div class="sb-bar-head"><span>C# / .NET / ASP.NET Core</span><span>98%</span></div>
+          <div class="sb-bar-track"><div class="sb-bar-fill" style="width:98%;"></div></div>
+        </div>
+        <div class="sb-bar-item">
+          <div class="sb-bar-head"><span>Angular (v2–v22) &amp; RxJS</span><span>95%</span></div>
+          <div class="sb-bar-track"><div class="sb-bar-fill" style="width:95%;"></div></div>
+        </div>
+        <div class="sb-bar-item">
+          <div class="sb-bar-head"><span>React.js &amp; TypeScript</span><span>88%</span></div>
+          <div class="sb-bar-track"><div class="sb-bar-fill" style="width:88%;"></div></div>
+        </div>
+        <div class="sb-bar-item">
+          <div class="sb-bar-head"><span>AWS Serverless &amp; Cloud</span><span>90%</span></div>
+          <div class="sb-bar-track"><div class="sb-bar-fill" style="width:90%;"></div></div>
+        </div>
+        <div class="sb-bar-item">
+          <div class="sb-bar-head"><span>Azure &amp; Semantic Kernel AI</span><span>90%</span></div>
+          <div class="sb-bar-track"><div class="sb-bar-fill" style="width:90%;"></div></div>
+        </div>
+        <div class="sb-bar-item">
+          <div class="sb-bar-head"><span>Microservices, Redis &amp; SQL</span><span>95%</span></div>
+          <div class="sb-bar-track"><div class="sb-bar-fill" style="width:95%;"></div></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sb-sec-title" data-i18n="edu_title">Education</div>
+        <div style="font-weight:700;font-size:14px;" data-i18n="edu_uni">National Aviation University (NAU)</div>
+        <div style="font-size:13px;color:#94a3b8;margin-top:2px;" data-i18n="edu_degree">Master's Degree in Computer Engineering</div>
+      </div>
+
+      <div>
+        <div class="sb-sec-title" data-i18n="lang_title">Languages</div>
+        <div class="sb-bar-item">
+          <div class="sb-bar-head"><span data-i18n="lang_uk">Ukrainian — Native</span><span>100%</span></div>
+          <div class="sb-bar-track"><div class="sb-bar-fill" style="width:100%;"></div></div>
+        </div>
+        <div class="sb-bar-item">
+          <div class="sb-bar-head"><span data-i18n="lang_en">English — Intermediate</span><span>75%</span></div>
+          <div class="sb-bar-track"><div class="sb-bar-fill" style="width:75%;"></div></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right Main Dossier Content -->
+    <main class="cv-main">
+      <!-- SUMMARY -->
+      <section id="about" class="main-sec">
+        <div class="main-sec-head">
+          <h2 data-i18n="summary_title">Executive Summary</h2>
+        </div>
+        <p style="font-size:15px;line-height:1.75;" data-i18n="summary_text">
+          I am a Senior .NET &amp; Full-Stack Software Engineer with over 9 years of commercial experience, including 2 years as a Tech Lead. Throughout my career, I have designed and delivered mission-critical enterprise platforms across Healthcare (Automated Payments), CRM, and Warehouse Management Systems (WMS) — leveraging .NET, Angular, React.js, RabbitMQ, Redis, SQL, DynamoDB, and MongoDB. My core expertise lies in building resilient microservices and serverless cloud architectures on AWS (Lambda, Step Functions, EventBridge, API Gateway, S3, SNS) and Azure, as well as AI-orchestrated workflows (Semantic Kernel, OpenAI).
+        </p>
+      </section>
+
+      <!-- DETAILED SKILL PROGRESS BARS -->
+      <section id="skills" class="main-sec">
+        <div class="main-sec-head">
+          <h2 data-i18n="skills_title">Technical Arsenal &amp; Skills</h2>
+        </div>
+
+        <div class="main-skills-grid">
+          <div class="ms-box">
+            <h3>Backend &amp; Architecture</h3>
+            <div class="ms-row">
+              <div class="ms-label"><span>C# / .NET / ASP.NET Core</span><span>98%</span></div>
+              <div class="ms-track"><div class="ms-fill" style="width:98%;"></div></div>
+            </div>
+            <div class="ms-row">
+              <div class="ms-label"><span>Entity Framework Core &amp; SQL</span><span>95%</span></div>
+              <div class="ms-track"><div class="ms-fill" style="width:95%;"></div></div>
+            </div>
+            <div class="ms-row">
+              <div class="ms-label"><span>Microservices &amp; Clean Architecture / CQRS</span><span>95%</span></div>
+              <div class="ms-track"><div class="ms-fill" style="width:95%;"></div></div>
+            </div>
+            <div class="ms-row">
+              <div class="ms-label"><span>Web API &amp; GraphQL</span><span>92%</span></div>
+              <div class="ms-track"><div class="ms-fill" style="width:92%;"></div></div>
+            </div>
+          </div>
+
+          <div class="ms-box">
+            <h3>Frontend &amp; UI Systems</h3>
+            <div class="ms-row">
+              <div class="ms-label"><span>Angular (v2–v22), Signals &amp; Material</span><span>95%</span></div>
+              <div class="ms-track"><div class="ms-fill" style="width:95%;"></div></div>
+            </div>
+            <div class="ms-row">
+              <div class="ms-label"><span>RxJS &amp; NgRx State Management</span><span>94%</span></div>
+              <div class="ms-track"><div class="ms-fill" style="width:94%;"></div></div>
+            </div>
+            <div class="ms-row">
+              <div class="ms-label"><span>React.js &amp; Modern SPA</span><span>86%</span></div>
+              <div class="ms-track"><div class="ms-fill" style="width:86%;"></div></div>
+            </div>
+            <div class="ms-row">
+              <div class="ms-label"><span>TypeScript, JavaScript, HTML5 &amp; CSS3</span><span>95%</span></div>
+              <div class="ms-track"><div class="ms-fill" style="width:95%;"></div></div>
+            </div>
+          </div>
+
+          <div class="ms-box">
+            <h3>AWS, Azure Serverless &amp; AI</h3>
+            <div class="ms-row">
+              <div class="ms-label"><span>AWS Lambda, Step Functions &amp; EventBridge</span><span>90%</span></div>
+              <div class="ms-track"><div class="ms-fill" style="width:90%;"></div></div>
+            </div>
+            <div class="ms-row">
+              <div class="ms-label"><span>AWS API Gateway, S3, SNS &amp; DynamoDB</span><span>88%</span></div>
+              <div class="ms-track"><div class="ms-fill" style="width:88%;"></div></div>
+            </div>
+            <div class="ms-row">
+              <div class="ms-label"><span>Azure Functions, Service Bus &amp; Key Vault</span><span>90%</span></div>
+              <div class="ms-track"><div class="ms-fill" style="width:90%;"></div></div>
+            </div>
+            <div class="ms-row">
+              <div class="ms-label"><span>Semantic Kernel &amp; OpenAI Integration</span><span>88%</span></div>
+              <div class="ms-track"><div class="ms-fill" style="width:88%;"></div></div>
+            </div>
+          </div>
+
+          <div class="ms-box">
+            <h3>Data, Messaging &amp; QA</h3>
+            <div class="ms-row">
+              <div class="ms-label"><span>MS SQL Server, Redis &amp; MongoDB</span><span>94%</span></div>
+              <div class="ms-track"><div class="ms-fill" style="width:94%;"></div></div>
+            </div>
+            <div class="ms-row">
+              <div class="ms-label"><span>RabbitMQ &amp; Apache Kafka</span><span>90%</span></div>
+              <div class="ms-track"><div class="ms-fill" style="width:90%;"></div></div>
+            </div>
+            <div class="ms-row">
+              <div class="ms-label"><span>Docker &amp; Kubernetes</span><span>86%</span></div>
+              <div class="ms-track"><div class="ms-fill" style="width:86%;"></div></div>
+            </div>
+            <div class="ms-row">
+              <div class="ms-label"><span>Unit, Component &amp; Playwright E2E Tests</span><span>92%</span></div>
+              <div class="ms-track"><div class="ms-fill" style="width:92%;"></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROFESSIONAL EXPERIENCE -->
+      <section id="experience" class="main-sec">
+        <div class="main-sec-head">
+          <h2 data-i18n="exp_title">Professional Experience</h2>
+        </div>
+
+        <div class="timeline-wrap">
+          <!-- DataArt -->
+          <article class="tl-item">
+            <div class="tl-head">
+              <div>
+                <span class="tl-co">DataArt</span> — <span class="tl-role" data-i18n="da_role">Senior Full Stack Software Engineer</span>
+              </div>
+              <span class="tl-date" data-i18n="da_date">September 2025 – Present</span>
+            </div>
+            <div style="font-size:13.5px;font-weight:700;color:#059669;margin-bottom:6px;" data-i18n="da_domain">
+              Large-Scale Healthcare Platform — Automated Payments (AutoPay) Team
+            </div>
+            <ul class="tl-ul">
+              <li data-i18n="da_b1">Driving development and end-to-end automation of recurring payment workflows (AutoPay) within a large-scale enterprise Healthcare platform.</li>
+              <li data-i18n="da_b2">Owned architecture and integration with the internal Payment Gateway, ensuring reliable, idempotent, and compliant payment processing.</li>
+              <li data-i18n="da_b3">Designed and built internal operational &amp; support tools from scratch for production data remediation, automated data backfills, and high-volume bulk operations.</li>
+              <li data-i18n="da_b4">Engineered event-driven serverless workflows on AWS using Lambda, Step Functions, EventBridge, SNS, S3, API Gateway, DynamoDB, and SQL, backed by Playwright E2E automation.</li>
+            </ul>
+            <div class="tl-tags">
+              <span class="tl-tag">.NET / C#</span>
+              <span class="tl-tag">React.js</span>
+              <span class="tl-tag">AWS Lambda</span>
+              <span class="tl-tag">Step Functions</span>
+              <span class="tl-tag">EventBridge</span>
+              <span class="tl-tag">API Gateway</span>
+              <span class="tl-tag">DynamoDB &amp; SQL</span>
+              <span class="tl-tag">S3 &amp; SNS</span>
+              <span class="tl-tag">Playwright</span>
+            </div>
+          </article>
+
+          <!-- FluentPro -->
+          <article class="tl-item">
+            <div class="tl-head">
+              <div>
+                <span class="tl-co">FluentPro</span> — <span class="tl-role" data-i18n="fp_role">Senior Full Stack Software Engineer</span>
+              </div>
+              <span class="tl-date" data-i18n="fp_date">April 2025 – September 2025</span>
+            </div>
+            <ul class="tl-ul">
+              <li data-i18n="fp_b1">Developed new features and enhanced existing functionality within a scalable analytics platform leveraging AI for enriched data interpretation and dynamic content generation.</li>
+              <li data-i18n="fp_b2">Implemented an admin interface for configuring dynamic templates and placeholder queries, enabling flexible data retrieval and AI-augmented insights.</li>
+              <li data-i18n="fp_b3">Integrated Semantic Kernel to orchestrate AI workflows, combining structured data with advanced natural language processing and generation capabilities using OpenAI services.</li>
+              <li data-i18n="fp_b4">Designed and maintained backend services using Azure Functions and Azure Service Bus to support reliable, event-driven, and asynchronous data processing.</li>
+              <li data-i18n="fp_b5">Authored comprehensive automated tests and conducted thorough code reviews to guarantee code quality and maintainability.</li>
+            </ul>
+            <div class="tl-tags">
+              <span class="tl-tag">Angular</span>
+              <span class="tl-tag">ASP.NET Core</span>
+              <span class="tl-tag">Semantic Kernel</span>
+              <span class="tl-tag">OpenAI</span>
+              <span class="tl-tag">Azure Functions &amp; Service Bus</span>
+              <span class="tl-tag">Azure Key Vault</span>
+            </div>
+          </article>
+
+          <!-- GlobalLogic -->
+          <article class="tl-item">
+            <div class="tl-head">
+              <div>
+                <span class="tl-co">GlobalLogic</span> — <span class="tl-role" data-i18n="gl_role">Senior Software Engineer</span>
+              </div>
+              <span class="tl-date" data-i18n="gl_date">October 2022 – April 2025</span>
+            </div>
+            <ul class="tl-ul">
+              <li data-i18n="gl_b1">Developed resilient microservices for a high-throughput Warehouse Management &amp; Automation System (WMS).</li>
+              <li data-i18n="gl_b2">Drove monolith decomposition into independent, scalable microservices.</li>
+              <li data-i18n="gl_b3">Expanded unit and component test coverage across mission-critical services.</li>
+              <li data-i18n="gl_b4">Investigated and resolved complex production issues and executed system-wide performance optimizations.</li>
+              <li data-i18n="gl_b5">Built new API integrations and developed stub/mock applications for external hardware and ERP systems.</li>
+            </ul>
+            <div class="tl-tags">
+              <span class="tl-tag">C# / ASP.NET Core</span>
+              <span class="tl-tag">Angular &amp; Material</span>
+              <span class="tl-tag">Redis &amp; RabbitMQ</span>
+              <span class="tl-tag">Docker &amp; Kubernetes</span>
+              <span class="tl-tag">WPF / XAML</span>
+            </div>
+          </article>
+
+          <!-- Rozetka -->
+          <article class="tl-item">
+            <div class="tl-head">
+              <div>
+                <span class="tl-co">LLC “Rozetka”</span> — <span class="tl-role" data-i18n="rz_role">Full-Stack Engineer / Tech Leader</span>
+              </div>
+              <span class="tl-date" data-i18n="rz_date">May 2018 – October 2022</span>
+            </div>
+            <ul class="tl-ul">
+              <li data-i18n="rz_b1">Built the frontend architecture from scratch and created a reusable UI component library powered by GraphQL (dynamic dropdowns, virtual tables, configurable pages).</li>
+              <li data-i18n="rz_b2">Created and maintained the core Digital Document Flow system and high-volume API integrations.</li>
+              <li data-i18n="rz_b3">Communicated directly with business stakeholders, managed production deployments, and resolved critical incidents.</li>
+              <li data-i18n="rz_b4">Led and mentored developers as Tech Lead with close cross-team coordination.</li>
+            </ul>
+            <div class="tl-tags">
+              <span class="tl-tag">C# / ASP.NET Core</span>
+              <span class="tl-tag">Angular / NgRx / RxJS</span>
+              <span class="tl-tag">GraphQL</span>
+              <span class="tl-tag">MS SQL / Redis / RabbitMQ</span>
+            </div>
+          </article>
+
+          <!-- Avon -->
+          <article class="tl-item">
+            <div class="tl-head">
+              <div>
+                <span class="tl-co">Avon Cosmetics</span> — <span class="tl-role" data-i18n="av_role">Junior Software Developer (.NET)</span>
+              </div>
+              <span class="tl-date" data-i18n="av_date">July 2017 – May 2018</span>
+            </div>
+            <ul class="tl-ul">
+              <li data-i18n="av_b1">Designed and developed modular, extensible object-oriented .NET code.</li>
+              <li data-i18n="av_b2">Maintained and enhanced enterprise applications across both client and server tiers.</li>
+            </ul>
+            <div class="tl-tags">
+              <span class="tl-tag">C#</span>
+              <span class="tl-tag">.NET Framework</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- FEATURED PORTFOLIO CASE STUDY -->
+      <section id="portfolio" class="main-sec" style="margin-bottom:0;">
+        <div class="main-sec-head">
+          <h2 data-i18n="portfolio_title">Featured Portfolio &amp; Products</h2>
+        </div>
+        <div class="ms-box" style="display:grid;grid-template-columns:1fr 280px;gap:24px;align-items:center;">
+          <div>
+            <h3 style="font-size:18px;text-transform:none;margin-bottom:6px;" data-i18n="rg_title">RedisGUI — Modern Redis Studio &amp; Observability Platform</h3>
+            <p style="font-size:13.5px;margin-bottom:12px;" data-i18n="rg_desc">
+              Enterprise-grade, high-performance Redis management studio and diagnostics platform built on .NET 11, ASP.NET Core Minimal APIs, Clean Architecture (CQRS / MediatR), SignalR WebSockets, and Angular 22 Signals.
+            </p>
+            <button type="button" class="t-link" style="background:var(--blue);color:#fff;" data-open-landing="redis-gui" data-i18n="open_landing_cta">Explore RedisGUI →</button>
+          </div>
+          <img src="../assets/redis-gui/03_storage_table.png" alt="RedisGUI" style="width:100%;border-radius:10px;border:1px solid var(--border);" />
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="../assets/switcher.js"></script>
+</body>
+</html>
+

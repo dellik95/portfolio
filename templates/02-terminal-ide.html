@@ -679,7 +679,7 @@
 
     .arch-diagram {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.15fr);
+      grid-template-columns: minmax(0, 0.9fr) auto minmax(0, 1.3fr);
       gap: 10px 8px;
       align-items: start;
       font-family: 'JetBrains Mono', monospace;
@@ -709,7 +709,7 @@
       font-weight: 600;
       text-align: center;
       line-height: 1.3;
-      overflow-wrap: anywhere;
+      overflow-wrap: break-word;
     }
 
     .arch-node--fe { border-color: rgba(56, 189, 248, 0.45); color: #7dd3fc; }
@@ -760,6 +760,7 @@
     }
 
     .term-shot-box {
+      container-type: inline-size;
       background: #090d16;
       border: 1px solid var(--border);
       border-radius: 10px;
@@ -767,37 +768,53 @@
     }
 
     .term-shot-tabs {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+      gap: 1px;
       border-bottom: 1px solid var(--border);
-      background: #0d1117;
-      overflow-x: visible;
+      background: var(--border);
     }
 
     .term-shot-tab {
       font-family: 'JetBrains Mono', monospace;
       font-size: 10.5px;
-      padding: 8px 8px;
-      flex: 1 1 auto;
+      padding: 8px 6px;
       min-width: 0;
       text-align: center;
-      background: transparent;
+      background: #0d1117;
       color: var(--text-muted);
       border: none;
-      border-right: 1px solid var(--border);
       cursor: pointer;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       transition: background 0.15s, color 0.15s;
     }
 
-    .term-shot-tab:last-child {
-      border-right: none;
+    html[data-theme="light"] .term-shot-tab {
+      background: #f1f5f9;
     }
 
     .term-shot-tab.active {
       background: var(--bg-panel);
       color: var(--green);
       font-weight: 600;
+    }
+
+    @container (max-width: 470px) {
+      .term-shot-tabs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    #term-shot-img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 10;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      background: #050814;
     }
 
     .sln-grid-3 {
@@ -1037,8 +1054,6 @@
       .sln-topbar { padding: 10px 14px; }
       .sln-body { padding: 16px; gap: 18px; }
       .arch-diagram { font-size: 10.5px; padding: 10px; }
-      .term-shot-tabs { flex-wrap: wrap; }
-      .term-shot-tab { flex: 1 1 46%; text-align: center; }
       .commit-card { padding: 14px; }
       .git-graph { padding-left: 28px; }
       .status-bar { flex-wrap: wrap; height: auto; padding: 8px 14px; gap: 6px 12px; }
@@ -1199,7 +1214,7 @@
                   <button class="term-shot-tab" onclick="setTermShot(this, '../assets/redis-gui/05_stream_visual_editor.png')">stream_editor.png</button>
                   <button class="term-shot-tab" onclick="setTermShot(this, '../assets/redis-gui/10_redis_cli_drawer.png')">redis_cli.png</button>
                 </div>
-                <img id="term-shot-img" src="../assets/redis-gui/03_storage_table.png" alt="RedisGUI" style="width:100%;height:280px;object-fit:cover;object-position:top;display:block;" />
+                <img id="term-shot-img" src="../assets/redis-gui/03_storage_table.png" alt="RedisGUI" />
               </div>
             </div>
           </div>

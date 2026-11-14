@@ -3,19 +3,11 @@ name: Deploy Portfolio to Azure Static Web Apps
 on:
   workflow_dispatch:
     inputs:
-      deploy_target:
-        description: 'What to deploy to Azure (resume or landing)'
+      resume_template:
+        description: 'Select resume template to deploy'
         required: true
         type: choice
-        default: 'resume'
-        options:
-          - resume
-          - landing
-      resume_template:
-        description: 'Resume template (used ONLY when deploy_target = resume; ignored for landing)'
-        required: false
-        type: choice
-        default: '01-bento-glass'
+        default: '02-terminal-ide'
         options:
           - 01-bento-glass
           - 02-terminal-ide
@@ -34,7 +26,7 @@ permissions:
 
 jobs:
   build_and_deploy:
-    name: Build & Deploy (${{ inputs.deploy_target }})
+    name: Build & Deploy (${{ inputs.resume_template }})
     runs-on: ubuntu-latest
 
     steps:
@@ -49,7 +41,7 @@ jobs:
       - name: Stage deployment bundle (dist/)
         run: |
           node scripts/build-deploy.mjs \
-            --target "${{ inputs.deploy_target }}" \
+            --target resume \
             --template "${{ inputs.resume_template }}" \
             --out dist
 
@@ -57,12 +49,7 @@ jobs:
         run: |
           {
             echo "### Azure Deployment Summary"
-            echo "- **Target**: \`${{ inputs.deploy_target }}\`"
-            if [ "${{ inputs.deploy_target }}" = "landing" ]; then
-              echo "- **Template**: *(not applicable — RedisGUI landing page)*"
-            else
-              echo "- **Template**: \`${{ inputs.resume_template }}\`"
-            fi
+            echo "- **Template**: \`${{ inputs.resume_template }}\`"
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Deploy to Azure Static Web Apps

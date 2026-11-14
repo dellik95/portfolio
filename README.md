@@ -1,16 +1,25 @@
-# Oleksandr Lutskov — Interactive Portfolio & RedisGUI Showcase
+# Oleksandr Lutskov — Interactive Portfolio & CV
 
-Bilingual (**EN / UA**) interactive resume templates (9 themes with Dark/Light modes & print-ready A4 styling) and a dedicated **RedisStudio V2.2 (`RedisGUI`)** product landing page.
+Bilingual (**EN / UA**) interactive resume templates (**10 themes** with Dark/Light modes, print-ready A4 styling, SEO meta/JSON-LD, and pre-rendered ATS-friendly HTML).
+
+Live Portfolio: https://dellik95.github.io/portfolio/  
+RedisGUI Product Landing: https://dellik95.github.io/redis-gui/ ([dellik95/redis-gui](https://github.com/dellik95/redis-gui))
 
 ## Structure
-- `index.html` — Hub switcher across all 9 resume templates + RedisGUI landing
-- `templates/` — 9 standalone resume templates (`01`..`10`)
-- `projects/redis-gui.html` — Standalone product landing page for [dellik95/redis-gui](https://github.com/dellik95/redis-gui)
-- `scripts/build-deploy.mjs` — Builds a clean `dist/` bundle for either `resume` (chosen template or full hub) or `landing` (ignores template selection)
-- `.github/workflows/deploy-pages.yml` — **100% Free GitHub Pages** deploy pipeline (`workflow_dispatch`)
-- `.github/workflows/deploy-azure.yml` — Optional Azure Static Web Apps deploy pipeline (`workflow_dispatch`, requires `AZURE_STATIC_WEB_APPS_API_TOKEN` secret)
+- `index.html` — Style switcher hub across all 10 resume templates
+- `templates/` — 10 standalone resume templates (`01`–`05`, `07`–`11`)
+- `data/resume-data.json` — Single source of truth for profile, experience, skills, education, languages & certifications
+- `assets/switcher.js` & `assets/resume-data.js` — Bilingual runtime hydration, theme switching, and offline `file://` fallback
+- `assets/redis-gui/` — RedisGUI preview screenshots embedded across the portfolio templates
+- `scripts/sync-resume-data.mjs` & `scripts/seo-and-ssr.mjs` — Syncs `data/resume-data.json` to `assets/resume-data.js`, pre-renders SSR HTML inside templates, and updates Schema.org JSON-LD, meta tags, `robots.txt` & `sitemap.xml`
+- `scripts/build-deploy.mjs` — Stages a clean `dist/` bundle for the chosen template (or `all-templates-hub`)
+- `.github/workflows/deploy-pages.yml` — GitHub Pages deploy pipeline (`workflow_dispatch`)
+- `.github/workflows/deploy-azure.yml` — Optional Azure Static Web Apps deploy pipeline (`workflow_dispatch`, requires `AZURE_STATIC_WEB_APPS_API_TOKEN`)
 
-## Deploying via Pipelines (GitHub Pages — Free)
-Go to **Actions → Deploy Portfolio to GitHub Pages (Free) → Run workflow**:
-1. **`deploy_target`**: choose `resume` or `landing`.
-2. **`resume_template`**: pick one of the 9 templates (or `all-templates-hub`) when `deploy_target = resume`. Automatically ignored when `deploy_target = landing`.
+## Syncing Data After Editing `data/resume-data.json`
+```bash
+node scripts/sync-resume-data.mjs
+```
+
+## Deploying via GitHub Pages
+Go to **Actions → Deploy Resume to GitHub Pages → Run workflow** and select `resume_template` (`01-bento-glass`..`11-classic-pdf` or `all-templates-hub`).

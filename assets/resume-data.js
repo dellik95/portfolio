@@ -159,7 +159,6 @@ window.__OL_RESUME_DATA__ = {
       },
       "githubUrl": "https://github.com/dellik95/redis-gui",
       "landingUrl": "https://dellik95.github.io/redis-gui/",
-      "landingPath": "projects/redis-gui.html",
       "features": {
         "en": [
           "Visual Strategy-based editors for Strings, Hashes, Lists, Sets, ZSets & Streams",

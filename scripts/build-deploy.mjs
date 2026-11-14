@@ -53,38 +53,21 @@ const root = process.cwd();
 const { target, template, out } = parseArgs(process.argv.slice(2));
 const outDir = path.resolve(root, out);
 
-if (!['resume', 'landing'].includes(target)) {
-  console.error(`Invalid --target "${target}". Expected "resume" or "landing".`);
+if (target !== 'resume') {
+  console.error(`Invalid --target "${target}". Only "resume" is hosted in this repository (RedisGUI landing moved to https://github.com/dellik95/redis-gui).`);
   process.exit(1);
 }
 
 fs.rmSync(outDir, { recursive: true, force: true });
 fs.mkdirSync(outDir, { recursive: true });
 
-if (target === 'landing') {
-  console.log('[build-deploy] Target: landing (RedisGUI product page — template input ignored)');
-  const srcLanding = path.join(root, 'projects', 'redis-gui.html');
-  const html = fs.readFileSync(srcLanding, 'utf8');
-  fs.writeFileSync(path.join(outDir, 'index.html'), rewriteRootPaths(html, false), 'utf8');
-  copyRecursive(path.join(root, 'assets', 'redis-gui'), path.join(outDir, 'assets', 'redis-gui'));
-  fs.writeFileSync(
-    path.join(outDir, 'robots.txt'),
-    'User-agent: *\nAllow: /\n\nSitemap: https://dellik95.github.io/redis-gui/sitemap.xml\n',
-    'utf8'
-  );
-  fs.writeFileSync(
-    path.join(outDir, 'sitemap.xml'),
-    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>https://dellik95.github.io/redis-gui/</loc>\n    <changefreq>monthly</changefreq>\n    <priority>1.0</priority>\n  </url>\n</urlset>\n`,
-    'utf8'
-  );
-} else if (template === 'all-templates-hub') {
+if (template === 'all-templates-hub') {
   console.log('[build-deploy] Target: resume | Template: all-templates-hub (full portfolio switcher hub)');
   copyRecursive(path.join(root, 'index.html'), path.join(outDir, 'index.html'));
   copyRecursive(path.join(root, 'CV_OleksandrLutskov_.NetFull-Stack.pdf'), path.join(outDir, 'CV_OleksandrLutskov_.NetFull-Stack.pdf'));
   copyRecursive(path.join(root, 'assets'), path.join(outDir, 'assets'));
   copyRecursive(path.join(root, 'data'), path.join(outDir, 'data'));
   copyRecursive(path.join(root, 'templates'), path.join(outDir, 'templates'));
-  copyRecursive(path.join(root, 'projects'), path.join(outDir, 'projects'));
   for (const seoFile of ['robots.txt', 'sitemap.xml']) {
     if (fs.existsSync(path.join(root, seoFile))) {
       copyRecursive(path.join(root, seoFile), path.join(outDir, seoFile));

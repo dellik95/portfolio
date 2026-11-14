@@ -768,7 +768,7 @@
 
     <div class="sw-controls">
       <input type="file" id="hub-photo-input" accept="image/*" style="display:none;" />
-      <button type="button" class="action-link" onclick="document.getElementById('hub-photo-input').click()" title="Завантажити своє фото у всі 9 шаблонів">
+      <button type="button" class="action-link" onclick="document.getElementById('hub-photo-input').click()" title="Завантажити своє фото у всі 10 шаблонів">
         📷 Фото
       </button>
       <button type="button" class="action-link" onclick="printActiveTemplate()" title="Роздрукувати або зберегти поточний шаблон у PDF (Ctrl+P)">
@@ -809,7 +809,7 @@
   <main class="stage-wrap">
     <iframe id="preview-frame" src="templates/07-architect-sidebar-cv.html" title="Resume Template Preview"></iframe>
 
-    <!-- Compare All 9 Drawer -->
+    <!-- Compare All 10 Drawer -->
     <div id="overview-drawer">
       <div class="ov-container">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
@@ -1040,11 +1040,10 @@
     }
 
     function openRedisLandingInHub() {
-      const isHosted = window.location.protocol.startsWith('http') && !/^(localhost|127\.0\.0\.1|0\.0\.0\.0)$/i.test(window.location.hostname);
-      const rgUrl = isHosted ? 'https://dellik95.github.io/redis-gui/' : 'projects/redis-gui.html';
+      const rgUrl = 'https://dellik95.github.io/redis-gui/';
       const frame = document.getElementById('preview-frame');
       frame.src = rgUrl;
-      document.getElementById('open-direct-link').href = 'https://dellik95.github.io/redis-gui/';
+      document.getElementById('open-direct-link').href = rgUrl;
       const themeBtns = document.getElementById('theme-light')?.parentElement;
       if (themeBtns) themeBtns.style.display = '';
       document.getElementById('active-style-desc').innerHTML =

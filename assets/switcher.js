@@ -24,6 +24,7 @@
       id: '03-swiss-editorial',
       tplClass: 'tpl-03',
       nativeTheme: 'light',
+      noTheme: true,
       num: '03',
       name: 'Swiss Editorial',
       tag: 'Minimalist / Print',
@@ -182,31 +183,42 @@
     if (!d) return;
     const eduItems = d.education || [];
     const langItems = d.languages || [];
-    const lines = [
-      '<span class="json-key">"educationAndLanguages": {</span>',
-      '<div class="ol-json-body">',
-      '  <div><span class="ol-jk">"education"</span>: [</div>',
-      ...eduItems.map((ed, idx) => {
-        const comma = idx < eduItems.length - 1 ? ',' : '';
-        const inst = escHtml(pick(ed.institution, lang));
-        const deg = escHtml(pick(ed.degree, lang));
-        const per = escHtml(ed.period || '');
-        const urlHtml = ed.url
-          ? `, <span class="ol-jk">"url"</span>: <a href="${escHtml(ed.url)}" target="_blank" rel="noopener" class="ol-jurl">"LinkedIn ↗"</a>`
-          : '';
-        return `<div class="ol-json-obj">    { <span class="ol-jk">"university"</span>: <span class="ol-js">"${inst}"</span>, <span class="ol-jk">"degree"</span>: <span class="ol-js2">"${deg}"</span>, <span class="ol-jk">"period"</span>: <span class="ol-jn">"${per}"</span>${urlHtml} }${comma}</div>`;
-      }),
-      '  <div>],</div>',
-      '  <div><span class="ol-jk">"languages"</span>: [</div>',
-      ...langItems.map((ln, idx) => {
-        const comma = idx < langItems.length - 1 ? ',' : '';
-        return `<div class="ol-json-obj">    { <span class="ol-jk">"language"</span>: <span class="ol-js3">"${escHtml(pick(ln.name, lang))}"</span>, <span class="ol-jk">"level"</span>: <span class="ol-js2">"${escHtml(pick(ln.level, lang))}"</span> }${comma}</div>`;
-      }),
-      '  <div>]</div>',
-      '</div>',
-      '<span class="json-key">}</span>'
-    ];
-    container.innerHTML = lines.join('\n');
+    const eduHtml = eduItems.map((ed, idx) => {
+      const comma = idx < eduItems.length - 1 ? ',' : '';
+      const inst = escHtml(pick(ed.institution, lang));
+      const deg = escHtml(pick(ed.degree, lang));
+      const per = escHtml(ed.period || '');
+      return [
+        '    {',
+        `      <span class="ol-jk">"university"</span>: <span class="ol-js">"${inst}"</span>,`,
+        `      <span class="ol-jk">"degree"</span>: <span class="ol-js2">"${deg}"</span>,`,
+        `      <span class="ol-jk">"period"</span>: <span class="ol-jn">"${per}"</span>`,
+        `    }${comma}`
+      ].join('\n');
+    }).join('\n');
+
+    const langHtml = langItems.map((ln, idx) => {
+      const comma = idx < langItems.length - 1 ? ',' : '';
+      return [
+        '    {',
+        `      <span class="ol-jk">"language"</span>: <span class="ol-js3">"${escHtml(pick(ln.name, lang))}"</span>,`,
+        `      <span class="ol-jk">"level"</span>: <span class="ol-js2">"${escHtml(pick(ln.level, lang))}"</span>`,
+        `    }${comma}`
+      ].join('\n');
+    }).join('\n');
+
+    container.innerHTML = [
+      '<span class="json-key">"educationAndLanguages":</span> {',
+      '<pre class="ol-json-body">',
+      '  <span class="ol-jk">"education"</span>: [',
+      eduHtml,
+      '  ],',
+      '  <span class="ol-jk">"languages"</span>: [',
+      langHtml,
+      '  ]',
+      '</pre>',
+      '}'
+    ].join('\n');
   }
 
   function renderEducationList(container, lang, tplClass) {
@@ -215,9 +227,7 @@
       const inst = escHtml(pick(ed.institution, lang));
       const deg = escHtml(pick(ed.degree, lang));
       const per = escHtml(ed.period || '');
-      const titleHtml = ed.url
-        ? `<a href="${escHtml(ed.url)}" target="_blank" rel="noopener" class="ol-edu-link">${inst} ↗</a>`
-        : `<span>${inst}</span>`;
+      const titleHtml = `<span>${inst}</span>`;
       if (tplClass === 'tpl-07') {
         return `<div class="ol-edu-item sb-edu-item">
           <div class="ol-edu-inst">${titleHtml}</div>
@@ -500,30 +510,33 @@
   }
 
   function getCurrentTheme() {
+    const meta = getCurrentTemplateMeta();
+    if (meta && meta.noTheme) return meta.nativeTheme || 'light';
     try {
       const saved = localStorage.getItem('ol_cv_theme');
       if (saved === 'light' || saved === 'dark') return saved;
     } catch (e) {}
-    const meta = getCurrentTemplateMeta();
     return (meta && meta.nativeTheme) || 'light';
   }
 
   function setTheme(theme, persist = true) {
-    if (theme !== 'light' && theme !== 'dark') return;
-    if (persist) {
+    const meta = getCurrentTemplateMeta();
+    const effective = (meta && meta.noTheme) ? (meta.nativeTheme || 'light') : theme;
+    if (effective !== 'light' && effective !== 'dark') return;
+    if (persist && !(meta && meta.noTheme)) {
       try {
-        localStorage.setItem('ol_cv_theme', theme);
+        localStorage.setItem('ol_cv_theme', effective);
       } catch (e) {}
     }
-    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-theme', effective);
     document.querySelectorAll('[data-theme-btn]').forEach((btn) => {
-      btn.classList.toggle('active', btn.getAttribute('data-theme-btn') === theme);
+      btn.classList.toggle('active', btn.getAttribute('data-theme-btn') === effective);
     });
     // Re-sync full-bleed print background layer after styles recompute
     window.requestAnimationFrame(syncPrintBackground);
     if (window.self !== window.top && window.parent) {
       try {
-        window.parent.postMessage({ type: 'OL_THEME_STATE', theme }, '*');
+        window.parent.postMessage({ type: 'OL_THEME_STATE', theme: effective }, '*');
       } catch (e) {}
     }
   }
@@ -633,11 +646,8 @@
   }
 
   function openProjectModal(projectId) {
-    const isInTemplatesDir = window.location.pathname.replace(/\\/g, '/').includes('/templates/');
-    const localLandingUrl = isInTemplatesDir ? '../projects/redis-gui.html' : 'projects/redis-gui.html';
     const remoteLandingUrl = (resumeData && resumeData.portfolio && resumeData.portfolio.featured && resumeData.portfolio.featured.landingUrl) || 'https://dellik95.github.io/redis-gui/';
-    const isHostedRemote = window.location.protocol.startsWith('http') && !/^(localhost|127\.0\.0\.1|0\.0\.0\.0)$/i.test(window.location.hostname);
-    const redisLandingUrl = isHostedRemote ? remoteLandingUrl : localLandingUrl;
+    const redisLandingUrl = remoteLandingUrl;
 
     if (projectId === 'redis-gui') {
       const win = window.open(redisLandingUrl, '_blank', 'noopener');
@@ -1138,8 +1148,12 @@
 
       /* Structured Education, Languages & Certifications Blocks */
       .ol-json-body {
-        padding-left: 10px;
-        line-height: 1.7;
+        margin: 0;
+        padding-left: 0;
+        font-family: inherit;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        line-height: 1.55;
         font-size: 12px;
         color: #cbd5e1;
       }
@@ -2805,11 +2819,13 @@
 
     function injectHeaderActions(tplClass) {
       if (document.querySelector('.ol-hdr-actions')) return;
+      const tplMeta = getCurrentTemplateMeta();
+      const hideThemeToggle = !!(tplMeta && tplMeta.noTheme);
       const box = document.createElement('div');
       box.className = 'ol-hdr-actions';
       box.setAttribute('role', 'group');
       box.setAttribute('aria-label', 'Resume Display Controls');
-      box.innerHTML = `
+      const themeSegHtml = hideThemeToggle ? '' : `
         <div class="ol-hdr-seg" title="Light / Dark Theme">
           <button type="button" class="ol-hdr-btn" data-theme-btn="light" aria-label="Light theme">
             <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
@@ -2817,7 +2833,8 @@
           <button type="button" class="ol-hdr-btn" data-theme-btn="dark" aria-label="Dark theme">
             <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
           </button>
-        </div>
+        </div>`;
+      box.innerHTML = `${themeSegHtml}
         <div class="ol-hdr-seg" title="Language">
           <button type="button" class="ol-hdr-btn" data-lang-btn="en">EN</button>
           <button type="button" class="ol-hdr-btn" data-lang-btn="uk">UA</button>

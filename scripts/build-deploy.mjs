@@ -88,8 +88,6 @@ if (target === 'landing') {
   copyRecursive(path.join(root, 'CV_OleksandrLutskov_.NetFull-Stack.pdf'), path.join(outDir, 'CV_OleksandrLutskov_.NetFull-Stack.pdf'));
   copyRecursive(path.join(root, 'assets'), path.join(outDir, 'assets'));
   copyRecursive(path.join(root, 'data'), path.join(outDir, 'data'));
-  // Keep RedisGUI landing reachable via /projects/redis-gui.html when clicked from the resume
-  copyRecursive(path.join(root, 'projects', 'redis-gui.html'), path.join(outDir, 'projects', 'redis-gui.html'));
 }
 
 const swaConfig = path.join(root, 'staticwebapp.config.json');

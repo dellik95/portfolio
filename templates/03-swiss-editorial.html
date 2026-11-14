@@ -419,14 +419,14 @@
     @media screen and (max-width: 980px) {
       .m-col-4, .m-col-5, .m-col-3,
       .hero-left, .hero-right,
-      .sec-sidebar, .sec-aside, .sec-main {
+      .sec-sidebar, .sec-main {
         grid-column: span 12;
         border-right: none;
       }
-      .sec-sidebar, .sec-aside {
+      .sec-sidebar {
         border-bottom: 1px solid var(--rule);
       }
-      .work-grid, .sub-works-grid, .exp-row, .skills-matrix-grid, .sec-row {
+      .work-grid, .sub-works-grid, .exp-row, .skills-matrix-grid, .swiss-section {
         grid-template-columns: 1fr;
       }
       .skill-cell[style*="span 2"] {
@@ -440,8 +440,8 @@
     @media screen and (max-width: 640px) {
       .m-col-4, .m-col-5, .m-col-3,
       .hero-left, .hero-right,
-      .sec-sidebar, .sec-aside, .sec-main {
-        padding: 20px 16px;
+      .sec-sidebar, .sec-main {
+        padding: 20px 16px !important;
       }
     }
   </style>
@@ -658,13 +658,13 @@
       </div>
     </section>
 
-    <section id="certifications" class="sec-row">
-      <aside class="sec-aside">
+    <section id="certifications" class="swiss-section" style="border-bottom:none;">
+      <aside class="sec-sidebar">
         <span class="index-label">05 / CREDENTIALS</span>
         <h2 data-i18n="certs_title">Licenses &amp; Certifications</h2>
         <p style="font-size:13px;color:var(--ink-muted);margin-top:12px;">Verified technical credentials &amp; specializations</p>
       </aside>
-      <div class="sec-main">
+      <div class="sec-main" style="padding:36px;">
         <div data-render="certifications"></div>
       </div>
     </section>

@@ -455,8 +455,7 @@ window.__OL_RESUME_DATA__ = {
         "en": "Master's degree, Computer Engineering",
         "uk": "Магістр, Комп'ютерна інженерія"
       },
-      "period": "2017 – 2019",
-      "url": "https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/details/education/edit/forms/447129981/"
+      "period": "2017 – 2019"
     },
     {
       "institution": {
@@ -467,8 +466,7 @@ window.__OL_RESUME_DATA__ = {
         "en": "Bachelor's degree, Computer Engineering",
         "uk": "Бакалавр, Комп'ютерна інженерія"
       },
-      "period": "2013 – 2017",
-      "url": "https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/details/education/edit/forms/439606164/"
+      "period": "2013 – 2017"
     }
   ],
   "languages": [

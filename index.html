@@ -546,6 +546,7 @@
       {
         file: 'templates/03-swiss-editorial.html',
         nativeTheme: 'light',
+        noTheme: true,
         desc: '<strong>03. Swiss Editorial (Editorial &amp; Vermilion):</strong> Журнальна швейцарська типографіка з портретним слотом та відкритою архітектурною сіткою.'
       },
       {
@@ -588,9 +589,12 @@
     }
 
     function syncHubThemeUI() {
+      const item = STYLES[currentIdx];
+      const themeBtns = document.getElementById('theme-light')?.parentElement;
+      if (themeBtns) themeBtns.style.display = (item && item.noTheme) ? 'none' : '';
       let savedTheme = null;
       try { savedTheme = localStorage.getItem('ol_cv_theme'); } catch (e) {}
-      const effective = savedTheme || (STYLES[currentIdx] && STYLES[currentIdx].nativeTheme) || 'light';
+      const effective = (item && item.noTheme) ? 'light' : (savedTheme || (item && item.nativeTheme) || 'light');
       updateThemeButtons(effective);
     }
 
@@ -614,9 +618,13 @@
     }
 
     function openRedisLandingInHub() {
+      const isHosted = window.location.protocol.startsWith('http') && !/^(localhost|127\.0\.0\.1|0\.0\.0\.0)$/i.test(window.location.hostname);
+      const rgUrl = isHosted ? 'https://dellik95.github.io/redis-gui/' : 'projects/redis-gui.html';
       const frame = document.getElementById('preview-frame');
-      frame.src = 'projects/redis-gui.html';
-      document.getElementById('open-direct-link').href = 'projects/redis-gui.html';
+      frame.src = rgUrl;
+      document.getElementById('open-direct-link').href = 'https://dellik95.github.io/redis-gui/';
+      const themeBtns = document.getElementById('theme-light')?.parentElement;
+      if (themeBtns) themeBtns.style.display = '';
       document.getElementById('active-style-desc').innerHTML =
         '<strong>★ RedisStudio V2.2 (RedisGUI) — Product Landing Page:</strong> Продуктовий лендінг із 3D-паралаксом, перекриттями, анімаціями, інтерактивним CLI/Strategy симулятором та детальним описом усіх 4 скриншотів.';
       for (let i = 0; i < STYLES.length; i++) {

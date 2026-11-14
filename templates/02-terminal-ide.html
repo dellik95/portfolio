@@ -542,16 +542,12 @@
       display: block;
     }
 
+    .mobile-contact-pill { display: none; }
+
     @media screen and (max-width: 980px) {
       .ide-body { grid-template-columns: 1fr; }
-      .ide-sidebar {
-        order: 2;
-        border-right: none;
-        border-top: 1px solid var(--border);
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 14px;
-      }
+      .ide-sidebar { display: none; }
+      .mobile-contact-pill { display: inline-flex; }
       .ide-content { padding: 20px; min-width: 0; }
       .sln-body, .sln-grid-3, .json-grid { grid-template-columns: 1fr; }
     }
@@ -657,6 +653,8 @@
               <a href="https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/" target="_blank" rel="noopener" class="btn-cmd">LinkedIn ↗</a>
               <a href="https://t.me/alexluts" target="_blank" rel="noopener" class="btn-cmd">Telegram ↗</a>
               <a href="https://www.youtube.com/@CrafterInCode" target="_blank" rel="noopener" class="btn-cmd">YouTube ↗</a>
+              <a href="mailto:dellik95@gmail.com" data-contact="email" class="btn-cmd mobile-contact-pill">✉ dellik95@gmail.com</a>
+              <a href="tel:+380978281303" data-contact="phone" class="btn-cmd mobile-contact-pill">📞 +380 97 828 13 03</a>
             </div>
           </div>
         </section>

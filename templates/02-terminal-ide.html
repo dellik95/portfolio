@@ -329,6 +329,11 @@
       align-items: center;
     }
 
+    .sln-body > *, .sln-grid-3 > *, .json-grid > * {
+      min-width: 0;
+      max-width: 100%;
+    }
+
     .arch-diagram {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11.5px;
@@ -553,6 +558,11 @@
     @media screen and (max-width: 640px) {
       .ide-content { padding: 14px; }
       .term-hero { padding: 18px 16px; }
+      .sln-topbar { padding: 10px 14px; }
+      .sln-body { padding: 16px; gap: 18px; }
+      .arch-diagram { font-size: 10.5px; padding: 10px; }
+      .term-shot-tabs { flex-wrap: wrap; }
+      .term-shot-tab { flex: 1 1 46%; text-align: center; }
       .commit-card { padding: 14px; }
       .git-graph { padding-left: 28px; }
       .status-bar { flex-wrap: wrap; height: auto; padding: 8px 14px; gap: 6px 12px; }

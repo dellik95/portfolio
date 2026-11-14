@@ -1491,8 +1491,11 @@
       main, main > *, .ide-content, .sec-main, .cv-main, .right-pane,
       .exp-timeline, .exp-list, .timeline-wrap, .bento-card,
       .exec-card, .mono-exp-card, .em-exp-item, .exp-cloud-item,
-      .clean-card, .commit-card {
+      .clean-card, .commit-card,
+      .sln-body > *, .sln-grid-3 > *, .json-grid > *,
+      .bento-card > *, .clean-card > *, .exec-card > * {
         min-width: 0;
+        max-width: 100%;
       }
       .ol-json-obj {
         overflow-wrap: anywhere;
@@ -1548,6 +1551,9 @@
         }
         .rg-metrics {
           grid-template-columns: 1fr !important;
+        }
+        .shot-tabs, .shot-browser-bar, .exec-shot-nav, .term-shot-tabs, .mono-menu {
+          flex-wrap: wrap !important;
         }
       }
 

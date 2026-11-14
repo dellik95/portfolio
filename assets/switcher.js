@@ -589,6 +589,10 @@
 
   function getCurrentLang() {
     try {
+      const qLang = new URLSearchParams(window.location.search).get('lang');
+      if (qLang === 'en' || qLang === 'uk') return qLang;
+    } catch (e) {}
+    try {
       return localStorage.getItem('ol_cv_lang') || 'en';
     } catch (e) {
       return 'en';

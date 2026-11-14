@@ -26,6 +26,7 @@ on:
           - 08-azure-cloud-portal
           - 09-minimal-mono-craft
           - 10-interactive-tabbed-folio
+          - 11-classic-pdf
           - all-templates-hub
 
 permissions:

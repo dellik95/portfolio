@@ -90,6 +90,17 @@
       tag: 'Profile Card + Skill Matrix + Menu',
       file: '10-interactive-tabbed-folio.html',
       accent: '#10B981'
+    },
+    {
+      id: '11-classic-pdf',
+      tplClass: 'tpl-11',
+      nativeTheme: 'light',
+      noTheme: true,
+      num: '10',
+      name: 'Classic PDF',
+      tag: 'Serif / Original A4 PDF Style',
+      file: '11-classic-pdf.html',
+      accent: '#575757'
     }
   ];
 
@@ -228,6 +239,12 @@
       const deg = escHtml(pick(ed.degree, lang));
       const per = escHtml(ed.period || '');
       const titleHtml = `<span>${inst}</span>`;
+      if (tplClass === 'tpl-11') {
+        return `<div class="pdf-edu-item">
+          <div class="pdf-edu-inst">${titleHtml}</div>
+          <div class="pdf-edu-deg">${deg}${per ? ` (${per})` : ''}</div>
+        </div>`;
+      }
       if (tplClass === 'tpl-07') {
         return `<div class="ol-edu-item sb-edu-item">
           <div class="ol-edu-inst">${titleHtml}</div>
@@ -247,6 +264,10 @@
 
   function renderLanguagesList(container, lang, tplClass) {
     const items = (resumeData && resumeData.languages) || [];
+    if (tplClass === 'tpl-11') {
+      container.innerHTML = `<ul class="pdf-bullet-list">${items.map((ln) => `<li>${escHtml(pick(ln.name, lang))} — ${escHtml(pick(ln.level, lang))}</li>`).join('')}</ul>`;
+      return;
+    }
     if (tplClass === 'tpl-07') {
       container.innerHTML = items.map((ln) => {
         const label = `${escHtml(pick(ln.name, lang))} — ${escHtml(pick(ln.level, lang))}`;
@@ -418,6 +439,16 @@
           <div class="mono-pills">${tags.map((t) => `<span class="m-pill">${escHtml(t)}</span>`).join('')}</div>
         </article>`;
       }
+      if (tplClass === 'tpl-11') {
+        const techLabel = lang === 'uk' ? 'Технології' : 'Technologies';
+        return `<article class="pdf-exp-item">
+          <h3 class="pdf-exp-role">${role}</h3>
+          <div class="pdf-exp-meta">${co} | ${period}</div>
+          ${domain ? `<p class="pdf-exp-domain">${domain}</p>` : ''}
+          <ul class="pdf-bullet-list">${bullets}</ul>
+          ${tags.length ? `<p class="pdf-exp-tech"><em>${techLabel}: ${tags.map(escHtml).join(', ')}</em></p>` : ''}
+        </article>`;
+      }
       return `<article class="em-exp-item">
         <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;">
           <h3 style="font-size:19px;">${co} — <span style="color:var(--emerald);">${role}</span></h3>
@@ -465,6 +496,18 @@
       });
     });
 
+    document.querySelectorAll('[data-render="skills-bullets"]').forEach((el) => {
+      const sk = (d && d.skills) || {};
+      const lines = [];
+      [sk.backend, sk.frontend, sk.cloudAndData].forEach((arr) => {
+        if (!Array.isArray(arr) || !arr.length) return;
+        for (let i = 0; i < arr.length; i += 3) {
+          lines.push(arr.slice(i, i + 3).map(escHtml).join(', '));
+        }
+      });
+      el.innerHTML = `<ul class="pdf-bullet-list">${lines.map((line) => `<li>${line}</li>`).join('')}</ul>`;
+    });
+
     if (d.profile && d.profile.contacts) {
       const c = d.profile.contacts;
       document.querySelectorAll('[data-contact="email"]').forEach((a) => {
@@ -481,6 +524,9 @@
       });
       document.querySelectorAll('[data-contact="telegram"]').forEach((a) => {
         a.href = c.telegram;
+      });
+      document.querySelectorAll('[data-contact="youtube"]').forEach((a) => {
+        if (c.youtube) a.href = c.youtube;
       });
     }
   }
@@ -1366,6 +1412,79 @@
       }
       html.tpl-10 .ol-cert-issuer { background: var(--emerald-soft); color: var(--emerald); }
       html.tpl-10 .ol-cert-btn { color: var(--emerald); border-color: var(--border); }
+
+      /* tpl-11: Classic PDF Style Actions & Certifications */
+      html.tpl-11 .ol-hdr-actions {
+        font-family: 'Raleway', sans-serif;
+        gap: 6px;
+      }
+      html.tpl-11 .ol-hdr-seg {
+        border: 1px solid #b8b8b8;
+        border-radius: 0;
+        padding: 1px;
+        background: #ffffff;
+      }
+      html.tpl-11 .ol-hdr-btn {
+        color: #575757;
+        padding: 4px 8px;
+        border-radius: 0;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      html.tpl-11 .ol-hdr-btn:hover { background: #efefef; color: #222222; }
+      html.tpl-11 .ol-hdr-btn.active { background: #575757; color: #ffffff; }
+      html.tpl-11 .ol-hdr-print {
+        border: 1px solid #b8b8b8;
+        border-radius: 0;
+        padding: 4px 10px;
+        font-size: 11px;
+        color: #575757;
+      }
+      html.tpl-11 .ol-hdr-print:hover {
+        background: #575757;
+        border-color: #575757;
+        color: #ffffff;
+      }
+      html.tpl-11 .ol-cert-card {
+        background: #ffffff;
+        border: 1px solid #cfcfcf;
+        border-radius: 0;
+        padding: 14px 16px;
+      }
+      html.tpl-11 .ol-cert-head {
+        font-family: 'Raleway', sans-serif;
+        letter-spacing: 0.04em;
+      }
+      html.tpl-11 .ol-cert-issuer {
+        background: #efefef;
+        color: #4a4a4a;
+        border-radius: 0;
+        font-weight: 600;
+      }
+      html.tpl-11 .ol-cert-title {
+        font-family: 'Lora', Georgia, serif;
+        color: #4a4a4a;
+        font-size: 14.5px;
+      }
+      html.tpl-11 .ol-cert-btn {
+        font-family: 'Lora', Georgia, serif;
+        border: none;
+        border-bottom: 1px solid #575757;
+        border-radius: 0;
+        padding: 0 0 1px;
+        color: #4a4a4a;
+      }
+      html.tpl-11 .ol-cert-btn:hover {
+        background: transparent;
+        color: #222222;
+      }
+      html.tpl-11 .ol-cert-skill {
+        border-radius: 0;
+        border-color: #cfcfcf;
+        color: #575757;
+      }
 
       /* Cross-template Responsive Hardening (Tablet <= 860px & Mobile <= 640px) */
       *, *::before, *::after { box-sizing: border-box; }
@@ -2925,6 +3044,14 @@
           const nav = document.querySelector('.em-header .em-nav');
           if (nav) {
             nav.appendChild(box);
+            return true;
+          }
+          return false;
+        },
+        'tpl-11': () => {
+          const topBar = document.querySelector('.pdf-top-actions');
+          if (topBar) {
+            topBar.prepend(box);
             return true;
           }
           return false;

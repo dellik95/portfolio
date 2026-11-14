@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oleksandr Lutskov — Senior Full Stack Software Engineer (Classic PDF Style)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --canvas: #efefef;
+      --paper: #ffffff;
+      --ink-strong: #4a4a4a;
+      --ink: #575757;
+      --ink-muted: #6f6f6f;
+      --rule: #7e7e7e;
+      --rule-light: #b8b8b8;
+      --badge: #8c8c8c;
+      --hover: #222222;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: 'Lora', Georgia, 'Times New Roman', serif;
+      font-size: 14.5px;
+      line-height: 1.58;
+      padding: 28px 16px 64px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .pdf-sheet {
+      max-width: 960px;
+      margin: 0 auto;
+      background: var(--paper);
+      padding: 46px 56px 60px;
+      box-shadow: 0 2px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Top utility strip inside paper margin (hidden in print) */
+    .pdf-top-actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .pdf-download-link {
+      font-family: 'Raleway', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      border: 1px solid var(--rule-light);
+      padding: 4px 10px;
+      transition: all 0.16s ease;
+    }
+    .pdf-download-link:hover {
+      color: var(--ink-strong);
+      border-color: var(--ink-strong);
+    }
+
+    /* Header matching CV_OleksandrLutskov_.NetFull-Stack.pdf */
+    .pdf-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 28px;
+    }
+    .pdf-header-left {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .pdf-name {
+      font-family: 'Raleway', 'Lora', Georgia, serif;
+      font-size: clamp(27px, 3.6vw, 39px);
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink);
+      line-height: 1.12;
+      margin-bottom: 6px;
+    }
+    .pdf-role {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+    .pdf-location {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 14px;
+      color: var(--ink-muted);
+    }
+
+    /* Right-aligned contact stack with circular gray badges */
+    .pdf-contacts {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 7px;
+      flex-shrink: 0;
+    }
+    .pdf-contact-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13.5px;
+      color: var(--ink);
+      text-decoration: none;
+      line-height: 1.25;
+      transition: color 0.15s ease;
+    }
+    .pdf-contact-row span.u-link {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+    }
+    .pdf-contact-row:hover {
+      color: var(--hover);
+    }
+    .pdf-contact-row:hover .pdf-icon-circle {
+      background: var(--ink-strong);
+    }
+    .pdf-icon-circle {
+      width: 21px;
+      height: 21px;
+      border-radius: 50%;
+      background: var(--badge);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s ease;
+    }
+    .pdf-icon-circle svg {
+      width: 11px;
+      height: 11px;
+      display: block;
+    }
+
+    /* Thick signature divider rule below header */
+    .pdf-thick-rule {
+      border: none;
+      height: 4px;
+      background: var(--rule);
+      margin: 22px 0 26px;
+    }
+
+    /* Centered Summary Section */
+    .pdf-summary {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .pdf-section-title {
+      font-family: 'Raleway', 'Lora', Georgia, serif;
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .pdf-summary-rule {
+      width: 132px;
+      height: 1px;
+      background: var(--rule);
+      margin: 7px auto 16px;
+      border: none;
+    }
+    .pdf-summary-text {
+      max-width: 810px;
+      margin: 0 auto;
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--ink);
+      text-align: center;
+    }
+
+    /* Two-column split with continuous vertical divider rule */
+    .pdf-two-col {
+      display: grid;
+      grid-template-columns: 33% 1fr;
+      align-items: stretch;
+      margin-top: 12px;
+    }
+    .pdf-left-col {
+      padding-right: 28px;
+    }
+    .pdf-right-col {
+      padding-left: 34px;
+      border-left: 1px solid var(--rule);
+    }
+
+    .pdf-block {
+      margin-bottom: 30px;
+    }
+    .pdf-block:last-child {
+      margin-bottom: 0;
+    }
+
+    .pdf-col-heading {
+      font-family: 'Raleway', 'Lora', Georgia, serif;
+      font-size: 17px;
+      font-weight: 400;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--ink);
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 14px;
+      width: 82%;
+    }
+    .pdf-right-col .pdf-col-heading {
+      width: 62%;
+    }
+
+    /* Classic serif bullet lists matching PDF */
+    .pdf-bullet-list {
+      list-style: disc;
+      padding-left: 18px;
+      display: grid;
+      gap: 6px;
+      font-size: 13.5px;
+      line-height: 1.52;
+      color: var(--ink);
+    }
+    .pdf-bullet-list li::marker {
+      color: var(--ink);
+    }
+
+    /* Education entries (clean serif, no URLs) */
+    .pdf-edu-item {
+      margin-bottom: 12px;
+    }
+    .pdf-edu-item:last-child {
+      margin-bottom: 0;
+    }
+    .pdf-edu-inst {
+      font-weight: 700;
+      font-size: 14.5px;
+      color: var(--ink-strong);
+      line-height: 1.35;
+    }
+    .pdf-edu-deg {
+      font-size: 13.5px;
+      color: var(--ink);
+      margin-top: 2px;
+    }
+
+    /* Compact Featured Product block in left column */
+    .pdf-product-title {
+      font-weight: 700;
+      font-size: 14.5px;
+      color: var(--ink-strong);
+      margin-bottom: 4px;
+    }
+    .pdf-product-desc {
+      font-size: 13px;
+      color: var(--ink);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .pdf-product-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      align-items: center;
+    }
+    .pdf-inline-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-strong);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      font-family: inherit;
+      padding: 0;
+    }
+    .pdf-inline-link:hover {
+      color: var(--hover);
+    }
+
+    /* Experience entries matching PDF style */
+    .pdf-exp-item {
+      margin-bottom: 26px;
+    }
+    .pdf-exp-item:last-child {
+      margin-bottom: 0;
+    }
+    .pdf-exp-role {
+      font-size: 15.5px;
+      font-weight: 700;
+      color: var(--ink-strong);
+      line-height: 1.3;
+    }
+    .pdf-exp-meta {
+      font-size: 14px;
+      color: var(--ink);
+      margin-top: 2px;
+      margin-bottom: 8px;
+    }
+    .pdf-exp-domain {
+      font-size: 13.5px;
+      font-style: italic;
+      color: var(--ink-muted);
+      margin-bottom: 8px;
+    }
+    .pdf-exp-tech {
+      margin-top: 9px;
+      font-size: 13.5px;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    /* Responsive Breakpoints */
+    @media screen and (max-width: 820px) {
+      body {
+        padding: 12px 8px 40px;
+      }
+      .pdf-sheet {
+        padding: 28px 24px 36px;
+      }
+      .pdf-header {
+        flex-direction: column;
+        gap: 18px;
+      }
+      .pdf-contacts {
+        align-items: flex-start;
+      }
+      .pdf-contact-row {
+        flex-direction: row-reverse;
+      }
+      .pdf-two-col {
+        grid-template-columns: 1fr;
+      }
+      .pdf-left-col {
+        padding-right: 0;
+        padding-bottom: 24px;
+      }
+      .pdf-right-col {
+        padding-left: 0;
+        border-left: none;
+        border-top: 1px solid var(--rule);
+        padding-top: 26px;
+      }
+      .pdf-col-heading,
+      .pdf-right-col .pdf-col-heading {
+        width: 100%;
+      }
+    }
+
+    @media screen and (max-width: 520px) {
+      .pdf-sheet {
+        padding: 22px 16px 32px;
+      }
+      .pdf-name {
+        font-size: 25px;
+      }
+      .pdf-summary-text {
+        text-align: left;
+      }
+    }
+
+    @media print {
+      body {
+        background: #ffffff !important;
+        padding: 0 !important;
+      }
+      .pdf-sheet {
+        box-shadow: none !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .pdf-top-actions {
+        display: none !important;
+      }
+      .pdf-exp-item,
+      .pdf-edu-item {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="pdf-sheet">
+    <!-- Top bar for switcher.js injected EN/UA + Print + Download PDF -->
+    <div class="pdf-top-actions">
+      <a class="pdf-download-link" href="../CV_OleksandrLutskov_.NetFull-Stack.pdf" download data-i18n="download_cv">Download PDF CV</a>
+    </div>
+
+    <!-- Header Block -->
+    <header class="pdf-header">
+      <div class="pdf-header-left">
+        <h1 class="pdf-name">OLEKSANDR LUTSKOV</h1>
+        <div class="pdf-role" data-i18n="role">Senior Full Stack Software Engineer</div>
+        <div class="pdf-location">
+          <span class="pdf-icon-circle" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          </span>
+          <span data-i18n="location">Spain (Remote / Hybrid)</span>
+        </div>
+      </div>
+
+      <div class="pdf-contacts">
+        <a class="pdf-contact-row" href="tel:+380978281303" data-contact="phone">
+          <span>+380978281303</span>
+          <span class="pdf-icon-circle" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2z"/></svg>
+          </span>
+        </a>
+
+        <a class="pdf-contact-row" href="mailto:dellik95@gmail.com" data-contact="email">
+          <span>dellik95@gmail.com</span>
+          <span class="pdf-icon-circle" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </span>
+        </a>
+
+        <a class="pdf-contact-row" href="https://t.me/alexluts" target="_blank" rel="noopener" data-contact="telegram">
+          <span class="u-link">Telegram</span>
+          <span class="pdf-icon-circle" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+          </span>
+        </a>
+
+        <a class="pdf-contact-row" href="https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/" target="_blank" rel="noopener" data-contact="linkedin">
+          <span class="u-link">LinkedIn</span>
+          <span class="pdf-icon-circle" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 8.5H3.56V19.5H6.94V8.5ZM5.25 3.5C4.14 3.5 3.25 4.39 3.25 5.5C3.25 6.6 4.14 7.5 5.25 7.5C6.35 7.5 7.25 6.6 7.25 5.5C7.25 4.39 6.35 3.5 5.25 3.5ZM20.44 13.02C20.44 9.88 18.76 8.22 16.16 8.22C14.37 8.22 13.48 9.2 13.02 9.93V8.5H9.65C9.7 9.48 9.65 19.5 9.65 19.5H13.02V13.36C13.02 13.02 13.05 12.69 13.15 12.45C13.42 11.78 14.03 11.09 15.07 11.09C16.41 11.09 17.06 12.11 17.06 13.6V19.5H20.44V13.02Z"/></svg>
+          </span>
+        </a>
+
+        <a class="pdf-contact-row" href="https://github.com/dellik95" target="_blank" rel="noopener" data-contact="github">
+          <span class="u-link">GitHub</span>
+          <span class="pdf-icon-circle" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.02c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.82.58A12 12 0 0 0 12 .5Z"/></svg>
+          </span>
+        </a>
+
+        <a class="pdf-contact-row" href="https://www.youtube.com/@CrafterInCode" target="_blank" rel="noopener" data-contact="youtube">
+          <span class="u-link">YouTube (@CrafterInCode)</span>
+          <span class="pdf-icon-circle" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.58 7.19a2.5 2.5 0 0 0-1.76-1.77C18.26 5 12 5 12 5s-6.26 0-7.82.42A2.5 2.5 0 0 0 2.42 7.2 26.2 26.2 0 0 0 2 12a26.2 26.2 0 0 0 .42 4.81 2.5 2.5 0 0 0 1.76 1.77C5.74 19 12 19 12 19s6.26 0 7.82-.42a2.5 2.5 0 0 0 1.76-1.77A26.2 26.2 0 0 0 22 12a26.2 26.2 0 0 0-.42-4.81zM10 15V9l5.2 3-5.2 3z"/></svg>
+          </span>
+        </a>
+      </div>
+    </header>
+
+    <hr class="pdf-thick-rule" />
+
+    <!-- Centered Summary -->
+    <section class="pdf-summary">
+      <h2 class="pdf-section-title" data-i18n="summary_title">SUMMARY</h2>
+      <hr class="pdf-summary-rule" />
+      <p class="pdf-summary-text" data-i18n="summary_text">Senior Full-Stack .NET Engineer with 9+ years of commercial experience (including 2 years as a Tech Lead) designing and building scalable, high-performance applications across Healthcare, WMS, and CRM domains.</p>
+    </section>
+
+    <!-- Two-Column PDF Body -->
+    <section class="pdf-two-col">
+      <!-- Left Sidebar Column -->
+      <aside class="pdf-left-col">
+        <div class="pdf-block">
+          <h2 class="pdf-col-heading" data-i18n="skills_title">SKILLS</h2>
+          <div data-render="skills-bullets"></div>
+        </div>
+
+        <div class="pdf-block">
+          <h2 class="pdf-col-heading" data-i18n="lang_title">LANGUAGES</h2>
+          <div data-render="languages"></div>
+        </div>
+
+        <div class="pdf-block">
+          <h2 class="pdf-col-heading" data-i18n="edu_title">EDUCATION</h2>
+          <div data-render="education"></div>
+        </div>
+
+        <div class="pdf-block">
+          <h2 class="pdf-col-heading" data-i18n="portfolio_title">PORTFOLIO</h2>
+          <div class="pdf-product-title" data-i18n="rg_title">RedisGUI — Modern Redis Studio</div>
+          <p class="pdf-product-desc" data-i18n="rg_desc">Enterprise open-source Redis Studio built with .NET 11, Angular 22, and SignalR real-time telemetry.</p>
+          <div class="pdf-product-links">
+            <button type="button" class="pdf-inline-link" data-open-landing="redis-gui" data-i18n="open_landing_cta">Explore RedisGUI →</button>
+            <a class="pdf-inline-link" href="https://github.com/dellik95/redis-gui" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right Main Column -->
+      <div class="pdf-right-col">
+        <div class="pdf-block">
+          <h2 class="pdf-col-heading" data-i18n="exp_title">PROFESSIONAL EXPERIENCE</h2>
+          <div data-render="experience"></div>
+        </div>
+
+        <div class="pdf-block" id="certifications">
+          <h2 class="pdf-col-heading" data-i18n="cert_title">LICENSES &amp; CERTIFICATIONS</h2>
+          <div data-render="certifications"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../assets/resume-data.js"></script>
+  <script src="../assets/switcher.js"></script>
+</body>
+</html>

@@ -354,8 +354,11 @@
       <button class="style-tab" onclick="selectTemplate(8)" id="tab-8">
         <span class="dot" style="background:#10b981;"></span><span>09. Matrix ★</span>
       </button>
+      <button class="style-tab" onclick="selectTemplate(9)" id="tab-9">
+        <span class="dot" style="background:#9ca3af;"></span><span>10. Classic PDF</span>
+      </button>
       <button class="style-tab" onclick="toggleOverview()" id="tab-ov" style="color:#38bdf8;">
-        <span>⊞ All 9</span>
+        <span>⊞ All 10</span>
       </button>
       <button class="style-tab" onclick="openRedisLandingInHub()" id="tab-redis" style="border-color:rgba(239,68,68,0.45);color:#fca5a5;">
         <span class="dot" style="background:#ef4444;"></span><span>🚀 RedisGUI Landing ★</span>
@@ -410,9 +413,9 @@
       <div class="ov-container">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
           <div>
-            <h2 style="font-size:25px;font-weight:800;">Усі 9 професійних шаблонів сайту-резюме</h2>
+            <h2 style="font-size:25px;font-weight:800;">Усі 10 професійних шаблонів сайту-резюме</h2>
             <p style="color:var(--muted);font-size:13.5px;margin-top:4px;">
-              Кожен шаблон підтримує перемикач <strong>☀ Light / 🌙 Dark</strong>, завантаження фото та адаптований до друку на A4. Шаблони <strong>06–09 (NEW ★)</strong> також мають випадаюче меню <em>Featured Portfolio &amp; Products ▾</em> та прогрес-бари скілів.
+              Шаблони адаптовані до друку на A4, мобільних пристроїв та підтримують EN/UA. Шаблони <strong>06–09 (NEW ★)</strong> мають випадаюче меню <em>Featured Portfolio &amp; Products ▾</em>, а <strong>10. Classic PDF</strong> відтворює оригінальний стиль вашого PDF-резюме.
             </p>
           </div>
           <button class="action-link" onclick="toggleOverview()">✕ Закрити огляд</button>
@@ -464,6 +467,18 @@
             <div class="ov-actions">
               <span class="action-link">Переглянути стиль →</span>
               <a href="templates/10-interactive-tabbed-folio.html" target="_blank" class="action-link" style="background:transparent;" onclick="event.stopPropagation()">Файл ↗</a>
+            </div>
+          </div>
+
+          <div class="ov-card" onclick="selectTemplate(9)" style="border-color:rgba(148,163,184,0.45);">
+            <div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#cbd5e1;">NEW ★ STYLE 10 • CLASSIC PDF DOSSIER</span>
+              <h3>10. Classic PDF Style (Original A4 Serif)</h3>
+              <p>Максимально точне відтворення стилю вашого класичного PDF-резюме: білий аркуш, антиква Lora/Raleway, контактні іконки-кружечки праворуч, жирна роздільна лінія, центрований Summary та 2-колонкова сітка з ліцензіями.</p>
+            </div>
+            <div class="ov-actions">
+              <span class="action-link">Переглянути стиль →</span>
+              <a href="templates/11-classic-pdf.html" target="_blank" class="action-link" style="background:transparent;" onclick="event.stopPropagation()">Файл ↗</a>
             </div>
           </div>
 
@@ -578,6 +593,12 @@
         file: 'templates/10-interactive-tabbed-folio.html',
         nativeTheme: 'dark',
         desc: '<strong>09. Emerald Matrix Workstation (NEW ★):</strong> Закріплена ліва картка профілю з великим фото + верхнє меню портфоліо + 10-сегментні індикатори рівня володіння технологіями.'
+      },
+      {
+        file: 'templates/11-classic-pdf.html',
+        nativeTheme: 'light',
+        noTheme: true,
+        desc: '<strong>10. Classic PDF Style (Original A4 Serif):</strong> Класичне паперове резюме, стилістично ідентичне вашому PDF CV (заголовок з кружечками контактів, товста лінія, Summary по центру та 2-колонковий макет).'
       }
     ];
 

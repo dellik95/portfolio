@@ -81,5 +81,7 @@ const swaConfig = path.join(root, 'staticwebapp.config.json');
 if (fs.existsSync(swaConfig)) {
   fs.copyFileSync(swaConfig, path.join(outDir, 'staticwebapp.config.json'));
 }
+// Prevent Jekyll from ignoring dot-prefixed folders or modifying files on GitHub Pages
+fs.writeFileSync(path.join(outDir, '.nojekyll'), '', 'utf8');
 
 console.log(`[build-deploy] Staged cleanly into ${outDir}`);

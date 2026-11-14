@@ -419,19 +419,29 @@
     @media screen and (max-width: 980px) {
       .m-col-4, .m-col-5, .m-col-3,
       .hero-left, .hero-right,
-      .sec-sidebar, .sec-main {
+      .sec-sidebar, .sec-aside, .sec-main {
         grid-column: span 12;
         border-right: none;
       }
-      .sec-sidebar {
+      .sec-sidebar, .sec-aside {
         border-bottom: 1px solid var(--rule);
       }
-      .work-grid, .sub-works-grid, .exp-row, .skills-matrix-grid {
+      .work-grid, .sub-works-grid, .exp-row, .skills-matrix-grid, .sec-row {
         grid-template-columns: 1fr;
+      }
+      .skill-cell[style*="span 2"] {
+        grid-column: span 1 !important;
       }
       .sub-work-cell {
         border-right: none;
         border-bottom: 1px solid var(--rule);
+      }
+    }
+    @media screen and (max-width: 640px) {
+      .m-col-4, .m-col-5, .m-col-3,
+      .hero-left, .hero-right,
+      .sec-sidebar, .sec-aside, .sec-main {
+        padding: 20px 16px;
       }
     }
   </style>
@@ -484,6 +494,7 @@
             <li><span>GITHUB</span><a href="https://github.com/dellik95" target="_blank" rel="noopener">github.com/dellik95 ↗</a></li>
             <li><span>LINKEDIN</span><a href="https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/" target="_blank" rel="noopener">oleksandr-lutskov ↗</a></li>
             <li><span>TELEGRAM</span><a href="https://t.me/alexluts" target="_blank" rel="noopener">@alexluts ↗</a></li>
+            <li><span>YOUTUBE</span><a href="https://www.youtube.com/@CrafterInCode" target="_blank" rel="noopener">@CrafterInCode ↗</a></li>
           </ul>
         </div>
         <div style="margin-top:24px;">
@@ -587,144 +598,7 @@
         <p style="font-size:13px;color:var(--ink-muted);margin-top:12px;">2017 — Present • 5 Enterprise Organizations</p>
       </aside>
 
-      <div class="sec-main">
-        <!-- DataArt -->
-        <article class="exp-row">
-          <div>
-            <div class="exp-co">DataArt</div>
-            <div class="exp-rl" data-i18n="da_role">Senior Full Stack Software Engineer</div>
-            <div class="exp-dt" data-i18n="da_date">September 2025 – Present</div>
-          </div>
-          <div>
-            <p style="font-size:14px;color:var(--vermilion);font-weight:700;margin-bottom:10px;" data-i18n="da_domain">
-              Large-Scale Healthcare Platform — Automated Payments (AutoPay) Team
-            </p>
-            <ul class="exp-ul">
-              <li data-i18n="da_b1">Driving development and end-to-end automation of recurring payment workflows (AutoPay) within a large-scale enterprise Healthcare platform.</li>
-              <li data-i18n="da_b2">Owned architecture and integration with the internal Payment Gateway, ensuring reliable, idempotent, and compliant payment processing.</li>
-              <li data-i18n="da_b3">Designed and built internal operational &amp; support tools from scratch for production data remediation, automated data backfills, and high-volume bulk operations.</li>
-              <li data-i18n="da_b4">Engineered event-driven serverless workflows on AWS using Lambda, Step Functions, EventBridge, SNS, S3, API Gateway, DynamoDB, and SQL, backed by Playwright E2E automation.</li>
-            </ul>
-            <div class="tag-line">
-              <span class="s-tag">.NET / C#</span>
-              <span class="s-tag">React.js</span>
-              <span class="s-tag">AWS Lambda</span>
-              <span class="s-tag">AWS Step Functions</span>
-              <span class="s-tag">Amazon EventBridge</span>
-              <span class="s-tag">AWS API Gateway</span>
-              <span class="s-tag">DynamoDB &amp; SQL</span>
-              <span class="s-tag">Amazon S3 &amp; SNS</span>
-              <span class="s-tag">Playwright</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- FluentPro -->
-        <article class="exp-row">
-          <div>
-            <div class="exp-co">FluentPro</div>
-            <div class="exp-rl" data-i18n="fp_role">Senior Full Stack Software Engineer</div>
-            <div class="exp-dt" data-i18n="fp_date">April 2025 – September 2025</div>
-          </div>
-          <div>
-            <ul class="exp-ul">
-              <li data-i18n="fp_b1">Developed new features and enhanced existing functionality within a scalable analytics platform leveraging AI for enriched data interpretation and dynamic content generation.</li>
-              <li data-i18n="fp_b2">Implemented an admin interface for configuring dynamic templates and placeholder queries, enabling flexible data retrieval and AI-augmented insights.</li>
-              <li data-i18n="fp_b3">Integrated Semantic Kernel to orchestrate AI workflows, combining structured data with advanced natural language processing and generation capabilities using OpenAI services.</li>
-              <li data-i18n="fp_b4">Designed and maintained backend services using Azure Functions and Azure Service Bus to support reliable, event-driven, and asynchronous data processing.</li>
-              <li data-i18n="fp_b5">Authored comprehensive automated tests and conducted thorough code reviews to guarantee code quality and maintainability.</li>
-            </ul>
-            <div class="tag-line">
-              <span class="s-tag">Angular</span>
-              <span class="s-tag">ASP.NET Core</span>
-              <span class="s-tag">Azure Functions</span>
-              <span class="s-tag">Azure Service Bus</span>
-              <span class="s-tag">Azure Key Vault</span>
-              <span class="s-tag">Semantic Kernel</span>
-              <span class="s-tag">OpenAI Integration</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- GlobalLogic -->
-        <article class="exp-row">
-          <div>
-            <div class="exp-co">GlobalLogic</div>
-            <div class="exp-rl" data-i18n="gl_role">Senior Software Engineer</div>
-            <div class="exp-dt" data-i18n="gl_date">October 2022 – April 2025</div>
-          </div>
-          <div>
-            <ul class="exp-ul">
-              <li data-i18n="gl_b1">Developed resilient microservices for a high-throughput Warehouse Management &amp; Automation System (WMS).</li>
-              <li data-i18n="gl_b2">Drove monolith decomposition into independent, scalable microservices.</li>
-              <li data-i18n="gl_b3">Expanded unit and component test coverage across mission-critical services.</li>
-              <li data-i18n="gl_b4">Investigated and resolved complex production issues and executed system-wide performance optimizations.</li>
-              <li data-i18n="gl_b5">Built new API integrations and developed stub/mock applications for external hardware and ERP systems.</li>
-              <li data-i18n="gl_b6">Collaborated closely with product owners and cross-functional engineering teams.</li>
-            </ul>
-            <div class="tag-line">
-              <span class="s-tag">C#</span>
-              <span class="s-tag">ASP.NET Core</span>
-              <span class="s-tag">XAML / WPF</span>
-              <span class="s-tag">Angular</span>
-              <span class="s-tag">Angular Material</span>
-              <span class="s-tag">Redis</span>
-              <span class="s-tag">RabbitMQ</span>
-              <span class="s-tag">Docker &amp; Kubernetes</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- Rozetka -->
-        <article class="exp-row">
-          <div>
-            <div class="exp-co">LLC “Rozetka”</div>
-            <div class="exp-rl" data-i18n="rz_role">Full-Stack Engineer / Tech Leader</div>
-            <div class="exp-dt" data-i18n="rz_date">May 2018 – October 2022</div>
-          </div>
-          <div>
-            <p style="font-size:14px;color:var(--ink-muted);margin-bottom:12px;" data-i18n="rz_desc">
-              Led engineering on a large-scale Digital Document Flow &amp; CRM ecosystem (based on Bpm’Online CRM) and architected a custom Request Processing System from scratch.
-            </p>
-            <ul class="exp-ul">
-              <li data-i18n="rz_b1">Built the frontend architecture from scratch and created a reusable UI component library powered by GraphQL (dynamic dropdowns, virtual tables, configurable pages).</li>
-              <li data-i18n="rz_b2">Created and maintained the core Digital Document Flow system and high-volume API integrations.</li>
-              <li data-i18n="rz_b3">Communicated directly with business stakeholders, managed production deployments, and resolved critical incidents.</li>
-              <li data-i18n="rz_b4">Led and mentored developers as Tech Lead with close cross-team coordination.</li>
-            </ul>
-            <div class="tag-line">
-              <span class="s-tag">C# / ASP.NET Core</span>
-              <span class="s-tag">.NET Framework / WCF</span>
-              <span class="s-tag">Angular / TypeScript</span>
-              <span class="s-tag">RxJS / NgRx</span>
-              <span class="s-tag">GraphQL</span>
-              <span class="s-tag">MS SQL Server</span>
-              <span class="s-tag">RabbitMQ</span>
-              <span class="s-tag">Redis</span>
-              <span class="s-tag">Entity Framework</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- Avon -->
-        <article class="exp-row">
-          <div>
-            <div class="exp-co">Avon Cosmetics</div>
-            <div class="exp-rl" data-i18n="av_role">Junior Software Developer (.NET)</div>
-            <div class="exp-dt" data-i18n="av_date">July 2017 – May 2018</div>
-          </div>
-          <div>
-            <ul class="exp-ul">
-              <li data-i18n="av_b1">Designed and developed modular, extensible object-oriented .NET code.</li>
-              <li data-i18n="av_b2">Maintained and enhanced enterprise applications across both client and server tiers.</li>
-            </ul>
-            <div class="tag-line">
-              <span class="s-tag">C#</span>
-              <span class="s-tag">.NET Framework</span>
-            </div>
-          </div>
-        </article>
-      </div>
+      <div class="sec-main" data-render="experience"></div>
     </section>
 
     <!-- Skills & Education -->
@@ -773,16 +647,25 @@
 
           <div class="skill-cell" style="grid-column: span 2;">
             <h4 data-i18n="edu_title">EDUCATION</h4>
-            <div style="font-size:18px;font-weight:800;" data-i18n="edu_uni">National Aviation University (NAU)</div>
-            <div style="font-size:15px;color:var(--ink-muted);" data-i18n="edu_degree">Master's Degree in Computer Engineering</div>
+            <div data-render="education"></div>
           </div>
 
           <div class="skill-cell">
             <h4 data-i18n="lang_title">LANGUAGES</h4>
-            <div style="font-size:14px;font-weight:600;" data-i18n="lang_uk">Ukrainian — Native</div>
-            <div style="font-size:14px;color:var(--ink-muted);margin-top:4px;" data-i18n="lang_en">English — Intermediate (B1+/B2)</div>
+            <div data-render="languages"></div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section id="certifications" class="sec-row">
+      <aside class="sec-aside">
+        <span class="index-label">05 / CREDENTIALS</span>
+        <h2 data-i18n="certs_title">Licenses &amp; Certifications</h2>
+        <p style="font-size:13px;color:var(--ink-muted);margin-top:12px;">Verified technical credentials &amp; specializations</p>
+      </aside>
+      <div class="sec-main">
+        <div data-render="certifications"></div>
       </div>
     </section>
   </div>
@@ -794,6 +677,7 @@
       document.getElementById('swiss-shot-img').src = src;
     }
   </script>
+  <script src="../assets/resume-data.js"></script>
   <script src="../assets/switcher.js"></script>
 </body>
 </html>

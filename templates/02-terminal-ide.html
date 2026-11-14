@@ -539,9 +539,24 @@
 
     @media screen and (max-width: 980px) {
       .ide-body { grid-template-columns: 1fr; }
-      .ide-sidebar { display: none; }
-      .ide-content { padding: 20px; }
+      .ide-sidebar {
+        order: 2;
+        border-right: none;
+        border-top: 1px solid var(--border);
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 14px;
+      }
+      .ide-content { padding: 20px; min-width: 0; }
       .sln-body, .sln-grid-3, .json-grid { grid-template-columns: 1fr; }
+    }
+    @media screen and (max-width: 640px) {
+      .ide-content { padding: 14px; }
+      .term-hero { padding: 18px 16px; }
+      .commit-card { padding: 14px; }
+      .git-graph { padding-left: 28px; }
+      .status-bar { flex-wrap: wrap; height: auto; padding: 8px 14px; gap: 6px 12px; }
+      .ide-titlebar { padding: 10px 14px; gap: 8px; flex-wrap: wrap; }
     }
   </style>
 </head>
@@ -576,7 +591,8 @@
         <a href="#portfolio" class="tree-file"><span class="ext-sln">SLN</span> RedisGUI.Studio.slnx</a>
         <a href="#experience" class="tree-file"><span class="ext-git">GIT</span> career-history.log</a>
         <a href="#skills" class="tree-file"><span class="ext-json">{ }</span> skills.matrix.json</a>
-        <a href="#education" class="tree-file"><span class="ext-cs">MD</span> education-contact.md</a>
+        <a href="#education" class="tree-file"><span class="ext-cs">MD</span> education-langs.json</a>
+        <a href="#certifications" class="tree-file"><span class="ext-json">✦</span> licenses-certs.json</a>
         <a href="../CV_OleksandrLutskov_.NetFull-Stack.pdf" download class="tree-file"><span class="ext-pdf">PDF</span> CV_OleksandrLutskov.pdf</a>
 
         <div class="sidebar-card">
@@ -587,6 +603,7 @@
             <a href="https://github.com/dellik95" target="_blank" rel="noopener" style="color:var(--green);text-decoration:none;">⌘ github.com/dellik95</a>
             <a href="https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/" target="_blank" rel="noopener" style="color:var(--purple);text-decoration:none;">in LinkedIn Profile</a>
             <a href="https://t.me/alexluts" target="_blank" rel="noopener" style="color:var(--amber);text-decoration:none;">✈ t.me/alexluts</a>
+            <a href="https://www.youtube.com/@CrafterInCode" target="_blank" rel="noopener" style="color:var(--red);text-decoration:none;">▶ youtube.com/@CrafterInCode</a>
           </div>
         </div>
       </aside>
@@ -629,6 +646,7 @@
               <a href="https://github.com/dellik95" target="_blank" rel="noopener" class="btn-cmd">git remote: @dellik95 ↗</a>
               <a href="https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/" target="_blank" rel="noopener" class="btn-cmd">LinkedIn ↗</a>
               <a href="https://t.me/alexluts" target="_blank" rel="noopener" class="btn-cmd">Telegram ↗</a>
+              <a href="https://www.youtube.com/@CrafterInCode" target="_blank" rel="noopener" class="btn-cmd">YouTube ↗</a>
             </div>
           </div>
         </section>
@@ -723,139 +741,7 @@
             <h2 data-i18n="exp_title">Professional Experience</h2>
           </div>
 
-          <div class="git-graph">
-            <!-- DataArt -->
-            <article class="git-commit">
-              <div class="commit-meta">
-                <span class="commit-hash">commit da202509</span>
-                <span class="commit-branch">HEAD -&gt; main, origin/DataArt-Healthcare-AutoPay</span>
-                <span style="color:var(--text-muted);" data-i18n="da_date">September 2025 – Present</span>
-              </div>
-              <div class="commit-title">DataArt — <span style="color:var(--cyan);" data-i18n="da_role">Senior Full Stack Software Engineer</span></div>
-              <p style="font-size:13.5px;color:var(--green);font-weight:600;margin-bottom:10px;" data-i18n="da_domain">
-                Large-Scale Healthcare Platform — Automated Payments (AutoPay) Team
-              </p>
-              <ul class="commit-list">
-                <li data-i18n="da_b1">Driving development and end-to-end automation of recurring payment workflows (AutoPay) within a large-scale enterprise Healthcare platform.</li>
-                <li data-i18n="da_b2">Owned architecture and integration with the internal Payment Gateway, ensuring reliable, idempotent, and compliant payment processing.</li>
-                <li data-i18n="da_b3">Designed and built internal operational &amp; support tools from scratch for production data remediation, automated data backfills, and high-volume bulk operations.</li>
-                <li data-i18n="da_b4">Engineered event-driven serverless workflows on AWS using Lambda, Step Functions, EventBridge, SNS, S3, API Gateway, DynamoDB, and SQL, backed by Playwright E2E automation.</li>
-              </ul>
-              <div class="tag-row">
-                <span class="code-tag">.NET / C#</span>
-                <span class="code-tag">React.js</span>
-                <span class="code-tag">AWS Lambda</span>
-                <span class="code-tag">AWS Step Functions</span>
-                <span class="code-tag">Amazon EventBridge</span>
-                <span class="code-tag">AWS API Gateway</span>
-                <span class="code-tag">DynamoDB &amp; SQL</span>
-                <span class="code-tag">Amazon S3 &amp; SNS</span>
-                <span class="code-tag">Playwright</span>
-              </div>
-            </article>
-
-            <!-- FluentPro -->
-            <article class="git-commit">
-              <div class="commit-meta">
-                <span class="commit-hash">commit f10e2025</span>
-                <span class="commit-branch">tag: FluentPro</span>
-                <span style="color:var(--text-muted);" data-i18n="fp_date">April 2025 – September 2025</span>
-              </div>
-              <div class="commit-title">FluentPro — <span style="color:var(--cyan);" data-i18n="fp_role">Senior Full Stack Software Engineer</span></div>
-              <ul class="commit-list">
-                <li data-i18n="fp_b1">Developed new features and enhanced existing functionality within a scalable analytics platform leveraging AI for enriched data interpretation and dynamic content generation.</li>
-                <li data-i18n="fp_b2">Implemented an admin interface for configuring dynamic templates and placeholder queries, enabling flexible data retrieval and AI-augmented insights.</li>
-                <li data-i18n="fp_b3">Integrated Semantic Kernel to orchestrate AI workflows, combining structured data with advanced natural language processing and generation capabilities using OpenAI services.</li>
-                <li data-i18n="fp_b4">Designed and maintained backend services using Azure Functions and Azure Service Bus to support reliable, event-driven, and asynchronous data processing.</li>
-                <li data-i18n="fp_b5">Authored comprehensive automated tests and conducted thorough code reviews to guarantee code quality and maintainability.</li>
-              </ul>
-              <div class="tag-row">
-                <span class="code-tag">Angular</span>
-                <span class="code-tag">ASP.NET Core</span>
-                <span class="code-tag">Azure Functions</span>
-                <span class="code-tag">Azure Service Bus</span>
-                <span class="code-tag">Azure Key Vault</span>
-                <span class="code-tag">Semantic Kernel</span>
-                <span class="code-tag">OpenAI Integration</span>
-              </div>
-            </article>
-
-            <!-- GlobalLogic -->
-            <article class="git-commit">
-              <div class="commit-meta">
-                <span class="commit-hash">commit c98a2022</span>
-                <span class="commit-branch">tag: GlobalLogic</span>
-                <span style="color:var(--text-muted);" data-i18n="gl_date">October 2022 – April 2025</span>
-              </div>
-              <div class="commit-title">GlobalLogic — <span style="color:var(--cyan);" data-i18n="gl_role">Senior Software Engineer</span></div>
-              <ul class="commit-list">
-                <li data-i18n="gl_b1">Developed resilient microservices for a high-throughput Warehouse Management & Automation System (WMS).</li>
-                <li data-i18n="gl_b2">Drove monolith decomposition into independent, scalable microservices.</li>
-                <li data-i18n="gl_b3">Expanded unit and component test coverage across mission-critical services.</li>
-                <li data-i18n="gl_b4">Investigated and resolved complex production issues and executed system-wide performance optimizations.</li>
-                <li data-i18n="gl_b5">Built new API integrations and developed stub/mock applications for external hardware and ERP systems.</li>
-                <li data-i18n="gl_b6">Collaborated closely with product owners and cross-functional engineering teams.</li>
-              </ul>
-              <div class="tag-row">
-                <span class="code-tag">C#</span>
-                <span class="code-tag">ASP.NET Core</span>
-                <span class="code-tag">XAML / WPF</span>
-                <span class="code-tag">Angular & Material</span>
-                <span class="code-tag">Redis</span>
-                <span class="code-tag">RabbitMQ</span>
-                <span class="code-tag">Docker</span>
-                <span class="code-tag">Kubernetes</span>
-              </div>
-            </article>
-
-            <!-- Rozetka -->
-            <article class="git-commit">
-              <div class="commit-meta">
-                <span class="commit-hash">commit d42b2018</span>
-                <span class="commit-branch">tag: LLC-Rozetka / Tech-Lead</span>
-                <span style="color:var(--text-muted);" data-i18n="rz_date">May 2018 – October 2022</span>
-              </div>
-              <div class="commit-title">LLC “Rozetka” — <span style="color:var(--cyan);" data-i18n="rz_role">Full-Stack Engineer / Tech Leader</span></div>
-              <p style="font-size:13.5px;color:#9ca3af;margin-bottom:10px;" data-i18n="rz_desc">
-                Led engineering on a large-scale Digital Document Flow & CRM ecosystem (based on Bpm’Online CRM) and architected a custom Request Processing System from scratch.
-              </p>
-              <ul class="commit-list">
-                <li data-i18n="rz_b1">Built the frontend architecture from scratch and created a reusable UI component library powered by GraphQL (dynamic dropdowns, virtual tables, configurable pages).</li>
-                <li data-i18n="rz_b2">Created and maintained the core Digital Document Flow system and high-volume API integrations.</li>
-                <li data-i18n="rz_b3">Communicated directly with business stakeholders, managed production deployments, and resolved critical incidents.</li>
-                <li data-i18n="rz_b4">Led and mentored developers as Tech Lead with close cross-team coordination.</li>
-              </ul>
-              <div class="tag-row">
-                <span class="code-tag">C# / ASP.NET Core</span>
-                <span class="code-tag">.NET Framework / WCF</span>
-                <span class="code-tag">Angular / TypeScript</span>
-                <span class="code-tag">RxJS / NgRx</span>
-                <span class="code-tag">GraphQL</span>
-                <span class="code-tag">MS SQL Server</span>
-                <span class="code-tag">RabbitMQ</span>
-                <span class="code-tag">Redis</span>
-                <span class="code-tag">Entity Framework</span>
-              </div>
-            </article>
-
-            <!-- Avon -->
-            <article class="git-commit">
-              <div class="commit-meta">
-                <span class="commit-hash">commit a01c2017</span>
-                <span class="commit-branch">tag: Avon-Cosmetics</span>
-                <span style="color:var(--text-muted);" data-i18n="av_date">July 2017 – May 2018</span>
-              </div>
-              <div class="commit-title">Avon Cosmetics — <span style="color:var(--cyan);" data-i18n="av_role">Junior Software Developer (.NET)</span></div>
-              <ul class="commit-list">
-                <li data-i18n="av_b1">Designed and developed modular, extensible object-oriented .NET code.</li>
-                <li data-i18n="av_b2">Maintained and enhanced enterprise applications across both client and server tiers.</li>
-              </ul>
-              <div class="tag-row">
-                <span class="code-tag">C#</span>
-                <span class="code-tag">.NET Framework</span>
-              </div>
-            </article>
-          </div>
+          <div class="git-graph" data-render="experience"></div>
         </section>
 
         <!-- SKILLS & EDUCATION -->
@@ -868,57 +754,33 @@
           <div class="json-grid">
             <div class="json-box">
               <span class="json-key">"backendAndArchitecture": [</span>
-              <div class="tag-row">
-                <span class="code-tag">C#</span>
-                <span class="code-tag">.NET / ASP.NET Core</span>
-                <span class="code-tag">Entity Framework</span>
-                <span class="code-tag">Web API</span>
-                <span class="code-tag">GraphQL</span>
-                <span class="code-tag">Microservices</span>
-                <span class="code-tag">CQRS &amp; Clean Arch</span>
-              </div>
+              <div class="tag-row" data-render="skills-backend"></div>
               <span class="json-key" style="margin-top:8px;">]</span>
             </div>
 
             <div class="json-box">
               <span class="json-key">"frontendAndTesting": [</span>
-              <div class="tag-row">
-                <span class="code-tag">Angular</span>
-                <span class="code-tag">React.js</span>
-                <span class="code-tag">Angular Material</span>
-                <span class="code-tag">NgRx &amp; RxJS</span>
-                <span class="code-tag">TypeScript / JS</span>
-                <span class="code-tag">Playwright E2E</span>
-                <span class="code-tag">HTML5 / CSS3</span>
-              </div>
+              <div class="tag-row" data-render="skills-frontend"></div>
               <span class="json-key" style="margin-top:8px;">]</span>
             </div>
 
             <div class="json-box">
               <span class="json-key">"awsAzureDataAndAi": [</span>
-              <div class="tag-row">
-                <span class="code-tag">AWS Lambda &amp; Step Functions</span>
-                <span class="code-tag">EventBridge, SNS, S3, API Gateway</span>
-                <span class="code-tag">DynamoDB, MS SQL, MongoDB, Redis</span>
-                <span class="code-tag">RabbitMQ &amp; Kafka</span>
-                <span class="code-tag">Azure Functions &amp; Service Bus</span>
-                <span class="code-tag">Semantic Kernel / OpenAI</span>
-                <span class="code-tag">Docker &amp; Kubernetes</span>
-              </div>
+              <div class="tag-row" data-render="skills-cloud"></div>
               <span class="json-key" style="margin-top:8px;">]</span>
             </div>
 
-            <div class="json-box" id="education">
-              <span class="json-key">"educationAndLanguages": {</span>
-              <div style="color:#cbd5e1;padding-left:10px;line-height:1.8;">
-                <div>"university": "<span style="color:#fde047;" data-i18n="edu_uni">National Aviation University (NAU)</span>",</div>
-                <div>"degree": "<span style="color:#38bdf8;" data-i18n="edu_degree">Master's Degree in Computer Engineering</span>",</div>
-                <div>"ukrainian": "<span style="color:#6ee7b7;" data-i18n="lang_uk">Ukrainian — Native</span>",</div>
-                <div>"english": "<span style="color:#6ee7b7;" data-i18n="lang_en">English — Intermediate (B1+/B2)</span>"</div>
-              </div>
-              <span class="json-key">}</span>
-            </div>
+            <div class="json-box" id="education" data-render="education-languages-json"></div>
           </div>
+        </section>
+
+        <!-- LICENSES & CERTIFICATIONS -->
+        <section id="certifications">
+          <div class="sec-header">
+            <span style="color:var(--green);">[04/CERTS]</span>
+            <h2 data-i18n="cert_title">Licenses &amp; Certifications</h2>
+          </div>
+          <div data-render="certifications"></div>
         </section>
       </main>
     </div>
@@ -931,6 +793,7 @@
       document.getElementById('term-shot-img').src = src;
     }
   </script>
+  <script src="../assets/resume-data.js"></script>
   <script src="../assets/switcher.js"></script>
 </body>
 </html>

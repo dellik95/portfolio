@@ -272,6 +272,7 @@
     }
     .pulse-dot {
       width: 9px; height: 9px;
+      flex-shrink: 0;
       border-radius: 50%;
       background: var(--emerald);
       box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
@@ -1419,9 +1420,40 @@
       .playground-shell, .arch-grid, .cta-banner { grid-template-columns: 1fr; }
       .bento-12 { grid-template-columns: repeat(2, 1fr); }
     }
+    @media (max-width: 768px) {
+      .hero-banner { padding: 48px 0 74px; }
+      .hero-copy { margin-bottom: 32px; }
+      .overlap-stats-section { margin-top: -36px; margin-bottom: 52px; }
+      .pg-tabs {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      .playground-shell > *, .arch-grid > *, .cta-banner > *, .tour-row > * {
+        min-width: 0;
+      }
+      .tt-head, .tt-toolbar { gap: 10px; }
+    }
     @media (max-width: 640px) {
+      .rg-nav-inner { padding: 10px 14px; gap: 10px; }
+      .rg-ver-pill { display: none; }
       .rg-nav-links { display: none; }
-      .bento-12, .stats-ribbon { grid-template-columns: 1fr; }
+      .container { padding: 0 16px; }
+      .hero-banner { padding: 36px 0 56px; }
+      .hero-title { font-size: clamp(30px, 8.5vw, 42px); }
+      .btn-hero { width: 100%; justify-content: center; padding: 12px 18px; }
+      .bento-12, .stats-ribbon, .pg-tabs { grid-template-columns: 1fr; }
+      .tour-band { padding: 54px 0; }
+      .tour-row, .tour-row.reverse { margin-bottom: 44px; }
+      .tour-card { padding: 20px 18px; }
+      .pg-screen { padding: 14px; }
+      .cta-banner { padding: 28px 18px; margin: 28px 0 52px; }
+      .docker-box { padding: 14px; font-size: 11.5px; overflow-x: auto; }
+      .bench-card { padding: 20px 18px; }
+      .sec-head { margin-bottom: 36px; }
+      .stage-chrome { gap: 10px; font-size: 10.5px; }
+      .stage-chrome > span:last-child { display: none; }
+      .live-pill { font-size: 11px; padding: 6px 12px; text-align: left; }
     }
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1; transform: none; transition: none; }
@@ -1908,7 +1940,13 @@
   </main>
 
   <footer>
-    <span data-i18n="footer_text">RedisGUI (RedisStudio V2.2) — Enterprise Redis Observability, Safe Governance &amp; Real-Time Diagnostics</span>
+    <div style="margin-bottom:10px;" data-i18n="footer_text">RedisGUI (RedisStudio V2.2) — Enterprise Redis Observability, Safe Governance &amp; Real-Time Diagnostics</div>
+    <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;font-size:12.5px;font-weight:600;">
+      <a href="https://github.com/dellik95/redis-gui" target="_blank" rel="noopener" style="color:var(--indigo-bright);">GitHub (redis-gui) ↗</a>
+      <a href="https://www.youtube.com/@CrafterInCode" target="_blank" rel="noopener" style="color:var(--cyan);">YouTube (@CrafterInCode) ↗</a>
+      <a href="https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/" target="_blank" rel="noopener" style="color:var(--muted);">LinkedIn ↗</a>
+      <a href="https://dellik95.github.io/portfolio/" target="_blank" rel="noopener" style="color:var(--muted);">Portfolio &amp; CV ↗</a>
+    </div>
   </footer>
 
   <!-- LIGHTBOX -->

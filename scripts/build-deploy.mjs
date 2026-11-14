@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import path from 'node:path';
+import { syncResumeData } from './sync-resume-data.mjs';
+
+syncResumeData(process.cwd());
 
 function parseArgs(argv) {
   const args = { target: 'resume', template: '01-bento-glass', out: 'dist' };
@@ -29,6 +32,7 @@ function copyRecursive(src, dest) {
 function rewriteRootPaths(html, injectStandaloneMeta, templateFile) {
   let out = html
     .replaceAll('../assets/', 'assets/')
+    .replaceAll('../data/', 'data/')
     .replaceAll('../CV_OleksandrLutskov_.NetFull-Stack.pdf', 'CV_OleksandrLutskov_.NetFull-Stack.pdf');
   if (injectStandaloneMeta) {
     const metaTags = [];
@@ -68,6 +72,7 @@ if (target === 'landing') {
   copyRecursive(path.join(root, 'index.html'), path.join(outDir, 'index.html'));
   copyRecursive(path.join(root, 'CV_OleksandrLutskov_.NetFull-Stack.pdf'), path.join(outDir, 'CV_OleksandrLutskov_.NetFull-Stack.pdf'));
   copyRecursive(path.join(root, 'assets'), path.join(outDir, 'assets'));
+  copyRecursive(path.join(root, 'data'), path.join(outDir, 'data'));
   copyRecursive(path.join(root, 'templates'), path.join(outDir, 'templates'));
   copyRecursive(path.join(root, 'projects'), path.join(outDir, 'projects'));
 } else {
@@ -82,6 +87,7 @@ if (target === 'landing') {
   fs.writeFileSync(path.join(outDir, 'index.html'), rewriteRootPaths(html, true, `${safeTemplate}.html`), 'utf8');
   copyRecursive(path.join(root, 'CV_OleksandrLutskov_.NetFull-Stack.pdf'), path.join(outDir, 'CV_OleksandrLutskov_.NetFull-Stack.pdf'));
   copyRecursive(path.join(root, 'assets'), path.join(outDir, 'assets'));
+  copyRecursive(path.join(root, 'data'), path.join(outDir, 'data'));
   // Keep RedisGUI landing reachable via /projects/redis-gui.html when clicked from the resume
   copyRecursive(path.join(root, 'projects', 'redis-gui.html'), path.join(outDir, 'projects', 'redis-gui.html'));
 }

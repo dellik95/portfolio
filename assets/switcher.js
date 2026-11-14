@@ -92,166 +92,388 @@
     }
   ];
 
-  const I18N = {
-    en: {
-      role: 'Senior Full Stack Software Engineer',
-      role_sub: '.NET/C#, Angular & React • 190+ Microservices • AWS Serverless & AI Agents',
-      location: 'Spain (Remote / Hybrid)',
-      exp_badge: '9+ Years Experience • 2 Years Tech Lead • 190+ Microservices Scale',
-      summary_title: 'About Me',
-      summary_text:
-        'Senior Full-Stack .NET Engineer with 9+ years of commercial experience (including 2 years as a Tech Lead) designing and building scalable, high-performance applications and highly distributed systems across Healthcare (Automated Payments), WMS, and CRM domains. My core expertise spans .NET/C#, Angular, React.js, and cloud technologies, with extensive hands-on experience evolving complex architectures — including highly distributed platforms consisting of 190+ microservices alongside multiple monoliths, communicating through synchronous HTTP/GraphQL APIs and asynchronous event-driven messaging patterns (RabbitMQ, Kafka, EventBridge, SNS, Azure Service Bus).\n\nOver the past 1.5+ years, my focus has increasingly shifted toward cloud-native development and AI-driven software engineering, with AWS as my primary cloud platform (Lambda, Step Functions, EventBridge, API Gateway, DynamoDB, S3, SNS) alongside Azure. I actively use AI to accelerate the software development lifecycle (SDLC) and have hands-on experience integrating AI agents and LLM workflows (Semantic Kernel, OpenAI, MCP) into products to enable intelligent automation, backed by strong full-cycle testing discipline (Unit, Component, and Playwright E2E testing).',
-      skills_title: 'Technical Arsenal & Skills',
-      exp_title: 'Professional Experience',
-      portfolio_title: 'Featured Portfolio & Products',
-      portfolio_sub: 'Production-grade open-source tools, platforms & engineering systems',
-      edu_title: 'Education',
-      lang_title: 'Languages',
-      contact_title: 'Contact & Links',
-      download_cv: 'Download PDF CV',
-      open_landing_cta: 'Explore RedisGUI →',
-      github_cta: 'GitHub Repository',
-      edu_degree: "Master's Degree in Computer Engineering",
-      edu_uni: 'National Aviation University (NAU)',
-      lang_uk: 'Ukrainian — Native',
-      lang_en: 'English — Intermediate (B1+/B2)',
-      photo_hint: 'Click to upload photo',
-      // DataArt Experience
-      da_role: 'Senior Full Stack Software Engineer',
-      da_date: 'September 2025 – Present',
-      da_domain: 'Large-Scale Healthcare Platform — Automated Payments (AutoPay) Team',
-      da_b1: 'Driving development and end-to-end automation of recurring payment workflows (AutoPay) within a large-scale enterprise Healthcare platform.',
-      da_b2: 'Owned architecture and integration with the internal Payment Gateway, ensuring reliable, idempotent, and compliant payment processing.',
-      da_b3: 'Designed and built internal operational & support tools from scratch for production data remediation, automated data backfills, and high-volume bulk operations.',
-      da_b4: 'Engineered event-driven serverless workflows on AWS using Lambda, Step Functions, EventBridge, SNS, S3, API Gateway, DynamoDB, and SQL, backed by Playwright E2E automation.',
-      // FluentPro Experience
-      fp_role: 'Senior Full Stack Software Engineer',
-      fp_date: 'April 2025 – September 2025',
-      fp_b1: 'Developed new features and enhanced existing functionality within a scalable analytics platform leveraging AI for enriched data interpretation and dynamic content generation.',
-      fp_b2: 'Implemented an admin interface for configuring dynamic templates and placeholder queries, enabling flexible data retrieval and AI-augmented insights.',
-      fp_b3: 'Integrated Semantic Kernel to orchestrate AI workflows, combining structured data with advanced natural language processing and generation capabilities using OpenAI services.',
-      fp_b4: 'Designed and maintained backend services using Azure Functions and Azure Service Bus to support reliable, event-driven, and asynchronous data processing.',
-      fp_b5: 'Authored comprehensive automated tests and conducted thorough code reviews to guarantee code quality and maintainability.',
-      // GlobalLogic Experience
-      gl_role: 'Senior Software Engineer',
-      gl_date: 'October 2022 – April 2025',
-      gl_b1: 'Developed resilient microservices for a high-throughput Warehouse Management & Automation System (WMS).',
-      gl_b2: 'Drove monolith decomposition into independent, scalable microservices.',
-      gl_b3: 'Expanded unit and component test coverage across mission-critical services.',
-      gl_b4: 'Investigated and resolved complex production issues and executed system-wide performance optimizations.',
-      gl_b5: 'Built new API integrations and developed stub/mock applications for external hardware and ERP systems.',
-      gl_b6: 'Collaborated closely with product owners and cross-functional engineering teams.',
-      // Rozetka Experience
-      rz_role: 'Full-Stack Engineer / Tech Leader',
-      rz_date: 'May 2018 – October 2022',
-      rz_desc: 'Led engineering on a large-scale Digital Document Flow & CRM ecosystem (based on Bpm’Online CRM) and architected a custom Request Processing System from scratch.',
-      rz_b1: 'Built the frontend architecture from scratch and created a reusable UI component library powered by GraphQL (dynamic dropdowns, virtual tables, configurable pages).',
-      rz_b2: 'Created and maintained the core Digital Document Flow system and high-volume API integrations.',
-      rz_b3: 'Communicated directly with business stakeholders, managed production deployments, and resolved critical incidents.',
-      rz_b4: 'Led and mentored developers as Tech Lead with close cross-team coordination.',
-      // Avon Experience
-      av_role: 'Junior Software Developer (.NET)',
-      av_date: 'July 2017 – May 2018',
-      av_b1: 'Designed and developed modular, extensible object-oriented .NET code.',
-      av_b2: 'Maintained and enhanced enterprise applications across both client and server tiers.',
-      // Portfolio items
-      rg_badge: 'Open-Source Product • .NET 11 + Angular 22 + SignalR',
-      rg_title: 'RedisGUI — Modern Redis Studio & Observability Platform',
-      rg_desc: 'Enterprise-grade, high-performance Redis management studio and diagnostics platform built on .NET 11, ASP.NET Core Minimal APIs, Clean Architecture (CQRS / MediatR), SignalR WebSockets, and Angular 22 Signals.',
-      rg_f1: 'Visual Strategy-based editors for Strings, Hashes, Lists, Sets, ZSets & Streams',
-      rg_f2: 'Sub-second SignalR telemetry (Ops/sec, Memory RSS, CPU) & Slowlog diagnostics',
-      rg_f3: 'Built-in multi-DB CLI drawer, Synthetic Load Tester (p50/p95/p99) & 10k Key Seeder',
-      rg_f4: 'Enterprise RBAC, JWT Auth, Audit Logging & Production Safe Mode',
-      tm_badge: 'Modular Monolith + Design System',
-      tm_title: 'TalentMind & @dellik95/ui — AI Recruitment Platform',
-      tm_desc: 'Full-scale recruitment platform built as an ASP.NET Core Modular Monolith + Angular 22 SPA with an AI Copilot, workflow automation engine, GraphQL DSL generator, multi-tenancy, and a private npm design-system (@dellik95/ui).',
-      cl_badge: 'AI Agent Tooling • MCP Server',
-      cl_title: 'Claudy (Context Platform) — Codebase Memory & Hybrid Search',
-      cl_desc: 'Token-efficient codebase intelligence and persistent memory platform for AI coding agents using hybrid search (FTS5 + vector cosine + tree-sitter AST symbol graph), live SignalR dashboard, and MCP server tools.',
-      yt_badge: 'Engineering Education • 40+ Modules',
-      yt_title: '.NET Engineering Academy — Deep-Dive Technical Courses',
-      yt_desc: 'Comprehensive curriculum and interactive learning hub covering AI in .NET (Microsoft Agent Framework, RAG, Qdrant, MCP), Docker & Kubernetes for .NET Developers, C# CLR Internals, and ASP.NET Core Security.'
-    },
-    uk: {
-      role: 'Senior Full Stack Software Engineer',
-      role_sub: '.NET/C#, Angular та React • 190+ Мікросервісів • AWS Serverless та AI-агенти',
-      location: 'Іспанія (Remote / Hybrid)',
-      exp_badge: '9+ років досвіду • 2 роки Tech Lead • Масштаб 190+ мікросервісів',
-      summary_title: 'Про мене',
-      summary_text:
-        'Senior Full-Stack .NET інженер із понад 9-річним комерційним досвідом (включно з 2 роками на позиції Tech Lead) у проєктуванні та розробці масштабованих, високопродуктивних додатків і високонавантажених розподілених систем у сферах Healthcare (автоматизація платежів), WMS та CRM. Моя ключова експертиза охоплює .NET/C#, Angular, React.js та хмарні технології з глибоким практичним досвідом розвитку складних архітектур — зокрема високорозподілених платформ зі 190+ мікросервісів поруч із кількома монолітами, що взаємодіють через синхронні HTTP/GraphQL API та асинхронні патерни обміну повідомленнями (RabbitMQ, Kafka, EventBridge, SNS, Azure Service Bus).\n\nПротягом останніх 1.5+ років мій фокус дедалі більше зосереджений на cloud-native розробці та AI-driven програмній інженерії, де AWS є моєю основною хмарною платформою (Lambda, Step Functions, EventBridge, API Gateway, DynamoDB, S3, SNS) разом із Azure. Я активно використовую AI для вдосконалення й прискорення життєвого циклу розробки (SDLC) та маю практичний досвід інтеграції AI-агентів і LLM-воркфлоу (Semantic Kernel, OpenAI, MCP) у продукти для інтелектуальної автоматизації, дотримуючись високих стандартів повного циклу тестування (Unit, Component та Playwright E2E).',
-      skills_title: 'Технічний стек та навички',
-      exp_title: 'Професійний досвід',
-      portfolio_title: 'Портфоліо та Власні Проєкти',
-      portfolio_sub: 'Власні продукти, open-source інструменти та інженерні платформи',
-      edu_title: 'Освіта',
-      lang_title: 'Мови',
-      contact_title: 'Контакти та Посилання',
-      download_cv: 'Завантажити PDF CV',
-      open_landing_cta: 'Детальніше про RedisGUI →',
-      github_cta: 'GitHub Репозиторій',
-      edu_degree: 'Магістр комп’ютерної інженерії',
-      edu_uni: 'Національний авіаційний університет (НАУ)',
-      lang_uk: 'Українська — Рідна',
-      lang_en: 'Англійська — Intermediate (B1+/B2)',
-      photo_hint: 'Натисніть, щоб додати фото',
-      // DataArt Experience
-      da_role: 'Senior Full Stack Software Engineer',
-      da_date: 'Вересень 2025 – Теперішній час',
-      da_domain: 'Масштабна Healthcare-система — Команда автоматичних платежів (AutoPay)',
-      da_b1: 'Розробка та розвиток функціоналу автоматизації платежів (Auto-Payment) у великій корпоративній Healthcare-платформі.',
-      da_b2: 'Відповідальність за проєктування та інтеграцію з внутрішнім платіжним шлюзом (Payment Gateway) для надійної обробки транзакцій.',
-      da_b3: 'Створення з нуля внутрішніх інструментів (internal tools) для підтримки та виправлення продакшн-даних, виконання backfill-процесів та масових (bulk) операцій над даними.',
-      da_b4: 'Побудова serverless та event-driven пайплайнів у AWS (EventBridge, Lambda, Step Functions, S3, SNS, API Gateway, DynamoDB, SQL), фронтенду на React.js та E2E-тестування на Playwright.',
-      // FluentPro Experience
-      fp_role: 'Senior Full Stack Software Engineer',
-      fp_date: 'Квітень 2025 – Вересень 2025',
-      fp_b1: 'Розробка нових фіч та розвиток масштабованої аналітичної платформи з використанням AI для збагаченої інтерпретації даних і динамічної генерації контенту.',
-      fp_b2: 'Реалізація адмін-інтерфейсу для налаштування динамічних шаблонів і параметризованих запитів для гнучкої вибірки даних та AI-інсайтів.',
-      fp_b3: 'Інтеграція Semantic Kernel для оркестрації AI-воркфлоу, поєднання структурованих даних із можливостями NLP та генерації через OpenAI.',
-      fp_b4: 'Проєктування та підтримка бекенд-сервісів на базі Azure Functions та Azure Service Bus для надійної подійно-орієнтованої та асинхронної обробки даних.',
-      fp_b5: 'Написання комплексних автоматизованих тестів та проведення ретельних код-рев’ю для забезпечення високої якості коду.',
-      // GlobalLogic Experience
-      gl_role: 'Senior Software Engineer',
-      gl_date: 'Жовтень 2022 – Квітень 2025',
-      gl_b1: 'Розробка мікросервісів для високонавантаженої системи автоматизації складу (Warehouse Management System).',
-      gl_b2: 'Декомпозиція монолітної системи на незалежні мікросервіси.',
-      gl_b3: 'Покриття коду unit- та компонентними тестами.',
-      gl_b4: 'Дослідження та вирішення складних продакшн-інцидентів, оптимізація продуктивності системи.',
-      gl_b5: 'Створення нових API-інтеграцій та розробка Stub/Mock-додатків для емуляції зовнішніх систем.',
-      gl_b6: 'Тісна співпраця з Product Owner-ами та крос-командна взаємодія.',
-      // Rozetka Experience
-      rz_role: 'Full-Stack Engineer / Tech Leader',
-      rz_date: 'Травень 2018 – Жовтень 2022',
-      rz_desc: 'Ключова роль у розробці масштабної системи електронного документообігу (CRM на базі Bpm’Online) та створення системи обробки заявок з нуля.',
-      rz_b1: 'Розробка фронтенду з нуля та створення бібліотеки конфігурованих UI-компонентів, що працюють з GraphQL (Dropdowns, Tables, Pages).',
-      rz_b2: 'Створення та розвиток системи документообігу і нових API-інтеграцій.',
-      rz_b3: 'Комунікація зі стейкхолдерами, проведення релізів нових фіч та вирішення продакшн-проблем.',
-      rz_b4: 'Технічне лідерство, координація команди та міжкомандна взаємодія.',
-      // Avon Experience
-      av_role: 'Junior Software Developer (.NET)',
-      av_date: 'Липень 2017 – Травень 2018',
-      av_b1: 'Проєктування та розробка модульного, розширюваного коду на C# / .NET Framework.',
-      av_b2: 'Підтримка та розвиток клієнт-серверних корпоративних додатків.',
-      // Portfolio items
-      rg_badge: 'Власний продукт • .NET 11 + Angular 22 + SignalR',
-      rg_title: 'RedisGUI — Сучасна студія управління та моніторингу Redis',
-      rg_desc: 'Високопродуктивна enterprise-платформа для візуального адміністрування та діагностики Redis, побудована на .NET 11, ASP.NET Core Minimal APIs, Clean Architecture (CQRS / MediatR), SignalR та Angular 22 Signals.',
-      rg_f1: 'Візуальні редактори для всіх типів Redis (Strings, Hashes, Lists, Sets, ZSets, Streams)',
-      rg_f2: 'Real-time телеметрія через SignalR (Ops/sec, Memory RSS, CPU) та аналізатор Slowlog',
-      rg_f3: 'Вбудований Redis CLI термінал, генератор навантаження (p50/p95/p99) та Seeder на 10k ключів',
-      rg_f4: 'RBAC-авторизація (JWT), аудит-логування та безпечний Read-Only режим для продакшну',
-      tm_badge: 'Модульний моноліт + Дизайн-система',
-      tm_title: 'TalentMind & @dellik95/ui — AI-платформа рекрутингу',
-      tm_desc: 'Масштабна рекрутингова система (ASP.NET Core Modular Monolith + Angular 22 SPA) з AI-копілотом, рушієм автоматизації воркфлоу, генератором GraphQL DSL та власною бібліотекою компонентів @dellik95/ui.',
-      cl_badge: 'AI Agent Tooling • MCP Сервер',
-      cl_title: 'Claudy (Context Platform) — Кодова пам’ять та гібридний пошук',
-      cl_desc: 'Платформа збереження контексту та семантичного індексування коду для AI-агентів (FTS5 + векторний пошук + AST граф символів tree-sitter), SignalR-дашборд та MCP-інструменти.',
-      yt_badge: 'Освітній хаб • 40+ модулів',
-      yt_title: '.NET Engineering Academy — Авторські технічні курси',
-      yt_desc: 'Поглиблені інженерні курси: AI у .NET (Microsoft Agent Framework, RAG, MCP), Docker та Kubernetes для .NET розробника, C# CLR Internals, ASP.NET Core Security та 24 спеціалізованих модулі.'
+  let resumeData = window.__OL_RESUME_DATA__ || null;
+
+  function escHtml(v) {
+    return String(v == null ? '' : v)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function pick(val, lang) {
+    if (val == null) return '';
+    if (typeof val === 'string') return val;
+    return val[lang] != null ? val[lang] : (val.en != null ? val.en : '');
+  }
+
+  function buildI18nDict(lang) {
+    const d = resumeData;
+    if (!d) return {};
+    const p = d.profile || {};
+    const u = d.ui || {};
+    const pf = (d.portfolio && d.portfolio.featured) || {};
+    const pr = (d.portfolio && d.portfolio.projects) || [];
+    const ex = d.experience || [];
+    const ed0 = (d.education && d.education[0]) || {};
+    const ln = d.languages || [];
+
+    const dict = {
+      role: pick(p.role, lang),
+      role_sub: pick(p.roleSub, lang),
+      location: pick(p.location, lang),
+      exp_badge: pick(p.expBadge, lang),
+      summary_title: pick(u.summary_title, lang),
+      summary_text: pick(p.summary, lang),
+      skills_title: pick(u.skills_title, lang),
+      exp_title: pick(u.exp_title, lang),
+      portfolio_title: pick(u.portfolio_title, lang),
+      portfolio_sub: pick(u.portfolio_sub, lang),
+      edu_title: pick(u.edu_title, lang),
+      lang_title: pick(u.lang_title, lang),
+      cert_title: pick(u.cert_title, lang),
+      certs_title: pick(u.cert_title, lang),
+      contact_title: pick(u.contact_title, lang),
+      download_cv: pick(u.download_cv, lang),
+      open_landing_cta: pick(u.open_landing_cta, lang),
+      github_cta: pick(u.github_cta, lang),
+      photo_hint: pick(u.photo_hint, lang),
+      edu_uni: pick(ed0.institution, lang),
+      edu_degree: pick(ed0.degree, lang),
+      lang_uk: ln[0] ? `${pick(ln[0].name, lang)} — ${pick(ln[0].level, lang)}` : '',
+      lang_en: ln[1] ? `${pick(ln[1].name, lang)} — ${pick(ln[1].level, lang)}` : '',
+      rg_badge: pick(pf.badge, lang),
+      rg_title: pick(pf.title, lang),
+      rg_desc: pick(pf.description, lang)
+    };
+
+    const fArr = pick(pf.features, lang) || [];
+    fArr.forEach((txt, idx) => { dict[`rg_f${idx + 1}`] = txt; });
+
+    const projPrefixes = ['tm', 'cl', 'yt'];
+    pr.forEach((item, idx) => {
+      const k = projPrefixes[idx];
+      if (!k) return;
+      dict[`${k}_badge`] = pick(item.badge, lang);
+      dict[`${k}_title`] = pick(item.title, lang);
+      dict[`${k}_desc`] = pick(item.description, lang);
+    });
+
+    const expPrefixes = ['da', 'fp', 'gl', 'rz', 'av'];
+    ex.forEach((job, idx) => {
+      const k = expPrefixes[idx];
+      if (!k) return;
+      dict[`${k}_role`] = pick(job.role, lang);
+      dict[`${k}_date`] = pick(job.period, lang);
+      if (job.domain) {
+        dict[`${k}_domain`] = pick(job.domain, lang);
+        dict[`${k}_desc`] = pick(job.domain, lang);
+      }
+      const bullets = pick(job.bullets, lang) || [];
+      bullets.forEach((b, bIdx) => { dict[`${k}_b${bIdx + 1}`] = b; });
+    });
+
+    return dict;
+  }
+
+  function renderEducationLanguagesJson(container, lang) {
+    const d = resumeData;
+    if (!d) return;
+    const eduItems = d.education || [];
+    const langItems = d.languages || [];
+    const lines = [
+      '<span class="json-key">"educationAndLanguages": {</span>',
+      '<div class="ol-json-body">',
+      '  <div><span class="ol-jk">"education"</span>: [</div>',
+      ...eduItems.map((ed, idx) => {
+        const comma = idx < eduItems.length - 1 ? ',' : '';
+        const inst = escHtml(pick(ed.institution, lang));
+        const deg = escHtml(pick(ed.degree, lang));
+        const per = escHtml(ed.period || '');
+        const urlHtml = ed.url
+          ? `, <span class="ol-jk">"url"</span>: <a href="${escHtml(ed.url)}" target="_blank" rel="noopener" class="ol-jurl">"LinkedIn ↗"</a>`
+          : '';
+        return `<div class="ol-json-obj">    { <span class="ol-jk">"university"</span>: <span class="ol-js">"${inst}"</span>, <span class="ol-jk">"degree"</span>: <span class="ol-js2">"${deg}"</span>, <span class="ol-jk">"period"</span>: <span class="ol-jn">"${per}"</span>${urlHtml} }${comma}</div>`;
+      }),
+      '  <div>],</div>',
+      '  <div><span class="ol-jk">"languages"</span>: [</div>',
+      ...langItems.map((ln, idx) => {
+        const comma = idx < langItems.length - 1 ? ',' : '';
+        return `<div class="ol-json-obj">    { <span class="ol-jk">"language"</span>: <span class="ol-js3">"${escHtml(pick(ln.name, lang))}"</span>, <span class="ol-jk">"level"</span>: <span class="ol-js2">"${escHtml(pick(ln.level, lang))}"</span> }${comma}</div>`;
+      }),
+      '  <div>]</div>',
+      '</div>',
+      '<span class="json-key">}</span>'
+    ];
+    container.innerHTML = lines.join('\n');
+  }
+
+  function renderEducationList(container, lang, tplClass) {
+    const items = (resumeData && resumeData.education) || [];
+    container.innerHTML = `<div class="ol-edu-list">${items.map((ed) => {
+      const inst = escHtml(pick(ed.institution, lang));
+      const deg = escHtml(pick(ed.degree, lang));
+      const per = escHtml(ed.period || '');
+      const titleHtml = ed.url
+        ? `<a href="${escHtml(ed.url)}" target="_blank" rel="noopener" class="ol-edu-link">${inst} ↗</a>`
+        : `<span>${inst}</span>`;
+      if (tplClass === 'tpl-07') {
+        return `<div class="ol-edu-item sb-edu-item">
+          <div class="ol-edu-inst">${titleHtml}</div>
+          <div class="ol-edu-deg">${deg}</div>
+          ${per ? `<div class="ol-edu-period">${per}</div>` : ''}
+        </div>`;
+      }
+      return `<div class="ol-edu-item">
+        <div class="ol-edu-top">
+          <strong class="ol-edu-inst">${titleHtml}</strong>
+          ${per ? `<span class="ol-edu-period">${per}</span>` : ''}
+        </div>
+        <div class="ol-edu-deg">${deg}</div>
+      </div>`;
+    }).join('')}</div>`;
+  }
+
+  function renderLanguagesList(container, lang, tplClass) {
+    const items = (resumeData && resumeData.languages) || [];
+    if (tplClass === 'tpl-07') {
+      container.innerHTML = items.map((ln) => {
+        const label = `${escHtml(pick(ln.name, lang))} — ${escHtml(pick(ln.level, lang))}`;
+        const pct = Number(ln.proficiency) || 80;
+        return `<div class="sb-bar-item">
+          <div class="sb-bar-head"><span>${label}</span><span>${pct}%</span></div>
+          <div class="sb-bar-track"><div class="sb-bar-fill ol-anim-bar ol-bar-filled" style="width:${pct}%;"></div></div>
+        </div>`;
+      }).join('');
+      return;
     }
-  };
+    if (tplClass === 'tpl-04' || tplClass === 'tpl-05' || tplClass === 'tpl-09') {
+      const pillCls = tplClass === 'tpl-04' ? 'chip indigo' : (tplClass === 'tpl-05' ? 'teal-tag' : 'm-pill');
+      container.innerHTML = `<div class="ol-lang-pills">${items.map((ln, idx) => {
+        const cls = tplClass === 'tpl-04' && idx > 0 ? 'chip' : pillCls;
+        return `<span class="${cls}">${escHtml(pick(ln.name, lang))} — ${escHtml(pick(ln.level, lang))}</span>`;
+      }).join('')}</div>`;
+      return;
+    }
+    container.innerHTML = `<div class="ol-lang-rows">${items.map((ln) => `
+      <div class="ol-lang-row">
+        <strong>${escHtml(pick(ln.name, lang))}</strong>
+        <span>${escHtml(pick(ln.level, lang))}</span>
+      </div>
+    `).join('')}</div>`;
+  }
+
+  function renderCertificationsList(container, lang) {
+    const d = resumeData;
+    if (!d) return;
+    const certs = d.certifications || [];
+    const u = d.ui || {};
+    const showCredTxt = escHtml(pick(u.show_credential, lang) || 'Show credential ↗');
+    const issuedTxt = escHtml(pick(u.issued_label, lang) || 'Issued');
+    const credIdTxt = escHtml(pick(u.credential_id_label, lang) || 'Credential ID');
+    const skillsTxt = escHtml(pick(u.skills_label, lang) || 'Skills');
+
+    container.innerHTML = `<div class="ol-cert-grid">${certs.map((c) => {
+      const credLink = c.credentialUrl
+        ? `<a href="${escHtml(c.credentialUrl)}" target="_blank" rel="noopener" class="ol-cert-btn">${showCredTxt}</a>`
+        : (c.credentialId ? `<span class="ol-cert-id">${credIdTxt}: ${escHtml(c.credentialId)}</span>` : '');
+      const skillsHtml = (c.skills && c.skills.length)
+        ? `<div class="ol-cert-skills">${c.skills.map((s) =>
+            c.skillsUrl
+              ? `<a href="${escHtml(c.skillsUrl)}" target="_blank" rel="noopener" class="ol-cert-skill">${skillsTxt}: ${escHtml(s)}</a>`
+              : `<span class="ol-cert-skill">${escHtml(s)}</span>`
+          ).join('')}</div>`
+        : '';
+      return `<article class="ol-cert-card">
+        <div class="ol-cert-head">
+          <span class="ol-cert-issuer">${escHtml(c.issuer)}</span>
+          <span class="ol-cert-date">${issuedTxt} ${escHtml(c.issued)}</span>
+        </div>
+        <h3 class="ol-cert-title">${escHtml(c.title)}</h3>
+        <div class="ol-cert-foot">
+          ${credLink}
+          ${skillsHtml}
+        </div>
+      </article>`;
+    }).join('')}</div>`;
+  }
+
+  function renderExperienceList(container, lang, tplClass) {
+    const jobs = (resumeData && resumeData.experience) || [];
+    container.innerHTML = jobs.map((job, idx) => {
+      const co = escHtml(job.company);
+      const role = escHtml(pick(job.role, lang));
+      const period = escHtml(pick(job.period, lang));
+      const domain = job.domain ? escHtml(pick(job.domain, lang)) : '';
+      const bullets = (pick(job.bullets, lang) || []).map((b) => `<li>${escHtml(b)}</li>`).join('');
+      const tags = job.tags || [];
+
+      if (tplClass === 'tpl-01') {
+        return `<article class="exp-card"${idx === 0 ? ' style="border-color: rgba(139, 92, 246, 0.35);"' : ''}>
+          <div>
+            <div class="exp-company">${co}</div>
+            <div class="exp-role-title">${role}</div>
+            <span class="exp-period">${period}</span>
+          </div>
+          <div>
+            ${domain ? `<p style="font-size:13.5px; color:#38bdf8; font-weight:600; margin-bottom:10px;">${domain}</p>` : ''}
+            <ul class="exp-bullets">${bullets}</ul>
+            <div class="pill-cloud">${tags.map((t, ti) => `<span class="tech-pill${ti < 2 ? ' hi' : (ti < 5 && idx === 0 ? ' cyan' : '')}">${escHtml(t)}</span>`).join('')}</div>
+          </div>
+        </article>`;
+      }
+      if (tplClass === 'tpl-02') {
+        return `<article class="git-commit">
+          <div class="commit-meta">
+            ${job.hash ? `<span class="commit-hash">${escHtml(job.hash)}</span>` : ''}
+            ${job.branch ? `<span class="commit-branch">${escHtml(job.branch)}</span>` : ''}
+            <span style="color:var(--text-muted);">${period}</span>
+          </div>
+          <h3 class="commit-title">${co} — <span style="color:${idx === 0 ? 'var(--cyan)' : (idx === 1 ? 'var(--purple)' : 'var(--text)')};">${role}</span></h3>
+          ${domain ? `<p style="font-size:13.5px;color:var(--green);font-weight:600;margin-bottom:10px;">${domain}</p>` : ''}
+          <ul class="commit-list">${bullets}</ul>
+          <div class="tag-row">${tags.map((t) => `<span class="code-tag">${escHtml(t)}</span>`).join('')}</div>
+        </article>`;
+      }
+      if (tplClass === 'tpl-03') {
+        return `<article class="exp-row">
+          <div>
+            <div class="exp-co">${co}</div>
+            <div class="exp-rl">${role}</div>
+            <div class="exp-dt">${period}</div>
+          </div>
+          <div>
+            ${domain ? `<p style="font-size:14px;color:var(--vermilion);font-weight:700;margin-bottom:10px;">${domain}</p>` : ''}
+            <ul class="exp-ul">${bullets}</ul>
+            <div class="tag-line">${tags.map((t) => `<span class="s-tag">${escHtml(t)}</span>`).join('')}</div>
+          </div>
+        </article>`;
+      }
+      if (tplClass === 'tpl-04') {
+        return `<article class="exp-item${idx === 0 ? ' current' : ''}">
+          <div>
+            <div class="exp-company">${co}</div>
+            <div class="exp-role">${role}</div>
+            <span class="exp-date-pill">${period}</span>
+          </div>
+          <div>
+            ${domain ? `<span class="domain-banner">${domain}</span>` : ''}
+            <ul class="clean-list" style="margin-top:${domain ? '6px' : '0'};">${bullets}</ul>
+            <div class="chips">${tags.map((t, ti) => `<span class="chip${ti < 2 ? ' indigo' : (ti < 4 ? ' emerald' : '')}">${escHtml(t)}</span>`).join('')}</div>
+          </div>
+        </article>`;
+      }
+      if (tplClass === 'tpl-05') {
+        return `<article class="exec-card"${idx === 0 ? ' style="border-color:rgba(45,212,191,0.35);"' : ''}>
+          <div class="exec-card-header">
+            <h3 class="exec-card-title">${co} · <span style="color:var(--teal);">${role}</span></h3>
+            <span class="exec-date">${period}</span>
+          </div>
+          ${domain ? `<p style="font-size:13.5px;color:#38bdf8;font-weight:600;margin-bottom:8px;">${domain}</p>` : ''}
+          <ul class="exec-ul">${bullets}</ul>
+          <div class="teal-tags">${tags.map((t) => `<span class="teal-tag">${escHtml(t)}</span>`).join('')}</div>
+        </article>`;
+      }
+      if (tplClass === 'tpl-07') {
+        return `<article class="tl-item">
+          <div class="tl-head">
+            <div><span class="tl-co">${co}</span> — <span class="tl-role">${role}</span></div>
+            <span class="tl-date">${period}</span>
+          </div>
+          ${domain ? `<div style="font-size:13.5px;font-weight:700;color:#059669;margin-bottom:6px;">${domain}</div>` : ''}
+          <ul class="tl-ul">${bullets}</ul>
+          <div class="tl-tags">${tags.map((t) => `<span class="tl-tag">${escHtml(t)}</span>`).join('')}</div>
+        </article>`;
+      }
+      if (tplClass === 'tpl-08') {
+        return `<article class="exp-cloud-item">
+          <div class="exp-cloud-head">
+            <h3 style="font-size:20px;color:var(--ink);">${co} — <span style="color:var(--blue);">${role}</span></h3>
+            <span class="c-badge${idx === 0 ? ' aws' : ''}">${period}</span>
+          </div>
+          ${domain ? `<div style="font-weight:700;font-size:13.5px;color:#0d9488;margin-bottom:6px;">${domain}</div>` : ''}
+          <ul class="exp-cloud-ul">${bullets}</ul>
+          <div class="cloud-badges">${tags.map((t, ti) => `<span class="c-badge${/aws|lambda|dynamo|s3|event/i.test(t) && ti > 1 ? ' aws' : ''}">${escHtml(t)}</span>`).join('')}</div>
+        </article>`;
+      }
+      if (tplClass === 'tpl-09') {
+        return `<article class="mono-exp-card">
+          <div class="mono-exp-top">
+            <h3 style="font-size:18px;color:var(--ink);">${co} · <span style="font-weight:500;color:var(--muted);">${role}</span></h3>
+            <span class="mono" style="font-size:12px;color:var(--muted);">${period}</span>
+          </div>
+          ${domain ? `<div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:8px;">${domain}</div>` : ''}
+          <ul class="mono-ul">${bullets}</ul>
+          <div class="mono-pills">${tags.map((t) => `<span class="m-pill">${escHtml(t)}</span>`).join('')}</div>
+        </article>`;
+      }
+      return `<article class="em-exp-item">
+        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+          <h3 style="font-size:19px;">${co} — <span style="color:var(--emerald);">${role}</span></h3>
+          <span class="em-tag">${period}</span>
+        </div>
+        ${domain ? `<div style="font-size:13.5px;color:var(--cyan);font-weight:700;margin:6px 0;">${domain}</div>` : ''}
+        <ul class="em-ul">${bullets}</ul>
+        <div class="em-tags">${tags.map((t) => `<span class="em-tag">${escHtml(t)}</span>`).join('')}</div>
+      </article>`;
+    }).join('');
+  }
+
+  function renderStructuredBlocks(lang) {
+    if (!resumeData) return;
+    const meta = getCurrentTemplateMeta();
+    const tplClass = (meta && meta.tplClass) || '';
+    const d = resumeData;
+
+    document.querySelectorAll('[data-render="education-languages-json"]').forEach((el) => renderEducationLanguagesJson(el, lang));
+    document.querySelectorAll('[data-render="education"]').forEach((el) => renderEducationList(el, lang, tplClass));
+    document.querySelectorAll('[data-render="languages"]').forEach((el) => renderLanguagesList(el, lang, tplClass));
+    document.querySelectorAll('[data-render="certifications"]').forEach((el) => renderCertificationsList(el, lang));
+    document.querySelectorAll('[data-render="experience"]').forEach((el) => renderExperienceList(el, lang, tplClass));
+
+    const skillGroups = {
+      'skills-backend': (d.skills && d.skills.backend) || [],
+      'skills-frontend': (d.skills && d.skills.frontend) || [],
+      'skills-cloud': (d.skills && d.skills.cloudAndData) || []
+    };
+    const tagClassMap = {
+      'tpl-01': 'tech-pill',
+      'tpl-02': 'code-tag',
+      'tpl-03': 's-tag',
+      'tpl-04': 'chip',
+      'tpl-05': 'teal-tag',
+      'tpl-07': 'tl-tag',
+      'tpl-08': 'c-badge',
+      'tpl-09': 'm-pill',
+      'tpl-10': 'em-tag'
+    };
+    const tCls = tagClassMap[tplClass] || 'code-tag';
+    Object.entries(skillGroups).forEach(([slot, items]) => {
+      document.querySelectorAll(`[data-render="${slot}"]`).forEach((el) => {
+        el.innerHTML = items.map((s) => `<span class="${tCls}">${escHtml(s)}</span>`).join('');
+      });
+    });
+
+    if (d.profile && d.profile.contacts) {
+      const c = d.profile.contacts;
+      document.querySelectorAll('[data-contact="email"]').forEach((a) => {
+        a.href = `mailto:${c.email}`;
+      });
+      document.querySelectorAll('[data-contact="phone"]').forEach((a) => {
+        a.href = `tel:${c.phone}`;
+      });
+      document.querySelectorAll('[data-contact="github"]').forEach((a) => {
+        a.href = c.github;
+      });
+      document.querySelectorAll('[data-contact="linkedin"]').forEach((a) => {
+        a.href = c.linkedin;
+      });
+      document.querySelectorAll('[data-contact="telegram"]').forEach((a) => {
+        a.href = c.telegram;
+      });
+    }
+  }
 
   function syncPrintBackground() {
     const printBg = document.getElementById('ol-print-page-bg');
@@ -319,7 +541,8 @@
       localStorage.setItem('ol_cv_lang', lang);
     } catch (e) {}
     document.documentElement.setAttribute('lang', lang);
-    const dict = I18N[lang] || I18N.en;
+    renderStructuredBlocks(lang);
+    const dict = buildI18nDict(lang);
     document.querySelectorAll('[data-i18n]').forEach((el) => {
       const key = el.getAttribute('data-i18n');
       if (dict[key]) {
@@ -330,6 +553,21 @@
       const isAct = btn.getAttribute('data-lang-btn') === lang;
       btn.classList.toggle('active', isAct);
     });
+  }
+
+  function loadLiveResumeJson() {
+    if (!window.location.protocol.startsWith('http')) return;
+    const isInTemplatesDir = window.location.pathname.replace(/\\/g, '/').includes('/templates/');
+    const jsonUrl = isInTemplatesDir ? '../data/resume-data.json' : 'data/resume-data.json';
+    fetch(jsonUrl, { cache: 'no-store' })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((json) => {
+        if (!json) return;
+        resumeData = json;
+        window.__OL_RESUME_DATA__ = json;
+        setLanguage(getCurrentLang());
+      })
+      .catch(() => {});
   }
 
   function initPhotoSlots() {
@@ -396,7 +634,10 @@
 
   function openProjectModal(projectId) {
     const isInTemplatesDir = window.location.pathname.replace(/\\/g, '/').includes('/templates/');
-    const redisLandingUrl = isInTemplatesDir ? '../projects/redis-gui.html' : 'projects/redis-gui.html';
+    const localLandingUrl = isInTemplatesDir ? '../projects/redis-gui.html' : 'projects/redis-gui.html';
+    const remoteLandingUrl = (resumeData && resumeData.portfolio && resumeData.portfolio.featured && resumeData.portfolio.featured.landingUrl) || 'https://dellik95.github.io/redis-gui/';
+    const isHostedRemote = window.location.protocol.startsWith('http') && !/^(localhost|127\.0\.0\.1|0\.0\.0\.0)$/i.test(window.location.hostname);
+    const redisLandingUrl = isHostedRemote ? remoteLandingUrl : localLandingUrl;
 
     if (projectId === 'redis-gui') {
       const win = window.open(redisLandingUrl, '_blank', 'noopener');
@@ -893,6 +1134,288 @@
       html.tpl-10 .ol-hdr-print:hover {
         border-color: var(--emerald);
         color: var(--emerald);
+      }
+
+      /* Structured Education, Languages & Certifications Blocks */
+      .ol-json-body {
+        padding-left: 10px;
+        line-height: 1.7;
+        font-size: 12px;
+        color: #cbd5e1;
+      }
+      .ol-json-obj { padding-left: 8px; }
+      .ol-jk { color: #93c5fd; }
+      .ol-js { color: #fde047; }
+      .ol-js2 { color: #38bdf8; }
+      .ol-js3 { color: #6ee7b7; }
+      .ol-jn { color: #c084fc; }
+      .ol-jurl { color: #38bdf8; text-decoration: none; border-bottom: 1px dashed rgba(56,189,248,0.45); }
+      .ol-jurl:hover { color: #6ee7b7; border-bottom-color: #6ee7b7; }
+      html.tpl-02[data-theme="light"] .ol-json-body { color: #334155; }
+      html.tpl-02[data-theme="light"] .ol-jk { color: #1d4ed8; }
+      html.tpl-02[data-theme="light"] .ol-js { color: #b45309; }
+      html.tpl-02[data-theme="light"] .ol-js2 { color: #0284c7; }
+      html.tpl-02[data-theme="light"] .ol-js3 { color: #047857; }
+      html.tpl-02[data-theme="light"] .ol-jn { color: #7c3aed; }
+      html.tpl-02[data-theme="light"] .ol-jurl { color: #0284c7; }
+
+      .ol-edu-list { display: grid; gap: 12px; }
+      .ol-edu-item {
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+      }
+      .ol-edu-item:last-child { padding-bottom: 0; border-bottom: none; }
+      .ol-edu-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 6px 12px;
+      }
+      .ol-edu-inst { font-size: 15px; font-weight: 700; color: inherit; }
+      .ol-edu-link { color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor; }
+      .ol-edu-link:hover { opacity: 0.85; }
+      .ol-edu-period {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11.5px;
+        opacity: 0.78;
+      }
+      .ol-edu-deg { font-size: 13.5px; margin-top: 2px; opacity: 0.88; font-weight: 600; }
+      .sb-edu-item .ol-edu-inst { font-size: 13px; }
+      .sb-edu-item .ol-edu-deg { font-size: 12px; color: #94a3b8; font-weight: 500; }
+      .sb-edu-item .ol-edu-period { font-size: 11px; color: #64748b; margin-top: 2px; }
+      html.tpl-07[data-theme="light"] .sb-edu-item .ol-edu-deg { color: #475569; }
+      html.tpl-07[data-theme="light"] .sb-edu-item { border-bottom-color: rgba(37, 99, 235, 0.15); }
+
+      .ol-lang-rows { display: grid; gap: 8px; }
+      .ol-lang-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        font-size: 13.5px;
+      }
+      .ol-lang-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+
+      .ol-cert-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+      @media screen and (max-width: 780px) {
+        .ol-cert-grid { grid-template-columns: 1fr; }
+      }
+      .ol-cert-card {
+        padding: 16px 18px;
+        border-radius: 10px;
+        border: 1px solid rgba(148, 163, 184, 0.22);
+        background: rgba(148, 163, 184, 0.05);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .ol-cert-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+      }
+      .ol-cert-issuer {
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 4px;
+        background: rgba(56, 189, 248, 0.14);
+        color: #38bdf8;
+      }
+      .ol-cert-date { opacity: 0.72; }
+      .ol-cert-title {
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 1.35;
+      }
+      .ol-cert-foot {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .ol-cert-btn {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11.5px;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 4px 10px;
+        border-radius: 6px;
+        border: 1px solid rgba(56, 189, 248, 0.35);
+        color: #38bdf8;
+      }
+      .ol-cert-btn:hover { background: rgba(56, 189, 248, 0.14); }
+      .ol-cert-id {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        opacity: 0.75;
+      }
+      .ol-cert-skills { display: flex; flex-wrap: wrap; gap: 5px; }
+      .ol-cert-skill {
+        font-size: 11px;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.28);
+        text-decoration: none;
+        color: inherit;
+        opacity: 0.85;
+      }
+      a.ol-cert-skill:hover { opacity: 1; border-color: #38bdf8; }
+
+      /* Per-template native certificate card harmonization */
+      html.tpl-01 .ol-cert-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+      }
+      html.tpl-01 .ol-cert-issuer { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; }
+      html.tpl-01[data-theme="light"] .ol-cert-issuer { background: #ede9fe; color: #6d28d9; }
+      html.tpl-01[data-theme="light"] .ol-cert-btn { color: #6d28d9; border-color: #c4b5fd; }
+
+      html.tpl-02 .ol-cert-card {
+        background: #0d1117;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+      }
+      html.tpl-02 .ol-cert-title { color: #fff; }
+      html.tpl-02 .ol-cert-issuer { background: rgba(16, 185, 129, 0.14); color: #34d399; }
+      html.tpl-02[data-theme="light"] .ol-cert-card { background: #ffffff; border-color: #cbd5e1; }
+      html.tpl-02[data-theme="light"] .ol-cert-title { color: #0f172a; }
+      html.tpl-02[data-theme="light"] .ol-cert-issuer { background: #ecfdf5; color: #047857; }
+      html.tpl-02[data-theme="light"] .ol-cert-btn { color: #0284c7; border-color: #bae6fd; }
+
+      html.tpl-03 .ol-cert-card {
+        border-radius: 0;
+        border: 1px solid var(--ink);
+        background: transparent;
+      }
+      html.tpl-03 .ol-cert-issuer { background: transparent; color: var(--vermilion); padding: 0; }
+      html.tpl-03 .ol-cert-btn { border-radius: 0; border-color: var(--ink); color: var(--ink); }
+
+      html.tpl-04 .ol-cert-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+      }
+      html.tpl-04 .ol-cert-issuer { background: var(--indigo-soft); color: var(--indigo); }
+      html.tpl-04 .ol-cert-btn { color: var(--indigo); border-color: rgba(79, 70, 229, 0.35); }
+
+      html.tpl-05 .ol-cert-card {
+        background: var(--slate-card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+      }
+      html.tpl-05 .ol-cert-issuer { background: rgba(45, 212, 191, 0.14); color: var(--teal); }
+      html.tpl-05 .ol-cert-btn { color: var(--teal); border-color: rgba(45, 212, 191, 0.4); }
+
+      html.tpl-07 .ol-cert-card {
+        background: var(--main-bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+      }
+      html.tpl-07 .ol-cert-issuer { background: rgba(37, 99, 235, 0.12); color: #2563eb; }
+      html.tpl-07[data-theme="dark"] .ol-cert-issuer { color: #93c5fd; }
+      html.tpl-07 .ol-cert-btn { color: #2563eb; border-color: rgba(37, 99, 235, 0.35); }
+      html.tpl-07[data-theme="dark"] .ol-cert-btn { color: #93c5fd; }
+
+      html.tpl-08 .ol-cert-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+      }
+      html.tpl-08 .ol-cert-issuer { background: rgba(0, 102, 255, 0.12); color: var(--blue); }
+      html.tpl-08 .ol-cert-btn { color: var(--blue); border-color: rgba(0, 102, 255, 0.35); }
+
+      html.tpl-09 .ol-cert-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+      }
+      html.tpl-09 .ol-cert-issuer { background: rgba(16, 185, 129, 0.12); color: var(--emerald); }
+      html.tpl-09 .ol-cert-btn { color: var(--ink); border-color: var(--border); }
+
+      html.tpl-10 .ol-cert-card {
+        background: var(--card-2);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+      }
+      html.tpl-10 .ol-cert-issuer { background: var(--emerald-soft); color: var(--emerald); }
+      html.tpl-10 .ol-cert-btn { color: var(--emerald); border-color: var(--border); }
+
+      /* Cross-template Responsive Hardening (Tablet <= 860px & Mobile <= 640px) */
+      *, *::before, *::after { box-sizing: border-box; }
+      main, main > *, .ide-content, .sec-main, .cv-main, .right-pane,
+      .exp-timeline, .exp-list, .timeline-wrap, .bento-card,
+      .exec-card, .mono-exp-card, .em-exp-item, .exp-cloud-item,
+      .clean-card, .commit-card {
+        min-width: 0;
+      }
+      .ol-json-obj {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+      }
+      @media screen and (max-width: 920px) {
+        .top-bar-inner, .portal-nav-inner, .mono-nav-inner, .em-header-inner, .top-nav-inner {
+          flex-wrap: wrap;
+          gap: 8px 12px;
+        }
+        .top-nav > a.t-link, .portal-links > a.p-link, .mono-menu > a.m-link, .em-nav > a.em-link {
+          display: none;
+        }
+      }
+      @media screen and (max-width: 860px) {
+        section#education > div[style*="grid-template-columns"],
+        main section > div[style*="grid-template-columns:1.4fr"],
+        main section > div[style*="grid-template-columns:1.15fr"],
+        section#portfolio [style*="grid-template-columns:1fr 280px"] {
+          grid-template-columns: 1fr !important;
+        }
+        .ol-cert-grid { grid-template-columns: 1fr; }
+        .dd-panel, .mono-dd-panel, .em-dd-panel, .mega-menu {
+          max-width: calc(100vw - 24px) !important;
+        }
+      }
+      @media screen and (max-width: 640px) {
+        html, body { overflow-x: hidden; }
+        .top-nav-inner {
+          border-radius: 20px !important;
+          padding: 10px 14px !important;
+          gap: 8px !important;
+        }
+        .top-bar-inner, .portal-nav-inner, .mono-nav-inner, .em-header-inner {
+          padding: 10px 14px !important;
+        }
+        .container, .page-wrap, .sheet, .wrap, .cloud-wrap {
+          padding-left: 14px !important;
+          padding-right: 14px !important;
+        }
+        .ol-hdr-actions { gap: 4px; flex-wrap: wrap; }
+        .ol-hdr-print { padding: 4px 8px; font-size: 10.5px; }
+        .ol-cert-card { padding: 14px; }
+        .ol-edu-top, .ol-lang-row, .exp-header, .timeline-top,
+        .tl-head, .exec-card-header, .exp-cloud-head, .mono-exp-top {
+          flex-wrap: wrap !important;
+          gap: 6px !important;
+        }
+        .bento-hero-main, .bento-card, .hero-card, .clean-card,
+        .exec-card, .mono-hero, .mono-exp-card, .em-panel, .em-exp-item,
+        .exp-cloud-item, .profile-card {
+          padding: 18px 16px !important;
+        }
+        .rg-metrics {
+          grid-template-columns: 1fr !important;
+        }
       }
 
       #ol-floating-switcher {
@@ -2249,7 +2772,9 @@
         .mono-bar-box,
         .mono-exp-card,
         .seg-card,
-        .em-exp-item {
+        .em-exp-item,
+        .ol-cert-card,
+        .ol-edu-item {
           break-inside: avoid !important;
           page-break-inside: avoid !important;
         }
@@ -2488,6 +3013,7 @@
     initAnimatedProgressBars();
     setLanguage(getCurrentLang());
     setTheme(getCurrentTheme(), false);
+    loadLiveResumeJson();
 
     window.addEventListener('message', (ev) => {
       if (ev.data && ev.data.type === 'OL_SET_LANG') {

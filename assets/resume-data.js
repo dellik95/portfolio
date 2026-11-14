@@ -1,0 +1,558 @@
+// AUTO-GENERATED from data/resume-data.json for offline file:// fallback.
+// Edit data/resume-data.json; HTTP/HTTPS pages fetch data/resume-data.json directly.
+window.__OL_RESUME_DATA__ = {
+  "meta": {
+    "version": "2026.1",
+    "updatedAt": "2026-11-14"
+  },
+  "profile": {
+    "name": "Oleksandr Lutskov",
+    "initials": "OL",
+    "role": {
+      "en": "Senior Full Stack Software Engineer",
+      "uk": "Senior Full Stack Software Engineer"
+    },
+    "roleSub": {
+      "en": ".NET/C#, Angular & React • 190+ Microservices • AWS Serverless & AI Agents",
+      "uk": ".NET/C#, Angular та React • 190+ Мікросервісів • AWS Serverless та AI-агенти"
+    },
+    "location": {
+      "en": "Spain (Remote / Hybrid)",
+      "uk": "Іспанія (Remote / Hybrid)"
+    },
+    "expBadge": {
+      "en": "9+ Years Experience • 2 Years Tech Lead • 190+ Microservices Scale",
+      "uk": "9+ років досвіду • 2 роки Tech Lead • Масштаб 190+ мікросервісів"
+    },
+    "summary": {
+      "en": "Senior Full-Stack .NET Engineer with 9+ years of commercial experience (including 2 years as a Tech Lead) designing and building scalable, high-performance applications and highly distributed systems across Healthcare (Automated Payments), WMS, and CRM domains. My core expertise spans .NET/C#, Angular, React.js, and cloud technologies, with extensive hands-on experience evolving complex architectures — including highly distributed platforms consisting of 190+ microservices alongside multiple monoliths, communicating through synchronous HTTP/GraphQL APIs and asynchronous event-driven messaging patterns (RabbitMQ, Kafka, EventBridge, SNS, Azure Service Bus).\n\nOver the past 1.5+ years, my focus has increasingly shifted toward cloud-native development and AI-driven software engineering, with AWS as my primary cloud platform (Lambda, Step Functions, EventBridge, API Gateway, DynamoDB, S3, SNS) alongside Azure. I actively use AI to accelerate the software development lifecycle (SDLC) and have hands-on experience integrating AI agents and LLM workflows (Semantic Kernel, OpenAI, MCP) into products to enable intelligent automation, backed by strong full-cycle testing discipline (Unit, Component, and Playwright E2E testing).",
+      "uk": "Senior Full-Stack .NET інженер із понад 9-річним комерційним досвідом (включно з 2 роками на позиції Tech Lead) у проєктуванні та розробці масштабованих, високопродуктивних додатків і високонавантажених розподілених систем у сферах Healthcare (автоматизація платежів), WMS та CRM. Моя ключова експертиза охоплює .NET/C#, Angular, React.js та хмарні технології з глибоким практичним досвідом розвитку складних архітектур — зокрема високорозподілених платформ зі 190+ мікросервісів поруч із кількома монолітами, що взаємодіють через синхронні HTTP/GraphQL API та асинхронні патерни обміну повідомленнями (RabbitMQ, Kafka, EventBridge, SNS, Azure Service Bus).\n\nПротягом останніх 1.5+ років мій фокус дедалі більше зосереджений на cloud-native розробці та AI-driven програмній інженерії, де AWS є моєю основною хмарною платформою (Lambda, Step Functions, EventBridge, API Gateway, DynamoDB, S3, SNS) разом із Azure. Я активно використовую AI для вдосконалення й прискорення життєвого циклу розробки (SDLC) та маю практичний досвід інтеграції AI-агентів і LLM-воркфлоу (Semantic Kernel, OpenAI, MCP) у продукти для інтелектуальної автоматизації, дотримуючись високих стандартів повного циклу тестування (Unit, Component та Playwright E2E)."
+    },
+    "highlights": [
+      {
+        "value": "9+ Yrs",
+        "label": {
+          "en": "Commercial .NET",
+          "uk": "Комерційний .NET"
+        }
+      },
+      {
+        "value": "2 Yrs",
+        "label": {
+          "en": "Tech Lead Role",
+          "uk": "Роль Tech Lead"
+        }
+      },
+      {
+        "value": "190+",
+        "label": {
+          "en": "Microservices Scale",
+          "uk": "Масштаб мікросервісів"
+        }
+      },
+      {
+        "value": "AI / Cloud",
+        "label": {
+          "en": "AWS, Azure & Agents",
+          "uk": "AWS, Azure та AI-агенти"
+        }
+      }
+    ],
+    "contacts": {
+      "email": "dellik95@gmail.com",
+      "phone": "+380978281303",
+      "phoneDisplay": "+380 97 828 13 03",
+      "github": "https://github.com/dellik95",
+      "githubHandle": "@dellik95",
+      "linkedin": "https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/",
+      "telegram": "https://t.me/alexluts",
+      "telegramHandle": "t.me/alexluts",
+      "youtube": "https://www.youtube.com/@CrafterInCode",
+      "youtubeHandle": "@CrafterInCode",
+      "pdfCv": "CV_OleksandrLutskov_.NetFull-Stack.pdf"
+    }
+  },
+  "ui": {
+    "summary_title": {
+      "en": "About Me",
+      "uk": "Про мене"
+    },
+    "portfolio_title": {
+      "en": "Featured Portfolio & Products",
+      "uk": "Портфоліо та Власні Проєкти"
+    },
+    "portfolio_sub": {
+      "en": "Production-grade open-source tools, platforms & engineering systems",
+      "uk": "Власні продукти, open-source інструменти та інженерні платформи"
+    },
+    "exp_title": {
+      "en": "Professional Experience",
+      "uk": "Професійний досвід"
+    },
+    "skills_title": {
+      "en": "Technical Arsenal & Skills",
+      "uk": "Технічний стек та навички"
+    },
+    "edu_title": {
+      "en": "Education",
+      "uk": "Освіта"
+    },
+    "lang_title": {
+      "en": "Languages",
+      "uk": "Мови"
+    },
+    "cert_title": {
+      "en": "Licenses & Certifications",
+      "uk": "Ліцензії та сертифікації"
+    },
+    "contact_title": {
+      "en": "Contact & Links",
+      "uk": "Контакти та Посилання"
+    },
+    "download_cv": {
+      "en": "Download PDF CV",
+      "uk": "Завантажити PDF CV"
+    },
+    "open_landing_cta": {
+      "en": "Explore RedisGUI →",
+      "uk": "Детальніше про RedisGUI →"
+    },
+    "github_cta": {
+      "en": "GitHub Repository",
+      "uk": "GitHub Репозиторій"
+    },
+    "show_credential": {
+      "en": "Show credential ↗",
+      "uk": "Показати сертифікат ↗"
+    },
+    "issued_label": {
+      "en": "Issued",
+      "uk": "Дата видачі"
+    },
+    "credential_id_label": {
+      "en": "Credential ID",
+      "uk": "ID облікових даних"
+    },
+    "skills_label": {
+      "en": "Skills",
+      "uk": "Навички"
+    },
+    "photo_hint": {
+      "en": "Click to upload photo",
+      "uk": "Натисніть, щоб додати фото"
+    }
+  },
+  "portfolio": {
+    "featured": {
+      "id": "redis-gui",
+      "badge": {
+        "en": "Open-Source Product • .NET 11 + Angular 22 + SignalR",
+        "uk": "Власний продукт • .NET 11 + Angular 22 + SignalR"
+      },
+      "title": {
+        "en": "RedisGUI — Modern Redis Studio & Observability Platform",
+        "uk": "RedisGUI — Сучасна студія управління та моніторингу Redis"
+      },
+      "description": {
+        "en": "Enterprise-grade, high-performance Redis management studio and diagnostics platform built on .NET 11, ASP.NET Core Minimal APIs, Clean Architecture (CQRS / MediatR), SignalR WebSockets, and Angular 22 Signals.",
+        "uk": "Високопродуктивна enterprise-платформа для візуального адміністрування та діагностики Redis, побудована на .NET 11, ASP.NET Core Minimal APIs, Clean Architecture (CQRS / MediatR), SignalR та Angular 22 Signals."
+      },
+      "githubUrl": "https://github.com/dellik95/redis-gui",
+      "landingUrl": "https://dellik95.github.io/redis-gui/",
+      "landingPath": "projects/redis-gui.html",
+      "features": {
+        "en": [
+          "Visual Strategy-based editors for Strings, Hashes, Lists, Sets, ZSets & Streams",
+          "Sub-second SignalR telemetry (Ops/sec, Memory RSS, CPU) & Slowlog diagnostics",
+          "Built-in multi-DB CLI drawer, Synthetic Load Tester (p50/p95/p99) & 10k Key Seeder",
+          "Enterprise RBAC, JWT Auth, Audit Logging & Production Safe Mode"
+        ],
+        "uk": [
+          "Візуальні редактори для всіх типів Redis (Strings, Hashes, Lists, Sets, ZSets, Streams)",
+          "Real-time телеметрія через SignalR (Ops/sec, Memory RSS, CPU) та аналізатор Slowlog",
+          "Вбудований Redis CLI термінал, генератор навантаження (p50/p95/p99) та Seeder на 10k ключів",
+          "RBAC-авторизація (JWT), аудит-логування та безпечний Read-Only режим для продакшну"
+        ]
+      }
+    },
+    "projects": [
+      {
+        "id": "talent-mind",
+        "badge": {
+          "en": "Modular Monolith + Design System",
+          "uk": "Модульний моноліт + Дизайн-система"
+        },
+        "title": {
+          "en": "TalentMind & @dellik95/ui — AI Recruitment Platform",
+          "uk": "TalentMind & @dellik95/ui — AI-платформа рекрутингу"
+        },
+        "description": {
+          "en": "Full-scale recruitment platform built as an ASP.NET Core Modular Monolith + Angular 22 SPA with an AI Copilot, workflow automation engine, GraphQL DSL generator, multi-tenancy, and a private npm design-system (@dellik95/ui).",
+          "uk": "Масштабна рекрутингова система (ASP.NET Core Modular Monolith + Angular 22 SPA) з AI-копілотом, рушієм автоматизації воркфлоу, генератором GraphQL DSL та власною бібліотекою компонентів @dellik95/ui."
+        }
+      },
+      {
+        "id": "claudy",
+        "badge": {
+          "en": "AI Agent Tooling • MCP Server",
+          "uk": "AI Agent Tooling • MCP Сервер"
+        },
+        "title": {
+          "en": "Claudy (Context Platform) — Codebase Memory & Hybrid Search",
+          "uk": "Claudy (Context Platform) — Кодова пам’ять та гібридний пошук"
+        },
+        "description": {
+          "en": "Token-efficient codebase intelligence and persistent memory platform for AI coding agents using hybrid search (FTS5 + vector cosine + tree-sitter AST symbol graph), live SignalR dashboard, and MCP server tools.",
+          "uk": "Платформа збереження контексту та семантичного індексування коду для AI-агентів (FTS5 + векторний пошук + AST граф символів tree-sitter), SignalR-дашборд та MCP-інструменти."
+        }
+      },
+      {
+        "id": "courses",
+        "badge": {
+          "en": "Engineering Education • 40+ Modules",
+          "uk": "Освітній хаб • 40+ модулів"
+        },
+        "title": {
+          "en": ".NET Engineering Academy — Deep-Dive Technical Courses",
+          "uk": ".NET Engineering Academy — Авторські технічні курси"
+        },
+        "description": {
+          "en": "Comprehensive curriculum and interactive learning hub covering AI in .NET (Microsoft Agent Framework, RAG, Qdrant, MCP), Docker & Kubernetes for .NET Developers, C# CLR Internals, and ASP.NET Core Security.",
+          "uk": "Поглиблені інженерні курси: AI у .NET (Microsoft Agent Framework, RAG, MCP), Docker та Kubernetes для .NET розробника, C# CLR Internals, ASP.NET Core Security та 24 спеціалізованих модулі."
+        }
+      }
+    ]
+  },
+  "experience": [
+    {
+      "company": "DataArt",
+      "role": {
+        "en": "Senior Full Stack Software Engineer",
+        "uk": "Senior Full Stack Software Engineer"
+      },
+      "period": {
+        "en": "September 2025 – Present",
+        "uk": "Вересень 2025 – Теперішній час"
+      },
+      "domain": {
+        "en": "Large-Scale Healthcare Platform — Automated Payments (AutoPay) Team",
+        "uk": "Масштабна Healthcare-система — Команда автоматичних платежів (AutoPay)"
+      },
+      "hash": "commit da202509",
+      "branch": "HEAD -> main, origin/DataArt-Healthcare-AutoPay",
+      "bullets": {
+        "en": [
+          "Driving development and end-to-end automation of recurring payment workflows (AutoPay) within a large-scale enterprise Healthcare platform.",
+          "Owned architecture and integration with the internal Payment Gateway, ensuring reliable, idempotent, and compliant payment processing.",
+          "Designed and built internal operational & support tools from scratch for production data remediation, automated data backfills, and high-volume bulk operations.",
+          "Engineered event-driven serverless workflows on AWS using Lambda, Step Functions, EventBridge, SNS, S3, API Gateway, DynamoDB, and SQL, backed by Playwright E2E automation."
+        ],
+        "uk": [
+          "Розробка та розвиток функціоналу автоматизації платежів (Auto-Payment) у великій корпоративній Healthcare-платформі.",
+          "Відповідальність за проєктування та інтеграцію з внутрішнім платіжним шлюзом (Payment Gateway) для надійної обробки транзакцій.",
+          "Створення з нуля внутрішніх інструментів (internal tools) для підтримки та виправлення продакшн-даних, виконання backfill-процесів та масових (bulk) операцій над даними.",
+          "Побудова serverless та event-driven пайплайнів у AWS (EventBridge, Lambda, Step Functions, S3, SNS, API Gateway, DynamoDB, SQL), фронтенду на React.js та E2E-тестування на Playwright."
+        ]
+      },
+      "tags": [
+        ".NET / C#",
+        "React.js",
+        "AWS Lambda",
+        "AWS Step Functions",
+        "Amazon EventBridge",
+        "AWS API Gateway",
+        "DynamoDB & SQL",
+        "Amazon S3 & SNS",
+        "Playwright"
+      ]
+    },
+    {
+      "company": "FluentPro",
+      "role": {
+        "en": "Senior Full Stack Software Engineer",
+        "uk": "Senior Full Stack Software Engineer"
+      },
+      "period": {
+        "en": "April 2025 – September 2025",
+        "uk": "Квітень 2025 – Вересень 2025"
+      },
+      "hash": "commit f10e2025",
+      "branch": "tag: FluentPro",
+      "bullets": {
+        "en": [
+          "Developed new features and enhanced existing functionality within a scalable analytics platform leveraging AI for enriched data interpretation and dynamic content generation.",
+          "Implemented an admin interface for configuring dynamic templates and placeholder queries, enabling flexible data retrieval and AI-augmented insights.",
+          "Integrated Semantic Kernel to orchestrate AI workflows, combining structured data with advanced natural language processing and generation capabilities using OpenAI services.",
+          "Designed and maintained backend services using Azure Functions and Azure Service Bus to support reliable, event-driven, and asynchronous data processing.",
+          "Authored comprehensive automated tests and conducted thorough code reviews to guarantee code quality and maintainability."
+        ],
+        "uk": [
+          "Розробка нових фіч та розвиток масштабованої аналітичної платформи з використанням AI для збагаченої інтерпретації даних і динамічної генерації контенту.",
+          "Реалізація адмін-інтерфейсу для налаштування динамічних шаблонів і параметризованих запитів для гнучкої вибірки даних та AI-інсайтів.",
+          "Інтеграція Semantic Kernel для оркестрації AI-воркфлоу, поєднання структурованих даних із можливостями NLP та генерації через OpenAI.",
+          "Проєктування та підтримка бекенд-сервісів на базі Azure Functions та Azure Service Bus для надійної подійно-орієнтованої та асинхронної обробки даних.",
+          "Написання комплексних автоматизованих тестів та проведення ретельних код-рев’ю для забезпечення високої якості коду."
+        ]
+      },
+      "tags": [
+        "Angular",
+        "ASP.NET Core",
+        "Azure Functions",
+        "Azure Service Bus",
+        "Azure Key Vault",
+        "Semantic Kernel",
+        "OpenAI Integration"
+      ]
+    },
+    {
+      "company": "GlobalLogic",
+      "role": {
+        "en": "Senior Software Engineer",
+        "uk": "Senior Software Engineer"
+      },
+      "period": {
+        "en": "October 2022 – April 2025",
+        "uk": "Жовтень 2022 – Квітень 2025"
+      },
+      "hash": "commit g10b2022",
+      "branch": "tag: GlobalLogic-WMS",
+      "bullets": {
+        "en": [
+          "Developed resilient microservices for a high-throughput Warehouse Management & Automation System (WMS).",
+          "Drove monolith decomposition into independent, scalable microservices.",
+          "Expanded unit and component test coverage across mission-critical services.",
+          "Investigated and resolved complex production issues and executed system-wide performance optimizations.",
+          "Built new API integrations and developed stub/mock applications for external hardware and ERP systems.",
+          "Collaborated closely with product owners and cross-functional engineering teams."
+        ],
+        "uk": [
+          "Розробка мікросервісів для високонавантаженої системи автоматизації складу (Warehouse Management System).",
+          "Декомпозиція монолітної системи на незалежні мікросервіси.",
+          "Покриття коду unit- та компонентними тестами.",
+          "Дослідження та вирішення складних продакшн-інцидентів, оптимізація продуктивності системи.",
+          "Створення нових API-інтеграцій та розробка Stub/Mock-додатків для емуляції зовнішніх систем.",
+          "Тісна співпраця з Product Owner-ами та крос-командна взаємодія."
+        ]
+      },
+      "tags": [
+        ".NET 8 / C#",
+        "Microservices",
+        "RabbitMQ",
+        "Kafka",
+        "Redis",
+        "MongoDB",
+        "MS SQL Server",
+        "Docker & Kubernetes"
+      ]
+    },
+    {
+      "company": "LLC “Rozetka”",
+      "role": {
+        "en": "Full-Stack Engineer / Tech Leader",
+        "uk": "Full-Stack Engineer / Tech Leader"
+      },
+      "period": {
+        "en": "May 2018 – October 2022",
+        "uk": "Травень 2018 – Жовтень 2022"
+      },
+      "domain": {
+        "en": "Led engineering on a large-scale Digital Document Flow & CRM ecosystem (based on Bpm’Online CRM) and architected a custom Request Processing System from scratch.",
+        "uk": "Ключова роль у розробці масштабної системи електронного документообігу (CRM на базі Bpm’Online) та створення системи обробки заявок з нуля."
+      },
+      "hash": "commit r02e2018",
+      "branch": "tag: Rozetka-TechLead",
+      "bullets": {
+        "en": [
+          "Built the frontend architecture from scratch and created a reusable UI component library powered by GraphQL (dynamic dropdowns, virtual tables, configurable pages).",
+          "Created and maintained the core Digital Document Flow system and high-volume API integrations.",
+          "Communicated directly with business stakeholders, managed production deployments, and resolved critical incidents.",
+          "Led and mentored developers as Tech Lead with close cross-team coordination."
+        ],
+        "uk": [
+          "Розробка фронтенду з нуля та створення бібліотеки конфігурованих UI-компонентів, що працюють з GraphQL (Dropdowns, Tables, Pages).",
+          "Створення та розвиток системи документообігу і нових API-інтеграцій.",
+          "Комунікація зі стейкхолдерами, проведення релізів нових фіч та вирішення продакшн-проблем.",
+          "Технічне лідерство, координація команди та міжкомандна взаємодія."
+        ]
+      },
+      "tags": [
+        "Angular",
+        "NgRx & RxJS",
+        "GraphQL",
+        ".NET Core",
+        "MS SQL Server",
+        "Redis",
+        "Tech Leadership"
+      ]
+    },
+    {
+      "company": "Avon Cosmetics",
+      "role": {
+        "en": "Junior Software Developer (.NET)",
+        "uk": "Junior Software Developer (.NET)"
+      },
+      "period": {
+        "en": "July 2017 – May 2018",
+        "uk": "Липень 2017 – Травень 2018"
+      },
+      "hash": "commit a10n2017",
+      "branch": "init",
+      "bullets": {
+        "en": [
+          "Designed and developed modular, extensible object-oriented .NET code.",
+          "Maintained and enhanced enterprise applications across both client and server tiers."
+        ],
+        "uk": [
+          "Проєктування та розробка модульного, розширюваного коду на C# / .NET Framework.",
+          "Підтримка та розвиток клієнт-серверних корпоративних додатків."
+        ]
+      },
+      "tags": [
+        "C#",
+        ".NET Framework",
+        "ASP.NET MVC",
+        "MS SQL Server"
+      ]
+    }
+  ],
+  "skills": {
+    "backend": [
+      "C# / .NET 8–11",
+      "ASP.NET Core",
+      "Entity Framework",
+      "Dapper",
+      "Web API",
+      "GraphQL",
+      "Microservices",
+      "CQRS & Clean Arch"
+    ],
+    "frontend": [
+      "Angular",
+      "React.js",
+      "Angular Material",
+      "NgRx & RxJS",
+      "TypeScript / JS",
+      "Playwright E2E",
+      "HTML5 / CSS3"
+    ],
+    "cloudAndData": [
+      "AWS Lambda & Step Functions",
+      "EventBridge, SNS, S3, API Gateway",
+      "DynamoDB, MS SQL, MongoDB, Redis",
+      "RabbitMQ & Kafka",
+      "Azure Functions & Service Bus",
+      "Semantic Kernel / OpenAI",
+      "Docker & Kubernetes"
+    ]
+  },
+  "education": [
+    {
+      "institution": {
+        "en": "National University «Kyiv Aviation Institute»",
+        "uk": "Національний університет «Київський авіаційний інститут»"
+      },
+      "degree": {
+        "en": "Master's degree, Computer Engineering",
+        "uk": "Магістр, Комп'ютерна інженерія"
+      },
+      "period": "2017 – 2019",
+      "url": "https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/details/education/edit/forms/447129981/"
+    },
+    {
+      "institution": {
+        "en": "National University «Kyiv Aviation Institute»",
+        "uk": "Національний університет «Київський авіаційний інститут»"
+      },
+      "degree": {
+        "en": "Bachelor's degree, Computer Engineering",
+        "uk": "Бакалавр, Комп'ютерна інженерія"
+      },
+      "period": "2013 – 2017",
+      "url": "https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/details/education/edit/forms/439606164/"
+    }
+  ],
+  "languages": [
+    {
+      "name": {
+        "en": "Ukrainian",
+        "uk": "Українська"
+      },
+      "level": {
+        "en": "Native",
+        "uk": "Рідна"
+      },
+      "proficiency": 100
+    },
+    {
+      "name": {
+        "en": "English",
+        "uk": "Англійська"
+      },
+      "level": {
+        "en": "Intermediate (B1+/B2)",
+        "uk": "Середній (B1+/B2)"
+      },
+      "proficiency": 75
+    }
+  ],
+  "certifications": [
+    {
+      "title": "Angular Router In Depth (Angular 19)",
+      "issuer": "Udemy",
+      "issued": "May 2024",
+      "credentialUrl": "https://www.udemy.com/certificate/UC-b4f0bcbc-c161-4dec-8bec-5527586cbb4d/",
+      "skillsUrl": "https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/overlay/1538163119/skill-associations-details/?associationType=certifications",
+      "skills": [
+        "Angular 2"
+      ]
+    },
+    {
+      "title": "RxJs In Practice (with FREE E-Book)",
+      "issuer": "Udemy",
+      "issued": "May 2024",
+      "credentialUrl": "https://www.udemy.com/certificate/UC-26654bcf-0707-4cac-998e-e8bf50baa7be/",
+      "skills": [
+        "RxJS"
+      ]
+    },
+    {
+      "title": "NgRx (with NgRx Data) - The Complete Guide (Angular 19)",
+      "issuer": "Udemy",
+      "issued": "May 2024",
+      "credentialUrl": "https://www.udemy.com/certificate/UC-03526d20-9844-43f1-8da3-30a20dd87d06/",
+      "skillsUrl": "https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/overlay/1538042651/skill-associations-details/?associationType=certifications",
+      "skills": [
+        "RxJS"
+      ]
+    },
+    {
+      "title": "Angular Deep Dive - Beginner to Advanced (Angular 19)",
+      "issuer": "Udemy",
+      "issued": "May 2024",
+      "credentialUrl": "https://www.udemy.com/certificate/UC-072611f9-c9a7-44a1-9e53-87512b41d833/",
+      "skillsUrl": "https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/overlay/1537899149/skill-associations-details/?associationType=certifications",
+      "skills": [
+        "Angular 2"
+      ]
+    },
+    {
+      "title": "C# Base",
+      "issuer": "IT Education Academy (ITEA)",
+      "issued": "Feb 2016",
+      "credentialId": "1210118003",
+      "skills": [
+        "C#"
+      ]
+    },
+    {
+      "title": "C# Advanced",
+      "issuer": "IT Education Academy (ITEA)",
+      "issued": "Oct 2016",
+      "credentialId": "1220212002",
+      "skills": [
+        "C#",
+        ".NET"
+      ]
+    }
+  ]
+};

@@ -331,6 +331,28 @@
   ],
   "certifications": [
     {
+      "title": "AI in C# using the Microsoft Agent Framework",
+      "issuer": "Udemy",
+      "issued": "Nov 2026",
+      "credentialUrl": "https://www.udemy.com/certificate/UC-5b6daa22-e2ad-436b-abf8-1ed93a4889d3/",
+      "skills": [
+        "C#",
+        "Microsoft Agent Framework",
+        "AI Agents"
+      ]
+    },
+    {
+      "title": "React - The Complete Guide (incl. Next.js, Redux)",
+      "issuer": "Udemy",
+      "issued": "Jul 2026",
+      "credentialUrl": "https://www.udemy.com/certificate/UC-2d3d1cdb-94d4-4a3e-a804-b8cc89c21ec6/",
+      "skills": [
+        "React",
+        "Next.js",
+        "Redux"
+      ]
+    },
+    {
       "title": "Angular Router In Depth (Angular 19)",
       "issuer": "Udemy",
       "issued": "May 2024",

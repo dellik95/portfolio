@@ -540,10 +540,94 @@
     printBg.style.backgroundImage = bodyStyle.backgroundImage;
   }
 
+  const TEMPLATE_ALIASES = {
+    bento: '01-bento-glass',
+    glass: '01-bento-glass',
+    'bento-glass': '01-bento-glass',
+    terminal: '02-terminal-ide',
+    ide: '02-terminal-ide',
+    'terminal-ide': '02-terminal-ide',
+    swiss: '03-swiss-editorial',
+    editorial: '03-swiss-editorial',
+    'swiss-editorial': '03-swiss-editorial',
+    nordic: '04-nordic-fintech',
+    fintech: '04-nordic-fintech',
+    'nordic-fintech': '04-nordic-fintech',
+    executive: '05-executive-split',
+    split: '05-executive-split',
+    'executive-split': '05-executive-split',
+    '06': '07-architect-sidebar-cv',
+    '6': '07-architect-sidebar-cv',
+    dossier: '07-architect-sidebar-cv',
+    architect: '07-architect-sidebar-cv',
+    sidebar: '07-architect-sidebar-cv',
+    'architect-sidebar': '07-architect-sidebar-cv',
+    'architect-sidebar-cv': '07-architect-sidebar-cv',
+    azure: '08-azure-cloud-portal',
+    cloud: '08-azure-cloud-portal',
+    portal: '08-azure-cloud-portal',
+    'azure-cloud': '08-azure-cloud-portal',
+    'azure-cloud-portal': '08-azure-cloud-portal',
+    minimal: '09-minimal-mono-craft',
+    mono: '09-minimal-mono-craft',
+    craft: '09-minimal-mono-craft',
+    'minimal-mono-craft': '09-minimal-mono-craft',
+    emerald: '10-interactive-tabbed-folio',
+    tabbed: '10-interactive-tabbed-folio',
+    matrix: '10-interactive-tabbed-folio',
+    interactive: '10-interactive-tabbed-folio',
+    'interactive-tabbed-folio': '10-interactive-tabbed-folio',
+    pdf: '11-classic-pdf',
+    classic: '11-classic-pdf',
+    ats: '11-classic-pdf',
+    print: '11-classic-pdf',
+    'classic-pdf': '11-classic-pdf',
+    hub: 'hub',
+    all: 'hub',
+    switcher: 'hub',
+    'all-templates-hub': 'hub'
+  };
+
+  function resolveTemplateId(raw) {
+    if (!raw) return null;
+    const cleaned = String(raw)
+      .trim()
+      .replace(/^\/+|\/+$/g, '')
+      .replace(/\/index\.html$/i, '')
+      .replace(/\.html$/i, '')
+      .toLowerCase();
+    if (!cleaned) return null;
+    const byExact = TEMPLATES.find((t) => t.id.toLowerCase() === cleaned);
+    if (byExact) return byExact.id;
+    const byNumPrefix = TEMPLATES.find((t) => {
+      const prefix = t.id.split('-')[0].toLowerCase();
+      return prefix === cleaned || String(parseInt(prefix, 10)) === cleaned;
+    });
+    if (byNumPrefix) return byNumPrefix.id;
+    const byUiNum = TEMPLATES.find((t) => String(t.num || '').toLowerCase() === cleaned);
+    if (byUiNum) return byUiNum.id;
+    return TEMPLATE_ALIASES[cleaned] || null;
+  }
+
+  function getAssetRoot() {
+    const metaEl = document.querySelector('meta[name="ol-asset-root"]');
+    if (metaEl) return metaEl.getAttribute('content') || '';
+    const normPath = window.location.pathname.replace(/\\/g, '/');
+    if (normPath.includes('/templates/')) return '../';
+    const parts = normPath.split('/').filter(Boolean);
+    const tail = parts[parts.length - 1] === 'index.html' ? parts[parts.length - 2] : parts[parts.length - 1];
+    if (tail && (tail.toLowerCase() === 'hub' || TEMPLATES.some((t) => t.id.toLowerCase() === tail.toLowerCase()))) {
+      return '../';
+    }
+    return '';
+  }
+
   function getCurrentTemplateMeta() {
     const metaEl = document.querySelector('meta[name="ol-template-file"]');
     const metaFile = metaEl ? metaEl.getAttribute('content') : '';
-    const currentFile = metaFile || window.location.pathname.split('/').pop() || 'index.html';
+    const parts = window.location.pathname.replace(/\\/g, '/').split('/').filter(Boolean);
+    const tail = parts[parts.length - 1] === 'index.html' ? parts[parts.length - 2] : parts[parts.length - 1];
+    const currentFile = metaFile || (tail && tail.endsWith('.html') ? tail : tail ? `${tail}.html` : 'index.html');
     return TEMPLATES.find((t) => t.file === currentFile) || null;
   }
 
@@ -621,8 +705,7 @@
 
   function loadLiveResumeJson() {
     if (!window.location.protocol.startsWith('http')) return;
-    const isInTemplatesDir = window.location.pathname.replace(/\\/g, '/').includes('/templates/');
-    const jsonUrl = isInTemplatesDir ? '../data/resume-data.json' : 'data/resume-data.json';
+    const jsonUrl = `${getAssetRoot()}data/resume-data.json`;
     fetch(jsonUrl, { cache: 'no-store' })
       .then((res) => (res.ok ? res.json() : null))
       .then((json) => {
@@ -714,6 +797,9 @@
       return;
     }
 
+    const assetRoot = getAssetRoot();
+    const fallbackLandingUrl = landingUrl || 'https://dellik95.github.io/redis-gui/';
+
     let modal = document.getElementById('ol-project-landing-modal');
     if (!modal) {
       modal = document.createElement('div');
@@ -734,26 +820,26 @@
             </p>
             <div class="ol-modal-shots">
               <div class="ol-shot-card">
-                <img src="../assets/redis-gui/03_storage_table.png" onerror="this.src='assets/redis-gui/03_storage_table.png'" alt="Storage Table View">
+                <img src="${assetRoot}assets/redis-gui/03_storage_table.png" alt="Storage Table View">
                 <span>01. Storage Manager (Virtual Table & Live Telemetry)</span>
               </div>
               <div class="ol-shot-card">
-                <img src="../assets/redis-gui/02_dashboard.png" onerror="this.src='assets/redis-gui/02_dashboard.png'" alt="Dashboard">
+                <img src="${assetRoot}assets/redis-gui/02_dashboard.png" alt="Dashboard">
                 <span>02. Real-Time SignalR Observability Dashboard</span>
               </div>
               <div class="ol-shot-card">
-                <img src="../assets/redis-gui/05_stream_visual_editor.png" onerror="this.src='assets/redis-gui/05_stream_visual_editor.png'" alt="Stream Editor">
+                <img src="${assetRoot}assets/redis-gui/05_stream_visual_editor.png" alt="Stream Editor">
                 <span>03. Strategy-Pattern Visual Data Structure Editors</span>
               </div>
               <div class="ol-shot-card">
-                <img src="../assets/redis-gui/10_redis_cli_drawer.png" onerror="this.src='assets/redis-gui/10_redis_cli_drawer.png'" alt="CLI Drawer">
+                <img src="${assetRoot}assets/redis-gui/10_redis_cli_drawer.png" alt="CLI Drawer">
                 <span>04. Interactive Multi-DB CLI Terminal & Load Tester</span>
               </div>
             </div>
           </div>
           <div class="ol-modal-footer">
             <a href="https://github.com/dellik95" target="_blank" rel="noopener" class="ol-btn-gh">GitHub (@dellik95) ↗</a>
-            <a href="${redisLandingUrl}" class="ol-btn-primary">Відкрити лендінг RedisGUI →</a>
+            <a href="${fallbackLandingUrl}" class="ol-btn-primary">Відкрити лендінг RedisGUI →</a>
           </div>
         </div>
       `;
@@ -764,6 +850,47 @@
     modal.classList.add('open');
   }
 
+  function maybeRedirectRequestedTemplate(isIframe) {
+    if (isIframe) return false;
+    const urlParams = new URLSearchParams(window.location.search);
+    const requestedTpl = urlParams.get('template') || urlParams.get('tpl');
+    if (!requestedTpl) return false;
+
+    const resolved = resolveTemplateId(requestedTpl);
+    if (!resolved) return false;
+
+    const currentMeta = getCurrentTemplateMeta();
+    const currentId = currentMeta ? currentMeta.id : null;
+    const normPath = window.location.pathname.replace(/\\/g, '/');
+    const alreadyOnHub = !!document.getElementById('templateGrid') || /\/hub(\/index\.html)?\/?$/i.test(normPath);
+
+    if ((resolved === 'hub' && alreadyOnHub) || (currentId && resolved === currentId)) {
+      return false;
+    }
+
+    urlParams.delete('template');
+    urlParams.delete('tpl');
+    const qs = urlParams.toString();
+    const suffix = (qs ? `?${qs}` : '') + window.location.hash;
+    const assetRoot = getAssetRoot();
+    const inTemplatesDir = normPath.includes('/templates/');
+    const hasDeployedRoutes = assetRoot !== '' || !!document.querySelector('meta[name="ol-standalone-resume"]') || alreadyOnHub;
+
+    let targetUrl = '';
+    if (resolved === 'hub') {
+      targetUrl = hasDeployedRoutes
+        ? `${assetRoot}hub/${suffix}`
+        : (inTemplatesDir ? `../index.html${suffix}` : `index.html${suffix}`);
+    } else if (hasDeployedRoutes && !inTemplatesDir) {
+      targetUrl = `${assetRoot}${resolved}/${suffix}`;
+    } else {
+      targetUrl = inTemplatesDir ? `${resolved}.html${suffix}` : `templates/${resolved}.html${suffix}`;
+    }
+
+    window.location.replace(targetUrl);
+    return true;
+  }
+
   window.OLPortfolio = {
     setLanguage,
     getCurrentLang,
@@ -771,11 +898,13 @@
     getCurrentTheme,
     openProjectModal,
     applySavedPhoto,
+    resolveTemplateId,
     TEMPLATES
   };
 
   function injectSwitcherToolbar() {
     const isIframe = window.self !== window.top;
+    if (maybeRedirectRequestedTemplate(isIframe)) return;
     const currentFile = window.location.pathname.split('/').pop() || 'index.html';
     const isInTemplatesDir = window.location.pathname.replace(/\\/g, '/').includes('/templates/');
     const prefix = isInTemplatesDir ? '' : 'templates/';
@@ -3114,7 +3243,7 @@
       }).join('');
 
       bar.innerHTML = `
-        <a href="${hubHref}" class="ol-sw-hub">⊞ All 9</a>
+        <a href="${hubHref}" class="ol-sw-hub">⊞ All ${TEMPLATES.length}</a>
         <div class="ol-sw-divider"></div>
         ${itemsHtml}
       `;

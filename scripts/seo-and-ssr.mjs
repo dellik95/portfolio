@@ -446,11 +446,24 @@ function buildPersonEntity(data) {
     });
   }
   for (const proj of projects) {
-    workExample.push({
-      '@type': 'CreativeWork',
-      name: pick(proj.title, 'en'),
-      description: pick(proj.description, 'en')
-    });
+    if (proj.landingUrl || proj.githubUrl) {
+      workExample.push({
+        '@type': 'SoftwareApplication',
+        '@id': `${proj.landingUrl || proj.githubUrl}#app`,
+        name: pick(proj.title, 'en'),
+        description: pick(proj.description, 'en'),
+        applicationCategory: 'DeveloperApplication',
+        operatingSystem: 'Windows, Linux, macOS',
+        ...(proj.landingUrl ? { url: proj.landingUrl } : {}),
+        ...(proj.githubUrl ? { codeRepository: proj.githubUrl } : {})
+      });
+    } else {
+      workExample.push({
+        '@type': 'CreativeWork',
+        name: pick(proj.title, 'en'),
+        description: pick(proj.description, 'en')
+      });
+    }
   }
 
   return {
@@ -556,12 +569,12 @@ function upsertSsrContainers(html, data, tplClass) {
 export function syncSeoAndSsr(root, data) {
   const person = buildPersonEntity(data);
   const resumeDesc =
-    'Oleksandr Lutskov — Senior Full Stack Software Engineer (9+ yrs, 2 yrs Tech Lead). .NET 11/C#, Angular 22, React.js, 190+ Microservices, AWS Serverless, Azure, AI Agents & Semantic Kernel. Creator of RedisGUI.';
+    'Oleksandr Lutskov — Senior Full Stack Software Engineer (9+ yrs, 2 yrs Tech Lead). .NET 11/C#, Angular 22, React.js, 190+ Microservices, AWS Serverless, Azure, AI Agents & Semantic Kernel. Creator of RedisGUI and Context Platform (Claudy).';
   const resumeKeywords = [
     'Oleksandr Lutskov', 'Senior Full Stack Software Engineer', '.NET Engineer', 'C#', 'ASP.NET Core',
     'Angular', 'React.js', 'TypeScript', 'Microservices', 'AWS Lambda', 'AWS Step Functions',
-    'Azure Functions', 'Semantic Kernel', 'OpenAI', 'MCP', 'AI Agents', 'RedisGUI',
-    'Playwright', 'RabbitMQ', 'Kafka', 'DynamoDB', 'Docker', 'Kubernetes', 'Tech Lead'
+    'Azure Functions', 'Semantic Kernel', 'OpenAI', 'MCP', 'AI Agents', 'RedisGUI', 'Context Platform', 'Claudy',
+    'Tree-sitter', 'SQLite FTS5', 'sqlite-vec', 'Playwright', 'RabbitMQ', 'Kafka', 'DynamoDB', 'Docker', 'Kubernetes', 'Tech Lead'
   ].join(', ');
 
   const ogResumeImg = `${PORTFOLIO_URL}assets/redis-gui/02_dashboard.png`;

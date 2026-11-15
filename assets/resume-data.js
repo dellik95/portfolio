@@ -117,6 +117,10 @@ window.__OL_RESUME_DATA__ = {
       "en": "Explore RedisGUI →",
       "uk": "Детальніше про RedisGUI →"
     },
+    "open_claudy_cta": {
+      "en": "Explore Context Platform →",
+      "uk": "Детальніше про Context Platform →"
+    },
     "github_cta": {
       "en": "GitHub Repository",
       "uk": "GitHub Репозиторій"
@@ -193,17 +197,25 @@ window.__OL_RESUME_DATA__ = {
       {
         "id": "claudy",
         "badge": {
-          "en": "AI Agent Tooling • MCP Server",
-          "uk": "AI Agent Tooling • MCP Сервер"
+          "en": "AI Agent Tooling • .NET 11 & MCP",
+          "uk": "AI Agent Tooling • .NET 11 та MCP"
         },
         "title": {
-          "en": "Claudy (Context Platform) — Codebase Memory & Hybrid Search",
-          "uk": "Claudy (Context Platform) — Кодова пам’ять та гібридний пошук"
+          "en": "Context Platform (Claudy) — Codebase Memory & Hybrid Search",
+          "uk": "Context Platform (Claudy) — Кодова пам’ять та гібридний пошук"
         },
         "description": {
-          "en": "Token-efficient codebase intelligence and persistent memory platform for AI coding agents using hybrid search (FTS5 + vector cosine + tree-sitter AST symbol graph), live SignalR dashboard, and MCP server tools.",
-          "uk": "Платформа збереження контексту та семантичного індексування коду для AI-агентів (FTS5 + векторний пошук + AST граф символів tree-sitter), SignalR-дашборд та MCP-інструменти."
-        }
+          "en": "Local-first persistent memory and hybrid code search engine (SQLite FTS5 + sqlite-vec + Tree-sitter AST call graph) built on .NET 11 Clean Architecture, Angular 22 Tailwind dashboard, SignalR telemetry, 6 lifecycle hooks, and 17 MCP tools for AI coding agents.",
+          "uk": "Локальна платформа довготривалої пам’яті та гібридного пошуку по коду (SQLite FTS5 + sqlite-vec + AST граф викликів Tree-sitter) на .NET 11 Clean Architecture, дашборд Angular 22 Tailwind з SignalR-телеметрією, 6 хуків та 17 MCP-інструментів для AI-агентів."
+        },
+        "githubUrl": "https://github.com/dellik95/context-platform",
+        "landingUrl": "https://dellik95.github.io/context-platform/",
+        "metrics": [
+          "17 MCP Tools",
+          "6 Hooks",
+          ".NET 11 + Angular 22",
+          "FTS5 + sqlite-vec"
+        ]
       },
       {
         "id": "courses",

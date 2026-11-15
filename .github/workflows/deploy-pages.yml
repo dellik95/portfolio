@@ -56,6 +56,7 @@ jobs:
             echo "### GitHub Pages Resume Deployment Summary"
             echo "- **Template**: \`${{ inputs.resume_template }}\`"
             echo "- **RedisGUI Product Page**: https://dellik95.github.io/redis-gui/"
+            echo "- **Context Platform (Claudy) Page**: https://dellik95.github.io/context-platform/"
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Setup Pages

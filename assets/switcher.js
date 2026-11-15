@@ -149,6 +149,7 @@
       contact_title: pick(u.contact_title, lang),
       download_cv: pick(u.download_cv, lang),
       open_landing_cta: pick(u.open_landing_cta, lang),
+      open_claudy_cta: pick(u.open_claudy_cta, lang),
       github_cta: pick(u.github_cta, lang),
       photo_hint: pick(u.photo_hint, lang),
       edu_uni: pick(ed0.institution, lang),
@@ -696,13 +697,19 @@
   }
 
   function openProjectModal(projectId) {
-    const remoteLandingUrl = (resumeData && resumeData.portfolio && resumeData.portfolio.featured && resumeData.portfolio.featured.landingUrl) || 'https://dellik95.github.io/redis-gui/';
-    const redisLandingUrl = remoteLandingUrl;
+    const featured = resumeData && resumeData.portfolio && resumeData.portfolio.featured;
+    const projects = (resumeData && resumeData.portfolio && resumeData.portfolio.projects) || [];
+    const matchedProject = [featured, ...projects].find((item) => item && item.id === projectId);
+    const defaultLandings = {
+      'redis-gui': 'https://dellik95.github.io/redis-gui/',
+      claudy: 'https://dellik95.github.io/context-platform/'
+    };
+    const landingUrl = (matchedProject && matchedProject.landingUrl) || defaultLandings[projectId];
 
-    if (projectId === 'redis-gui') {
-      const win = window.open(redisLandingUrl, '_blank', 'noopener');
+    if (landingUrl) {
+      const win = window.open(landingUrl, '_blank', 'noopener');
       if (!win) {
-        window.location.href = redisLandingUrl;
+        window.location.href = landingUrl;
       }
       return;
     }

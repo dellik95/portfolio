@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="3 12 155 135" fill="none">
+  <defs>
+    <linearGradient id="qd-ring-base-i" x1="14" y1="88" x2="142" y2="62" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="50%" stop-color="#EEF2FF" />
+      <stop offset="100%" stop-color="#C7D2FE" />
+    </linearGradient>
+    <linearGradient id="qd-right-crease-i" x1="98" y1="24" x2="132" y2="108" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#A5B4FC" stop-opacity="0" />
+      <stop offset="55%" stop-color="#6366F1" stop-opacity="0.28" />
+      <stop offset="100%" stop-color="#4338CA" stop-opacity="0.45" />
+    </linearGradient>
+    <linearGradient id="qd-top-swoosh-i" x1="20" y1="54" x2="72" y2="17" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#BAE6FD" />
+      <stop offset="50%" stop-color="#E0E7FF" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="qd-left-sweep-i" x1="12" y1="48" x2="88" y2="132" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="55%" stop-color="#EEF2FF" />
+      <stop offset="100%" stop-color="#E0E7FF" stop-opacity="0" />
+    </linearGradient>
+    <radialGradient id="qd-tail-ring-shadow-i" cx="94" cy="112" r="34" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#312E81" stop-opacity="0.45" />
+      <stop offset="60%" stop-color="#4F46E5" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#818CF8" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="qd-tail-fill-i" x1="56" y1="102" x2="152" y2="141" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#A5B4FC" />
+      <stop offset="28%" stop-color="#E0E7FF" />
+      <stop offset="65%" stop-color="#BAE6FD" />
+      <stop offset="100%" stop-color="#93C5FD" />
+    </linearGradient>
+    <linearGradient id="qd-tail-lip-i" x1="48" y1="101.4" x2="88" y2="109" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4338CA" stop-opacity="0.42" />
+      <stop offset="65%" stop-color="#6366F1" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#BAE6FD" stop-opacity="0" />
+    </linearGradient>
+    <clipPath id="qd-donut-clip-i" clip-rule="evenodd">
+      <path
+        clip-rule="evenodd"
+        d="M 73.8 15.2
+           A 68.8 64.7 0 1 1 73.79 15.2 Z
+           M 73.5 43.4
+           C 51.5 43.4 36.8 57.5 36.8 76.5
+           C 36.8 89.0 43.5 98.2 53.5 102.0
+           L 106.2 102.0
+           C 110.2 96.8 111.5 88.5 111.5 78.2
+           C 111.5 57.5 96.2 43.4 73.5 43.4 Z"
+      />
+    </clipPath>
+    <filter id="qd-soft-blur-i" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4.5" />
+    </filter>
+  </defs>
+  <g clip-path="url(#qd-donut-clip-i)">
+    <rect x="0" y="10" width="148" height="140" fill="url(#qd-ring-base-i)" />
+    <path
+      d="M 92 20 C 122 28 139 58 135 94 C 131 112 119 124 100 128 C 109 110 112 92 109 74 C 106 52 99 33 92 20 Z"
+      fill="url(#qd-right-crease-i)"
+    />
+    <path
+      d="M 15 44 C 24 22 52 12 82 15 C 63 25 46 44 40 70 C 37 82 38 92 44 100 C 26 91 14 70 15 44 Z"
+      fill="url(#qd-top-swoosh-i)"
+    />
+    <path
+      d="M 16.8 40 C 17 58 29 82 52 100 C 66 108 88 109 105 108 L 96 146 C 58 148 28 138 12 114 C -2 90 1 60 16.8 40 Z"
+      fill="url(#qd-left-sweep-i)"
+    />
+    <ellipse cx="91" cy="115" rx="30" ry="21" fill="url(#qd-tail-ring-shadow-i)" filter="url(#qd-soft-blur-i)" />
+  </g>
+  <path
+    d="M 48.0 101.3
+       L 121.4 101.8
+       Q 126.0 101.9 129.1 105.5
+       L 154.6 139.0
+       Q 156.8 142.0 155.3 143.2
+       Q 154.2 144.0 151.2 144.0
+       L 110.8 144.0
+       Q 107.2 144.0 104.5 140.6
+       C 93.6 126.0 82.8 112.4 68.5 105.6
+       C 61.5 102.4 53.5 101.5 48.0 101.3 Z"
+    fill="url(#qd-tail-fill-i)"
+  />
+  <path
+    d="M 48.0 101.3
+       C 62.5 101.8 76.5 102.8 89.5 105.8
+       C 81.8 109.0 74.5 108.3 68.5 105.6
+       C 61.5 102.4 53.5 101.5 48.0 101.3 Z"
+    fill="url(#qd-tail-lip-i)"
+  />
+</svg>

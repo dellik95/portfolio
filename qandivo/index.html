@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Qandivo — Modern AI-First ATS &amp; Workflow Platform</title>
+    <meta
+      name="description"
+      content="Multi-tenant AI-first Recruitment, Kanban, Visual Workflow Automation, Semantic Vector Search, and .NET Aspire Platform."
+    />
+    <link rel="icon" type="image/svg+xml" href="assets/svg/qandivo-logo.svg" />
+    <script src="assets/theme-init.js"></script>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="brand">
+          <img data-brand-mark src="assets/svg/qandivo-logo.svg" alt="" width="30" height="30" />
+          <span>Qandivo</span>
+        </a>
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="index.html" class="active" data-i18n="nav.overview">Overview</a>
+          <a href="recruiting.html" data-i18n="nav.recruiting">Recruiting</a>
+          <a href="automation.html" data-i18n="nav.automation">Automation</a>
+          <a href="ai.html" data-i18n="nav.ai">AI &amp; Search</a>
+          <a href="platform.html" data-i18n="nav.platform">Platform &amp; Infra</a>
+        </nav>
+        <div class="controls">
+          <div class="pill-group" role="group" aria-label="Language selector">
+            <button type="button" class="pill-btn active" data-lang-btn="en">EN</button>
+            <button type="button" class="pill-btn" data-lang-btn="uk">UA</button>
+          </div>
+          <div class="pill-group" role="group" aria-label="Theme selector">
+            <button type="button" class="pill-btn" data-theme-btn="light">
+              <img src="assets/svg/sun.svg" alt="" /> Light
+            </button>
+            <button type="button" class="pill-btn" data-theme-btn="dark">
+              <img src="assets/svg/moon.svg" alt="" /> Dark
+            </button>
+            <button type="button" class="pill-btn" data-theme-btn="ember">
+              <img src="assets/svg/sparkles.svg" alt="" /> Ember
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <span class="badge" data-i18n="hero.badge">.NET 11 • Aspire 17 • Azure OpenAI gpt-6-luna • Kadex UI</span>
+            <h1 data-i18n="hero.title">Modern AI-First ATS &amp; Workflow Automation Platform</h1>
+            <p class="lead" data-i18n="hero.lead">
+              Qandivo unifies full-cycle recruiting, Kanban pipelines, candidate self-booking portals, visual DAG workflow automation, Cosmos DB semantic vector search, and explainable Azure OpenAI scoring in a modular multi-tenant monolith.
+            </p>
+            <div class="cta-row">
+              <a href="recruiting.html" class="btn-primary">
+                <span data-i18n="hero.ctaPrimary">Explore Recruiting</span>
+                <img src="assets/svg/arrow-right.svg" alt="" />
+              </a>
+              <a href="ai.html" class="btn-outline" data-i18n="hero.ctaAi">
+                AI &amp; Vector Search
+              </a>
+              <a href="platform.html" class="btn-outline" data-i18n="hero.ctaPlatform">
+                Security &amp; Architecture
+              </a>
+            </div>
+            <div class="stack-grid" aria-label="Core stack">
+              <span class="stack-pill">.NET 11 &amp; EF Core 11</span>
+              <span class="stack-pill">Angular 22 &amp; Signals</span>
+              <span class="stack-pill">HotChocolate 16 GraphQL</span>
+              <span class="stack-pill">Azure SQL + Cosmos DB</span>
+              <span class="stack-pill">Pulumi Azure IaC</span>
+            </div>
+          </div>
+
+          <figure
+            class="hero-shot"
+            data-lightbox-src="assets/images/home-dashboard-en-light.png"
+            data-lightbox-title="Qandivo Modular Workspace Dashboard"
+          >
+            <img
+              data-themed-shot="home-dashboard-en"
+              src="assets/images/home-dashboard-en-light.png"
+              alt="Qandivo customizable recruitment dashboard"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <h2 data-i18n="overview.featuresTitle">Everything recruitment teams need in one cohesive workspace</h2>
+            <p data-i18n="overview.featuresLead">
+              Built for recruiters, hiring managers, candidates, and platform administrators with strict RBAC and record-level access control.
+            </p>
+          </div>
+          <div class="grid-3">
+            <article class="card">
+              <span class="tag">Recruiting</span>
+              <h3>Candidates, Vacancies &amp; Kanban</h3>
+              <p>Adaptive Kanban with status-colored headers, metadata-driven GraphQL filters, sticky command bars, and header bulk actions.</p>
+              <a href="recruiting.html" class="brand-sub">Explore Recruiting →</a>
+            </article>
+            <article class="card">
+              <span class="tag">Portals &amp; Scheduling</span>
+              <h3>Public Career Board &amp; Self-Booking</h3>
+              <p>Branded tenant career pages with open CV applications plus tokenized portals where candidates track stages and book interview slots themselves.</p>
+              <a href="recruiting.html#portals" class="brand-sub">Explore Portals →</a>
+            </article>
+            <article class="card">
+              <span class="tag">Calendar &amp; Inbox</span>
+              <h3>Interview Calendar &amp; Google Sync</h3>
+              <p>Conflict-checked interview scheduling in Month/Week/Day/List views, bidirectional Google Calendar sync, and SignalR Work Inbox triage.</p>
+              <a href="recruiting.html#calendar" class="brand-sub">See Scheduling →</a>
+            </article>
+            <article class="card">
+              <span class="tag">AI Copilot</span>
+              <h3>Candidate Scoring &amp; gpt-6-luna Copilot</h3>
+              <p>Multi-dimension AI fit scoring (0–100) with strengths/gaps, Morning Recruiting Briefs, streaming chat, and JD synthesis.</p>
+              <a href="ai.html" class="brand-sub">Explore AI &amp; Scoring →</a>
+            </article>
+            <article class="card">
+              <span class="tag">Vector Search &amp; DAG</span>
+              <h3>Semantic Search &amp; Visual Workflows</h3>
+              <p>Cosmos DB DiskANN semantic search across entities, drag-and-drop DAG workflow studio, JSON trace logs, Hangfire jobs, and Connectors.</p>
+              <a href="automation.html" class="brand-sub">Explore Automation →</a>
+            </article>
+            <article class="card">
+              <span class="tag">Security &amp; RBAC</span>
+              <h3>Permissions, ACL Sharing &amp; Quotas</h3>
+              <p>Role-based permissions, record-level Read/Write/Delete/Share grants with expiry, Stripe quotas, and synchronized EN/UA localization.</p>
+              <a href="platform.html" class="brand-sub">Explore Security →</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Key Feature Spotlights -->
+      <section class="section section-alt">
+        <div class="container">
+          <div class="section-head">
+            <h2 data-i18n="overview.spotlightsTitle">Inside the Qandivo workspace</h2>
+            <p data-i18n="overview.spotlightsLead">
+              Every module is engineered around unified design tokens, live Light / Obsidian Dark / Ember themes, and synchronized English / Ukrainian localization.
+            </p>
+          </div>
+
+          <div class="spotlight-stack">
+            <!-- Spotlight 1: Recruiting Pipeline -->
+            <article class="spotlight">
+              <div class="spotlight-copy">
+                <span class="tag" data-i18n="spot.overview.recruiting.tag">Full-Cycle Recruiting</span>
+                <h3 data-i18n="spot.overview.recruiting.title">Kanban Pipelines, Dynamic Filters &amp; Header Bulk Actions</h3>
+                <p data-i18n="spot.overview.recruiting.body">
+                  Manage requisitions and talent pools side by side in status-colored Kanban boards or metadata-driven GraphQL tables with multi-select bulk actions and sticky entity headers.
+                </p>
+                <ul class="feature-bullets">
+                  <li data-i18n="spot.overview.recruiting.b1">Adaptive full-width Kanban columns color-coded by stage status</li>
+                  <li data-i18n="spot.overview.recruiting.b2">Multi-select header Bulk Actions (Send Email, Delete, Clear) across Candidates, Vacancies, and Clients</li>
+                  <li data-i18n="spot.overview.recruiting.b3">Unified sticky Entity Command Bar with consistent View / Edit / Create transitions</li>
+                </ul>
+              </div>
+              <div class="qd-gallery">
+                <figure class="qd-gallery-stage" data-lightbox-src="assets/images/vacancies-kanban-light.png" data-lightbox-title="Adaptive Kanban Pipeline">
+                  <img data-themed-shot="vacancies-kanban" src="assets/images/vacancies-kanban-light.png" alt="Vacancies Kanban Board" />
+                </figure>
+                <div class="qd-gallery-thumbs">
+                  <button type="button" class="qd-thumb active" data-gallery-shot="vacancies-kanban" data-gallery-title="Adaptive Kanban Pipeline">
+                    <img data-themed-shot="vacancies-kanban" src="assets/images/vacancies-kanban-light.png" alt="Kanban thumbnail" />
+                    <span>Kanban Board</span>
+                  </button>
+                  <button type="button" class="qd-thumb" data-gallery-shot="vacancies-list" data-gallery-title="Vacancies Table with Bulk Actions">
+                    <img data-themed-shot="vacancies-list" src="assets/images/vacancies-list-light.png" alt="Vacancies bulk list thumbnail" />
+                    <span>Bulk Actions</span>
+                  </button>
+                  <button type="button" class="qd-thumb" data-gallery-shot="vacancy-view" data-gallery-title="Sticky Entity Command Bar">
+                    <img data-themed-shot="vacancy-view" src="assets/images/vacancy-view-light.png" alt="Vacancy detail thumbnail" />
+                    <span>Vacancy View</span>
+                  </button>
+                  <button type="button" class="qd-thumb" data-gallery-shot="candidate-detail" data-gallery-title="360° Candidate Profile">
+                    <img data-themed-shot="candidate-detail" src="assets/images/candidate-detail-light.png" alt="Candidate detail thumbnail" />
+                    <span>Candidate 360°</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Spotlight 2: Public Portal, Self-Booking & Calendar -->
+            <article class="spotlight spotlight-reverse">
+              <div class="spotlight-copy">
+                <span class="tag" data-i18n="spot.overview.portals.tag">Portals &amp; Calendar</span>
+                <h3 data-i18n="spot.overview.portals.title">Branded Career Boards &amp; Candidate Self-Scheduling</h3>
+                <p data-i18n="spot.overview.portals.body">
+                  Publish openings to tenant-branded career pages, let applicants track live progress through tokenized links, and allow candidates to book interview slots directly into synced calendars.
+                </p>
+                <ul class="feature-bullets">
+                  <li data-i18n="spot.overview.portals.b1">Public Career Portal per tenant slug with search, filters, CV upload, and friendly 404 edge states</li>
+                  <li data-i18n="spot.overview.portals.b2">Tokenized Candidate Self-Service Portal with live stage progress and self-booking calendar</li>
+                  <li data-i18n="spot.overview.portals.b3">Interview Calendar with conflict detection, mobile scrolling, and bidirectional Google Calendar sync</li>
+                </ul>
+              </div>
+              <div class="qd-gallery">
+                <figure class="qd-gallery-stage" data-lightbox-src="assets/images/career-portal-public-light.png" data-lightbox-title="Public Branded Career Portal">
+                  <img data-themed-shot="career-portal-public" src="assets/images/career-portal-public-light.png" alt="Public Career Portal" />
+                </figure>
+                <div class="qd-gallery-thumbs">
+                  <button type="button" class="qd-thumb active" data-gallery-shot="career-portal-public" data-gallery-title="Public Branded Career Portal">
+                    <img data-themed-shot="career-portal-public" src="assets/images/career-portal-public-light.png" alt="Public career portal thumbnail" />
+                    <span>Career Portal</span>
+                  </button>
+                  <button type="button" class="qd-thumb" data-gallery-shot="candidate-portal-selfservice" data-gallery-title="Candidate Self-Service &amp; Booking">
+                    <img data-themed-shot="candidate-portal-selfservice" src="assets/images/candidate-portal-selfservice-light.png" alt="Candidate self-service thumbnail" />
+                    <span>Self-Booking</span>
+                  </button>
+                  <button type="button" class="qd-thumb" data-gallery-shot="calendar-view" data-gallery-title="Interview Scheduling Calendar">
+                    <img data-themed-shot="calendar-view" src="assets/images/calendar-view-light.png" alt="Calendar thumbnail" />
+                    <span>Calendar</span>
+                  </button>
+                  <button type="button" class="qd-thumb" data-gallery-shot="career-portal-missing-job" data-gallery-title="Unavailable Position 404 State">
+                    <img data-themed-shot="career-portal-missing-job" src="assets/images/career-portal-missing-job-light.png" alt="Missing job banner thumbnail" />
+                    <span>404 Edge State</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Spotlight 3: AI Scoring, Copilot & Semantic Search -->
+            <article class="spotlight">
+              <div class="spotlight-copy">
+                <span class="tag" data-i18n="spot.overview.ai.tag">AI &amp; Vector Search</span>
+                <h3 data-i18n="spot.overview.ai.title">gpt-6-luna Copilot, Candidate Match &amp; Semantic Search</h3>
+                <p data-i18n="spot.overview.ai.body">
+                  Stream recruiting insights and job descriptions in Copilot chat, score every candidate transparently on a 0–100 rubric, and search by conceptual meaning in Cosmos DB DiskANN.
+                </p>
+                <ul class="feature-bullets">
+                  <li data-i18n="spot.overview.ai.b1">Daily Recruiting Brief surfaces urgent bottlenecks and unreviewed applicants automatically</li>
+                  <li data-i18n="spot.overview.ai.b2">Explainable Fit Scorecards break down strengths, risks, and matched vs. missing skills</li>
+                  <li data-i18n="spot.overview.ai.b3">Conceptual Semantic Vector Search across candidates, vacancies, companies, and skills</li>
+                </ul>
+              </div>
+              <div class="qd-gallery">
+                <figure class="qd-gallery-stage" data-lightbox-src="assets/images/ai-copilot-light.png" data-lightbox-title="AI Daily Recruiting Brief">
+                  <img data-themed-shot="ai-copilot" src="assets/images/ai-copilot-light.png" alt="AI Daily Brief" />
+                </figure>
+                <div class="qd-gallery-thumbs">
+                  <button type="button" class="qd-thumb active" data-gallery-shot="ai-copilot" data-gallery-title="AI Daily Recruiting Brief">
+                    <img data-themed-shot="ai-copilot" src="assets/images/ai-copilot-light.png" alt="AI Daily Brief thumbnail" />
+                    <span>Daily Brief</span>
+                  </button>
+                  <button type="button" class="qd-thumb" data-gallery-shot="ai-copilot-chat" data-gallery-title="Interactive Copilot Chat">
+                    <img data-themed-shot="ai-copilot-chat" src="assets/images/ai-copilot-chat-light.png" alt="Copilot chat thumbnail" />
+                    <span>Copilot Chat</span>
+                  </button>
+                  <button type="button" class="qd-thumb" data-gallery-shot="ai-match-overview" data-gallery-title="Explainable Candidate Fit Scoring">
+                    <img data-themed-shot="ai-match-overview" src="assets/images/ai-match-overview-light.png" alt="AI Match thumbnail" />
+                    <span>Match Scoring</span>
+                  </button>
+                  <button type="button" class="qd-thumb" data-gallery-shot="semantic-search" data-gallery-title="Cosmos DB Semantic Vector Search">
+                    <img data-themed-shot="semantic-search" src="assets/images/semantic-search-light.png" alt="Semantic Search thumbnail" />
+                    <span>Vector Search</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Spotlight 4: Automation, Connectors & Permissions -->
+            <article class="spotlight spotlight-reverse">
+              <div class="spotlight-copy">
+                <span class="tag" data-i18n="spot.overview.security.tag">Automation &amp; Access Control</span>
+                <h3 data-i18n="spot.overview.security.title">Visual DAG Workflows, Connectors &amp; Granular Permissions</h3>
+                <p data-i18n="spot.overview.security.body">
+                  Automate multi-step hiring flows triggered by domain events, inspect formatted JSON node logs, connect external tools, and enforce strict RBAC plus record-level ACL sharing.
+                </p>
+                <ul class="feature-bullets">
+                  <li data-i18n="spot.overview.security.b1">Drag-and-drop DAG Workflow Builder with Outbox reliability and Hangfire recurring schedules</li>
+                  <li data-i18n="spot.overview.security.b2">Record-level ACL Share Matrix per User or Role (Read / Write / Delete / Share / Export + expiry)</li>
+                  <li data-i18n="spot.overview.security.b3">Runtime System Config, Stripe Plan Quotas, and synchronized EN / UA backend &amp; UI localization</li>
+                </ul>
+              </div>
+              <div class="qd-gallery">
+                <figure class="qd-gallery-stage" data-lightbox-src="assets/images/entity-share-dialog-light.png" data-lightbox-title="Record-Level ACL Permissions Modal">
+                  <img data-themed-shot="entity-share-dialog" src="assets/images/entity-share-dialog-light.png" alt="Permissions & ACL Sharing Dialog" />
+                </figure>
+                <div class="qd-gallery-thumbs">
+                  <button type="button" class="qd-thumb active" data-gallery-shot="entity-share-dialog" data-gallery-title="Record-Level ACL Permissions Modal">
+                    <img data-themed-shot="entity-share-dialog" src="assets/images/entity-share-dialog-light.png" alt="ACL sharing thumbnail" />
+                    <span>ACL Permissions</span>
+                  </button>
+                  <button type="button" class="qd-thumb" data-gallery-shot="automation-workflow-builder" data-gallery-title="Visual DAG Workflow Builder">
+                    <img data-themed-shot="automation-workflow-builder" src="assets/images/automation-workflow-builder-light.png" alt="Workflow builder thumbnail" />
+                    <span>Workflow DAG</span>
+                  </button>
+                  <button type="button" class="qd-thumb" data-gallery-shot="automation-run-detail" data-gallery-title="Workflow Execution Trace &amp; JSON">
+                    <img data-themed-shot="automation-run-detail" src="assets/images/automation-run-detail-light.png" alt="Run trace thumbnail" />
+                    <span>Run JSON Trace</span>
+                  </button>
+                  <button type="button" class="qd-thumb" data-gallery-shot="connectors-list" data-gallery-title="Integration Connectors">
+                    <img data-themed-shot="connectors-list" src="assets/images/connectors-list-light.png" alt="Connectors thumbnail" />
+                    <span>Connectors</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <h2 data-i18n="overview.galleryTitle">Themes, Live Localization, Portals &amp; Permissions</h2>
+            <p data-i18n="overview.galleryLead">
+              Switch themes at the top of the page — every screenshot and gallery updates across Light, Obsidian Dark, and Ember.
+            </p>
+          </div>
+          <div class="grid-3">
+            <article class="shot-card">
+              <figure data-lightbox-src="assets/images/login-light.png" data-lightbox-title="Split-Card SaaS Authentication">
+                <img data-themed-shot="login" src="assets/images/login-light.png" alt="Qandivo split-card login screen" />
+              </figure>
+              <div class="shot-body">
+                <h3>Split-Card SaaS Authentication</h3>
+                <p>Refined folded-ribbon identity, password visibility toggle, circular Google OAuth Sign-In, and theme/language dropdowns.</p>
+              </div>
+            </article>
+            <article class="shot-card">
+              <figure data-lightbox-src="assets/images/work-inbox-light.png" data-lightbox-title="SignalR Work Inbox">
+                <img data-themed-shot="work-inbox" src="assets/images/work-inbox-light.png" alt="Work Inbox role queues" />
+              </figure>
+              <div class="shot-body">
+                <h3>Role-Segmented Work Inbox</h3>
+                <p>Real-time SignalR task queues filtered by Recruiter, Hiring Manager, and Coordinator with instant acknowledgement.</p>
+              </div>
+            </article>
+            <article class="shot-card">
+              <figure data-lightbox-src="assets/images/admin-system-config-light.png" data-lightbox-title="Runtime System Configuration">
+                <img data-themed-shot="admin-system-config" src="assets/images/admin-system-config-light.png" alt="Admin runtime system configuration" />
+              </figure>
+              <div class="shot-body">
+                <h3>Live System Governance</h3>
+                <p>Runtime AI thresholds, Circuit Breaker settings, scheduled Hangfire jobs, and audit history scoped to SuperAdmins.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span data-i18n="footer.copy">© 2026 Qandivo • Modular .NET 11 + Angular 22 Recruiting &amp; Workflow Platform</span>
+        <div class="nav-links">
+          <a href="recruiting.html" data-i18n="nav.recruiting">Recruiting</a>
+          <a href="automation.html" data-i18n="nav.automation">Automation</a>
+          <a href="ai.html" data-i18n="nav.ai">AI &amp; Search</a>
+          <a href="platform.html" data-i18n="nav.platform">Platform &amp; Infra</a>
+        </div>
+      </div>
+    </footer>
+
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot preview">
+      <div class="lightbox-inner">
+        <button id="lightbox-close" type="button" class="lightbox-close" aria-label="Close preview">
+          <img src="assets/svg/close.svg" alt="" />
+        </button>
+        <img id="lightbox-img" src="" alt="" />
+        <p id="lightbox-caption" class="lightbox-caption"></p>
+      </div>
+    </div>
+
+    <script src="assets/i18n.js"></script>
+    <script src="assets/app.js"></script>
+  </body>
+</html>

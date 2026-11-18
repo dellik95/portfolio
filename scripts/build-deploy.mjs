@@ -322,6 +322,9 @@ copyRecursive(path.join(root, 'CV_OleksandrLutskov_.NetFull-Stack.pdf'), path.jo
 copyRecursive(path.join(root, 'assets'), path.join(outDir, 'assets'));
 copyRecursive(path.join(root, 'data'), path.join(outDir, 'data'));
 copyRecursive(templatesDir, path.join(outDir, 'templates'));
+if (fs.existsSync(path.join(root, 'qandivo'))) {
+  copyRecursive(path.join(root, 'qandivo'), path.join(outDir, 'qandivo'));
+}
 for (const seoFile of ['robots.txt', 'sitemap.xml']) {
   if (fs.existsSync(path.join(root, seoFile))) {
     copyRecursive(path.join(root, seoFile), path.join(outDir, seoFile));

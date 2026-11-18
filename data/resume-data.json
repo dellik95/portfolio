@@ -114,17 +114,24 @@
       {
         "id": "talent-mind",
         "badge": {
-          "en": "Modular Monolith + Design System",
-          "uk": "Модульний моноліт + Дизайн-система"
+          "en": "Modular Monolith • .NET 11 & Angular 22",
+          "uk": "Модульний моноліт • .NET 11 та Angular 22"
         },
         "title": {
-          "en": "TalentMind & @dellik95/ui — AI Recruitment Platform",
-          "uk": "TalentMind & @dellik95/ui — AI-платформа рекрутингу"
+          "en": "Qandivo & @dellik95/kadex-ui — AI-First ATS & Workflow Automation Platform",
+          "uk": "Qandivo & @dellik95/kadex-ui — AI-First ATS та платформа автоматизації рекрутингу"
         },
         "description": {
-          "en": "Full-scale recruitment platform built as an ASP.NET Core Modular Monolith + Angular 22 SPA with an AI Copilot, workflow automation engine, GraphQL DSL generator, multi-tenancy, and a private npm design-system (@dellik95/ui).",
-          "uk": "Масштабна рекрутингова система (ASP.NET Core Modular Monolith + Angular 22 SPA) з AI-копілотом, рушієм автоматизації воркфлоу, генератором GraphQL DSL та власною бібліотекою компонентів @dellik95/ui."
-        }
+          "en": "Enterprise multi-tenant recruiting platform built on .NET 11 Modular Monolith + Angular 22 SPA featuring a visual DAG workflow automation engine, AI Copilot & candidate match scoring, Cosmos DB vector semantic search, branded public career & self-scheduling candidate portals, GraphQL DSL source generator, and the @dellik95/kadex-ui design system.",
+          "uk": "Багатотенантна платформа рекрутингу на .NET 11 Modular Monolith + Angular 22 SPA з візуальним DAG-рушієм автоматизації воркфлоу, AI-копілотом і скорингом кандидатів, векторним семантичним пошуком у Cosmos DB, брендованими публічними та кандидатськими порталами з самозаписом на інтерв’ю, генератором GraphQL DSL і дизайн-системою @dellik95/kadex-ui."
+        },
+        "landingUrl": "https://dellik95.github.io/portfolio/qandivo/",
+        "metrics": [
+          ".NET 11 + Angular 22",
+          "DAG Automation",
+          "AI + Vector Search",
+          "@dellik95/kadex-ui"
+        ]
       },
       {
         "id": "claudy",

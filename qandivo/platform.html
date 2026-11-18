@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Platform &amp; Cloud Infrastructure — Qandivo</title>
+    <link rel="icon" type="image/svg+xml" href="assets/svg/qandivo-logo.svg" />
+    <script src="assets/theme-init.js"></script>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="brand">
+          <img data-brand-mark src="assets/svg/qandivo-logo.svg" alt="" width="30" height="30" />
+          <span>Qandivo</span>
+        </a>
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="index.html" data-i18n="nav.overview">Overview</a>
+          <a href="recruiting.html" data-i18n="nav.recruiting">Recruiting</a>
+          <a href="automation.html" data-i18n="nav.automation">Automation</a>
+          <a href="ai.html" data-i18n="nav.ai">AI &amp; Search</a>
+          <a href="platform.html" class="active" data-i18n="nav.platform">Platform &amp; Infra</a>
+        </nav>
+        <div class="controls">
+          <div class="pill-group" role="group" aria-label="Language selector">
+            <button type="button" class="pill-btn active" data-lang-btn="en">EN</button>
+            <button type="button" class="pill-btn" data-lang-btn="uk">UA</button>
+          </div>
+          <div class="pill-group" role="group" aria-label="Theme selector">
+            <button type="button" class="pill-btn" data-theme-btn="light">
+              <img src="assets/svg/sun.svg" alt="" /> Light
+            </button>
+            <button type="button" class="pill-btn" data-theme-btn="dark">
+              <img src="assets/svg/moon.svg" alt="" /> Dark
+            </button>
+            <button type="button" class="pill-btn" data-theme-btn="ember">
+              <img src="assets/svg/sparkles.svg" alt="" /> Ember
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-banner">
+        <div class="container">
+          <span class="tag">Security • Multi-Tenancy • Azure</span>
+          <h1 data-i18n="platform.title">Enterprise Security, Multi-Tenancy &amp; Cloud Infrastructure</h1>
+          <p data-i18n="platform.lead">
+            Fine-grained RBAC plus record-level ACL sharing, tenant subscriptions &amp; quotas, .NET Aspire orchestration, and automated Pulumi Azure provisioning.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container spotlight-stack">
+          <article class="spotlight">
+            <div class="spotlight-copy">
+              <span class="tag">RBAC &amp; Record-Level ACL</span>
+              <h3>Role Permissions &amp; Fine-Grained Entity Sharing</h3>
+              <p>
+                Combine tenant-wide Role-Based Access Control with per-record ACL sharing. Grant or restrict Read, Update, Delete, Share, and Export rights for individual team members or roles with optional expiration dates.
+              </p>
+              <ul class="feature-bullets">
+                <li>Unified `RequireAuthorization` &amp; `EntityAccess` enforcement across REST APIs and GraphQL</li>
+                <li>Manage Access modal directly on Candidates, Vacancies, and Companies with expiry support</li>
+                <li>Multi-tenant organization isolation, Google OIDC Sign-In, and SuperAdmin User Governance</li>
+              </ul>
+            </div>
+            <div class="qd-gallery">
+              <figure class="qd-gallery-stage" data-lightbox-src="assets/images/entity-share-dialog-light.png" data-lightbox-title="Instance-Level ACL Sharing Matrix">
+                <img data-themed-shot="entity-share-dialog" src="assets/images/entity-share-dialog-light.png" alt="Manage access modal for record ACL sharing" />
+              </figure>
+              <div class="qd-gallery-thumbs">
+                <button type="button" class="qd-thumb active" data-gallery-shot="entity-share-dialog" data-gallery-title="Instance-Level ACL Sharing Matrix">
+                  <img data-themed-shot="entity-share-dialog" src="assets/images/entity-share-dialog-light.png" alt="Entity share thumbnail" />
+                  <span>Record ACL</span>
+                </button>
+                <button type="button" class="qd-thumb" data-gallery-shot="admin-user-management" data-gallery-title="Role-Based User Management">
+                  <img data-themed-shot="admin-user-management" src="assets/images/admin-user-management-light.png" alt="User management thumbnail" />
+                  <span>RBAC &amp; Users</span>
+                </button>
+                <button type="button" class="qd-thumb" data-gallery-shot="profile-subscription" data-gallery-title="Subscriptions &amp; Resource Quotas">
+                  <img data-themed-shot="profile-subscription" src="assets/images/profile-subscription-light.png" alt="Subscriptions thumbnail" />
+                  <span>Subscriptions</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="spotlight spotlight-reverse">
+            <div class="spotlight-copy">
+              <span class="tag">Governance &amp; Cloud Parity</span>
+              <h3>Runtime Config, .NET Aspire 17 &amp; Pulumi Azure IaC</h3>
+              <p>
+                Tune system parameters in production without restarts, observe distributed traces locally in .NET Aspire 17, and provision Azure Container Apps, Azure SQL, Cosmos DB, Blob Storage, Key Vault, and Azure OpenAI via typed C# Pulumi stacks.
+              </p>
+              <ul class="feature-bullets">
+                <li>Live System Config overrides for AI similarity thresholds and resilience circuit breakers</li>
+                <li>Stripe billing plans tracking team seats, storage, candidates, vacancies, and monthly AI tokens</li>
+                <li>Single-command local Aspire parity paired with automated Azure deployment and EF Core bundles</li>
+              </ul>
+            </div>
+            <div class="qd-gallery">
+              <figure class="qd-gallery-stage" data-lightbox-src="assets/images/admin-system-config-light.png" data-lightbox-title="Runtime System Configuration">
+                <img data-themed-shot="admin-system-config" src="assets/images/admin-system-config-light.png" alt="Platform Administration System Configuration" />
+              </figure>
+              <div class="qd-gallery-thumbs">
+                <button type="button" class="qd-thumb active" data-gallery-shot="admin-system-config" data-gallery-title="Runtime System Configuration">
+                  <img data-themed-shot="admin-system-config" src="assets/images/admin-system-config-light.png" alt="System config thumbnail" />
+                  <span>System Config</span>
+                </button>
+                <button type="button" class="qd-thumb" data-gallery-shot="aspire-dashboard" data-gallery-title=".NET Aspire Local Cloud-Parity Stack">
+                  <img data-themed-shot="aspire-dashboard" src="assets/images/aspire-dashboard-light.png" alt="Aspire dashboard thumbnail" />
+                  <span>Aspire 17</span>
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span data-i18n="footer.copy">© 2026 Qandivo • Modular .NET 11 + Angular 22 Recruiting &amp; Workflow Platform</span>
+        <div class="nav-links">
+          <a href="index.html">Back to Overview →</a>
+        </div>
+      </div>
+    </footer>
+
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot preview">
+      <div class="lightbox-inner">
+        <button id="lightbox-close" type="button" class="lightbox-close" aria-label="Close preview">
+          <img src="assets/svg/close.svg" alt="" />
+        </button>
+        <img id="lightbox-img" src="" alt="" />
+        <p id="lightbox-caption" class="lightbox-caption"></p>
+      </div>
+    </div>
+
+    <script src="assets/i18n.js"></script>
+    <script src="assets/app.js"></script>
+  </body>
+</html>

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { syncResumeData } from './sync-resume-data.mjs';
 
 syncResumeData(process.cwd());
@@ -322,6 +323,9 @@ copyRecursive(path.join(root, 'CV_OleksandrLutskov_.NetFull-Stack.pdf'), path.jo
 copyRecursive(path.join(root, 'assets'), path.join(outDir, 'assets'));
 copyRecursive(path.join(root, 'data'), path.join(outDir, 'data'));
 copyRecursive(templatesDir, path.join(outDir, 'templates'));
+const kadexDir = path.join(outDir, 'kadex-ui');
+fs.mkdirSync(kadexDir, { recursive: true });
+execFileSync('tar', ['-xzf', path.join(root, 'showcases', 'kadex-showcase.tgz'), '-C', kadexDir]);
 if (fs.existsSync(path.join(root, 'qandivo'))) {
   copyRecursive(path.join(root, 'qandivo'), path.join(outDir, 'qandivo'));
 }

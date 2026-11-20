@@ -3,6 +3,7 @@
 Bilingual (**EN / UA**) interactive resume templates (**10 themes** with Dark/Light modes, print-ready A4 styling, SEO meta/JSON-LD, and pre-rendered ATS-friendly HTML).
 
 Live Portfolio: https://dellik95.github.io/portfolio/  
+[Qandivo recruiting platform](https://dellik95.github.io/portfolio/qandivo/) · [Kadex UI library](https://dellik95.github.io/portfolio/kadex-ui/) · [Component guides](https://dellik95.github.io/portfolio/kadex-ui/guides/) · [Demo](https://dellik95.github.io/portfolio/kadex-ui/demo/) · [npm package](https://github.com/users/dellik95/packages/npm/package/kadex-ui)
 RedisGUI Product Landing: https://dellik95.github.io/redis-gui/ ([dellik95/redis-gui](https://github.com/dellik95/redis-gui))  
 Context Platform (Claudy) Landing: https://dellik95.github.io/context-platform/ ([dellik95/context-platform](https://github.com/dellik95/context-platform))
 
@@ -17,6 +18,8 @@ Context Platform (Claudy) Landing: https://dellik95.github.io/context-platform/ 
 - `scripts/build-deploy.mjs` — Stages a clean `dist/` bundle for the chosen template (or `all-templates-hub`)
 - `.github/workflows/deploy-pages.yml` — GitHub Pages deploy pipeline (`workflow_dispatch`)
 - `.github/workflows/deploy-azure.yml` — Optional Azure Static Web Apps deploy pipeline (`workflow_dispatch`, requires `AZURE_STATIC_WEB_APPS_API_TOKEN`)
+
+The Pages build serves the Qandivo showcase from `qandivo/`. For Kadex releases, copy the production `kadex-showcase.tgz` artifact from the Kadex showcase workflow to `showcases/` and deploy the portfolio.
 
 ## Syncing Data After Editing `data/resume-data.json`
 ```bash

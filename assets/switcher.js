@@ -164,13 +164,13 @@
     const fArr = pick(pf.features, lang) || [];
     fArr.forEach((txt, idx) => { dict[`rg_f${idx + 1}`] = txt; });
 
-    const projPrefixes = ['tm', 'cl', 'yt'];
-    pr.forEach((item, idx) => {
-      const k = projPrefixes[idx];
-      if (!k) return;
-      dict[`${k}_badge`] = pick(item.badge, lang);
-      dict[`${k}_title`] = pick(item.title, lang);
-      dict[`${k}_desc`] = pick(item.description, lang);
+    const prefixes = { qandivo: 'qd', 'kadex-ui': 'kx', claudy: 'cl', courses: 'yt' };
+    pr.forEach((item) => {
+      const prefix = prefixes[item.id];
+      if (!prefix) return;
+      for (const field of ['badge', 'title', 'desc']) {
+        dict[`${prefix}_${field}`] = pick(item[field === 'desc' ? 'description' : field], lang);
+      }
     });
 
     const expPrefixes = ['da', 'fp', 'gl', 'rz', 'av'];
@@ -785,15 +785,14 @@
     const matchedProject = [featured, ...projects].find((item) => item && item.id === projectId);
     const defaultLandings = {
       'redis-gui': 'https://dellik95.github.io/redis-gui/',
-      claudy: 'https://dellik95.github.io/context-platform/'
+      claudy: 'https://dellik95.github.io/context-platform/',
+      'qandivo': 'https://dellik95.github.io/portfolio/qandivo/',
+      'kadex-ui': 'https://dellik95.github.io/portfolio/kadex-ui/'
     };
     const landingUrl = (matchedProject && matchedProject.landingUrl) || defaultLandings[projectId];
 
     if (landingUrl) {
-      const win = window.open(landingUrl, '_blank', 'noopener');
-      if (!win) {
-        window.location.href = landingUrl;
-      }
+      window.open(landingUrl, '_blank', 'noopener,noreferrer');
       return;
     }
 

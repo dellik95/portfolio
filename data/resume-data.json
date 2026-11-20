@@ -112,25 +112,48 @@
     },
     "projects": [
       {
-        "id": "talent-mind",
+        "id": "qandivo",
         "badge": {
-          "en": "Modular Monolith • .NET 11 & Angular 22",
-          "uk": "Модульний моноліт • .NET 11 та Angular 22"
+          "en": "AI-First ATS • .NET 11 Modular Monolith + Angular 22",
+          "uk": "AI-First ATS • .NET 11 Модульний моноліт + Angular 22"
         },
         "title": {
-          "en": "Qandivo & @dellik95/kadex-ui — AI-First ATS & Workflow Automation Platform",
-          "uk": "Qandivo & @dellik95/kadex-ui — AI-First ATS та платформа автоматизації рекрутингу"
+          "en": "Qandivo — AI-First ATS & Workflow Automation Platform",
+          "uk": "Qandivo — AI-рекрутинг та платформа автоматизації найму"
         },
         "description": {
-          "en": "Enterprise multi-tenant recruiting platform built on .NET 11 Modular Monolith + Angular 22 SPA featuring a visual DAG workflow automation engine, AI Copilot & candidate match scoring, Cosmos DB vector semantic search, branded public career & self-scheduling candidate portals, GraphQL DSL source generator, and the @dellik95/kadex-ui design system.",
-          "uk": "Багатотенантна платформа рекрутингу на .NET 11 Modular Monolith + Angular 22 SPA з візуальним DAG-рушієм автоматизації воркфлоу, AI-копілотом і скорингом кандидатів, векторним семантичним пошуком у Cosmos DB, брендованими публічними та кандидатськими порталами з самозаписом на інтерв’ю, генератором GraphQL DSL і дизайн-системою @dellik95/kadex-ui."
+          "en": "Enterprise multi-tenant recruiting platform on .NET 11 Modular Monolith + Angular 22 SPA featuring a visual DAG workflow automation engine, AI Copilot & candidate match scoring, Cosmos DB vector semantic search, branded public career & self-scheduling candidate portals, and GraphQL DSL source generator.",
+          "uk": "Багатотенантна платформа рекрутингу на .NET 11 Modular Monolith + Angular 22 SPA з візуальним DAG-рушієм автоматизації воркфлоу, AI-копілотом та скорингом кандидатів, векторним семантичним пошуком у Cosmos DB, брендованими публічними та кандидатськими порталами з самозаписом на інтерв'ю, генератором GraphQL DSL."
         },
         "landingUrl": "https://dellik95.github.io/portfolio/qandivo/",
         "metrics": [
           ".NET 11 + Angular 22",
           "DAG Automation",
           "AI + Vector Search",
-          "@dellik95/kadex-ui"
+          "Multi-Tenant"
+        ]
+      },
+      {
+        "id": "kadex-ui",
+        "badge": {
+          "en": "Angular 22 component library",
+          "uk": "Бібліотека компонентів Angular 22"
+        },
+        "title": {
+          "en": "@dellik95/kadex-ui — Angular 22 Enterprise Design System",
+          "uk": "@dellik95/kadex-ui — Enterprise Design System для Angular 22"
+        },
+        "description": {
+          "en": "Public Angular components and design tokens used by Qandivo. Explore 92 component guides, customize the palette, or try the hiring workspace demo. Install @dellik95/kadex-ui 0.1.0 from GitHub Packages.",
+          "uk": "Публічні компоненти Angular і дизайн-токени, які використовує Qandivo. Доступні 92 довідники компонентів, власні палітри й демозастосунок. Версію @dellik95/kadex-ui 0.1.0 можна встановити з GitHub Packages."
+        },
+        "landingUrl": "https://dellik95.github.io/portfolio/kadex-ui/",
+        "githubUrl": "https://github.com/dellik95/kadex-ui-system",
+        "metrics": [
+          "Angular 22",
+          "92 components",
+          "271 examples",
+          "GitHub Packages"
         ]
       },
       {

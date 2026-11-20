@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -361,11 +361,21 @@
         {
           "@type": "SoftwareApplication",
           "@id": "https://dellik95.github.io/portfolio/qandivo/#app",
-          "name": "Qandivo & @dellik95/kadex-ui — AI-First ATS & Workflow Automation Platform",
-          "description": "Enterprise multi-tenant recruiting platform built on .NET 11 Modular Monolith + Angular 22 SPA featuring a visual DAG workflow automation engine, AI Copilot & candidate match scoring, Cosmos DB vector semantic search, branded public career & self-scheduling candidate portals, GraphQL DSL source generator, and the @dellik95/kadex-ui design system.",
+          "name": "Qandivo — AI-First ATS & Workflow Automation Platform",
+          "description": "Enterprise multi-tenant recruiting platform on .NET 11 Modular Monolith + Angular 22 SPA featuring a visual DAG workflow automation engine, AI Copilot & candidate match scoring, Cosmos DB vector semantic search, branded public career & self-scheduling candidate portals, and GraphQL DSL source generator.",
           "applicationCategory": "DeveloperApplication",
           "operatingSystem": "Windows, Linux, macOS",
           "url": "https://dellik95.github.io/portfolio/qandivo/"
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://dellik95.github.io/portfolio/kadex-ui/#app",
+          "name": "@dellik95/kadex-ui — Angular 22 Enterprise Design System",
+          "description": "Public Angular components and design tokens used by Qandivo. Explore 92 component guides, customize the palette, or try the hiring workspace demo. Install @dellik95/kadex-ui 0.1.0 from GitHub Packages.",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Windows, Linux, macOS",
+          "url": "https://dellik95.github.io/portfolio/kadex-ui/",
+          "codeRepository": "https://github.com/dellik95/kadex-ui-system"
         },
         {
           "@type": "SoftwareApplication",
@@ -762,18 +772,22 @@
             Featured Portfolio &amp; Products ▾
           </button>
           <div class="mono-dd-panel">
-            <div class="mono-dd-item" data-open-landing="redis-gui">
+            <a class="mono-dd-item" href="https://dellik95.github.io/redis-gui/" target="_blank" rel="noopener noreferrer">
               <strong><span>RedisGUI Studio</span><span class="mono" style="font-size:11px;color:var(--emerald);">Open ↗</span></strong>
               <p>.NET 11, Angular 22 Signals, Clean Arch / CQRS, SignalR Redis Studio.</p>
-            </div>
-            <div class="mono-dd-item" data-open-landing="talent-mind">
-              <strong><span>TalentMind &amp; @dellik95/ui</span><span class="mono" style="font-size:11px;">Monolith ↗</span></strong>
-              <p>ASP.NET Core Modular Monolith + Angular 22 AI Recruitment Platform.</p>
-            </div>
-            <div class="mono-dd-item" data-open-landing="claudy">
+            </a>
+            <a class="mono-dd-item" href="https://dellik95.github.io/portfolio/qandivo/" target="_blank" rel="noopener noreferrer">
+              <strong><span>Qandivo — AI-First ATS</span><span class="mono" style="font-size:11px;">ATS ↗</span></strong>
+              <p>.NET 11 Modular Monolith + Angular 22, DAG workflow engine, AI Copilot, Cosmos DB vector search.</p>
+            </a>
+            <a class="mono-dd-item" href="https://dellik95.github.io/portfolio/kadex-ui/" target="_blank" rel="noopener noreferrer">
+              <strong><span>@dellik95/kadex-ui</span><span class="mono" style="font-size:11px;">Design System ↗</span></strong>
+              <p>Angular 22 design system, 92 components, Tailwind v4, Signal IO, 11 entry points.</p>
+            </a>
+            <a class="mono-dd-item" href="https://dellik95.github.io/context-platform/" target="_blank" rel="noopener noreferrer">
               <strong><span>Context Platform (Claudy)</span><span class="mono" style="font-size:11px;">MCP ↗</span></strong>
               <p>FTS5 + sqlite-vec + Tree-sitter AST Graph, .NET 11, Angular 22, 6 Hooks &amp; 17 MCP Tools.</p>
-            </div>
+            </a>
             <div class="mono-dd-item" data-open-landing="courses">
               <strong><span>.NET Engineering Academy</span><span class="mono" style="font-size:11px;">40+ Modules ↗</span></strong>
               <p>Deep-dive engineering courses: AI in .NET, Docker/K8s, CLR Internals.</p>
@@ -807,7 +821,7 @@
           I am a Senior .NET &amp; Full-Stack Software Engineer with over 9 years of commercial experience, including 2 years as a Tech Lead. Throughout my career, I have designed and delivered mission-critical enterprise platforms across Healthcare (Automated Payments), CRM, and Warehouse Management Systems (WMS) — leveraging .NET, Angular, React.js, RabbitMQ, Redis, SQL, DynamoDB, and MongoDB. My core expertise lies in building resilient microservices and serverless cloud architectures on AWS (Lambda, Step Functions, EventBridge, API Gateway, S3, SNS) and Azure, as well as AI-orchestrated workflows (Semantic Kernel, OpenAI).
         </p>
         <div style="display:flex;flex-wrap:wrap;gap:8px;">
-          <button class="btn-dark" data-open-landing="redis-gui" data-i18n="open_landing_cta">Explore RedisGUI →</button>
+          <a class="btn-dark" data-i18n="open_landing_cta" href="https://dellik95.github.io/redis-gui/" target="_blank" rel="noopener noreferrer">Explore RedisGUI →</a>
           <a href="mailto:dellik95@gmail.com" class="btn-light">dellik95@gmail.com</a>
           <a href="https://github.com/dellik95" target="_blank" rel="noopener" class="btn-light">GitHub ↗</a>
           <a href="https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/" target="_blank" rel="noopener" class="btn-light">LinkedIn ↗</a>
@@ -1075,7 +1089,7 @@
           <h3 style="font-size:19px;color:var(--ink);margin-bottom:6px;" data-i18n="rg_title">RedisGUI — Modern Redis Studio &amp; Observability Platform</h3>
           <p style="font-size:13.5px;color:var(--muted);margin-bottom:14px;" data-i18n="rg_desc">Enterprise-grade, high-performance Redis management studio and diagnostics platform built on .NET 11, ASP.NET Core Minimal APIs, Clean Architecture (CQRS / MediatR), SignalR WebSockets, and Angular 22 Signals.</p>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <a href="https://dellik95.github.io/redis-gui/" target="_blank" rel="noopener" class="btn-dark" style="text-decoration:none;" data-open-landing="redis-gui" data-i18n="open_landing_cta">Explore RedisGUI →</a>
+            <a class="btn-dark" style="text-decoration:none;" data-i18n="open_landing_cta" href="https://dellik95.github.io/redis-gui/" target="_blank" rel="noopener noreferrer">Explore RedisGUI →</a>
             <a href="https://github.com/dellik95/redis-gui" target="_blank" rel="noopener" class="m-link" style="border:1px solid var(--border);text-decoration:none;" data-i18n="github_cta">GitHub Repository</a>
           </div>
         </div>
@@ -1091,7 +1105,7 @@
           <h3 style="font-size:19px;color:var(--ink);margin-bottom:6px;" data-i18n="cl_title">Context Platform (Claudy) — Codebase Memory &amp; Hybrid Search</h3>
           <p style="font-size:13.5px;color:var(--muted);margin-bottom:14px;" data-i18n="cl_desc">Local-first persistent memory and hybrid code search engine (SQLite FTS5 + sqlite-vec + Tree-sitter AST call graph) built on .NET 11 Clean Architecture, Angular 22 Tailwind dashboard, SignalR telemetry, 6 lifecycle hooks, and 17 MCP tools for AI coding agents.</p>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <a href="https://dellik95.github.io/context-platform/" target="_blank" rel="noopener" class="btn-dark" style="text-decoration:none;" data-open-landing="claudy" data-i18n="open_claudy_cta">Explore Context Platform →</a>
+            <a class="btn-dark" style="text-decoration:none;" data-i18n="open_claudy_cta" href="https://dellik95.github.io/context-platform/" target="_blank" rel="noopener noreferrer">Explore Context Platform →</a>
             <a href="https://github.com/dellik95/context-platform" target="_blank" rel="noopener" class="m-link" style="border:1px solid var(--border);text-decoration:none;" data-i18n="github_cta">GitHub Repository</a>
           </div>
         </div>

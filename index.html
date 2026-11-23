@@ -132,8 +132,7 @@
       "sameAs": [
         "https://github.com/dellik95",
         "https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/",
-        "https://t.me/alexluts",
-        "https://www.youtube.com/@CrafterInCode"
+        "https://t.me/alexluts"
       ],
       "knowsLanguage": [
         {
@@ -773,7 +772,7 @@
     <div class="sw-brand">
       <div class="sw-badge">OL</div>
       <div class="sw-title-wrap">
-        <h1>Oleksandr Lutskov — 9 Resume Templates</h1>
+        <h1>Oleksandr Lutskov — 10 Resume Templates</h1>
         <span>Portrait Photo • Skill Progress Bars • Light/Dark Theme • Print-Ready</span>
       </div>
     </div>
@@ -794,7 +793,7 @@
       <button class="style-tab" onclick="selectTemplate(4)" id="tab-4">
         <span class="dot" style="background:#2dd4bf;"></span><span>05. Split</span>
       </button>
-      <button class="style-tab active" onclick="selectTemplate(5)" id="tab-5">
+      <button class="style-tab" onclick="selectTemplate(5)" id="tab-5">
         <span class="dot" style="background:#2563eb;"></span><span>06. Dossier CV ★</span>
       </button>
       <button class="style-tab" onclick="selectTemplate(6)" id="tab-6">
@@ -806,7 +805,7 @@
       <button class="style-tab" onclick="selectTemplate(8)" id="tab-8">
         <span class="dot" style="background:#10b981;"></span><span>09. Matrix ★</span>
       </button>
-      <button class="style-tab" onclick="selectTemplate(9)" id="tab-9">
+      <button class="style-tab active" onclick="selectTemplate(9)" id="tab-9">
         <span class="dot" style="background:#9ca3af;"></span><span>10. Classic PDF</span>
       </button>
       <button class="style-tab" onclick="toggleOverview()" id="tab-ov" style="color:#38bdf8;">
@@ -845,7 +844,7 @@
         <button class="seg-btn" id="vp-mobile" onclick="setViewport('mobile')">📲</button>
       </div>
 
-      <a id="open-direct-link" href="templates/07-architect-sidebar-cv.html" target="_blank" class="action-link">
+      <a id="open-direct-link" href="templates/11-classic-pdf.html" target="_blank" class="action-link">
         Open ↗
       </a>
     </div>
@@ -853,7 +852,7 @@
 
   <div class="style-subbar">
     <div class="style-desc" id="active-style-desc">
-      <strong>06. Classic Two-Column Dossier CV (NEW ★):</strong> Класичне двоколонкове резюме із сайдбаром, круглим фото, детальними прогрес-барами скілів та випадаючим меню портфоліо.
+      <strong>10. Classic PDF Style (Original A4 Serif):</strong> Класичне паперове резюме, стилістично ідентичне вашому PDF CV (заголовок з кружечками контактів, товста лінія, Summary по центру та 2-колонковий макет).
     </div>
     <div style="font-family:'JetBrains Mono',monospace;font-size:11px;">
       Перед друком (<strong>🖨 Print</strong>) можна перемкнути на <strong>☀ Light</strong> для чистого світлого друку на папері
@@ -861,7 +860,7 @@
   </div>
 
   <main class="stage-wrap">
-    <iframe id="preview-frame" src="templates/07-architect-sidebar-cv.html" title="Resume Template Preview"></iframe>
+    <iframe id="preview-frame" src="templates/11-classic-pdf.html" title="Resume Template Preview"></iframe>
 
     <!-- Compare All 10 Drawer -->
     <div id="overview-drawer">
@@ -1057,7 +1056,7 @@
       }
     ];
 
-    let currentIdx = 5;
+    let currentIdx = 9;
 
     function updateThemeButtons(theme) {
       document.getElementById('theme-light').classList.toggle('active', theme === 'light');

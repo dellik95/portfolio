@@ -527,17 +527,39 @@
         a.href = c.telegram;
       });
       document.querySelectorAll('[data-contact="youtube"]').forEach((a) => {
-        if (c.youtube) a.href = c.youtube;
+        if (c.youtube) {
+          a.href = c.youtube;
+        } else {
+          const li = a.closest('li');
+          if (li) li.style.display = 'none';
+          a.style.display = 'none';
+        }
       });
     }
   }
 
   function syncPrintBackground() {
     const printBg = document.getElementById('ol-print-page-bg');
-    if (!printBg) return;
+    const meta = getCurrentTemplateMeta();
+    const theme = getCurrentTheme();
+    const isWhiteSheetTpl = !!(meta && (meta.tplClass === 'tpl-11' || (meta.tplClass === 'tpl-07' && theme === 'light')));
     const bodyStyle = window.getComputedStyle(document.body);
-    printBg.style.backgroundColor = bodyStyle.backgroundColor;
-    printBg.style.backgroundImage = bodyStyle.backgroundImage;
+    const bgColor = isWhiteSheetTpl ? '#ffffff' : (bodyStyle.backgroundColor || '#ffffff');
+    const bgImage = isWhiteSheetTpl ? 'none' : (bodyStyle.backgroundImage || 'none');
+
+    if (printBg) {
+      printBg.style.backgroundColor = bgColor;
+      printBg.style.backgroundImage = bgImage;
+      printBg.style.display = isWhiteSheetTpl ? 'none' : '';
+    }
+
+    let pageRule = document.getElementById('ol-print-page-bg-rule');
+    if (!pageRule) {
+      pageRule = document.createElement('style');
+      pageRule.id = 'ol-print-page-bg-rule';
+      document.head.appendChild(pageRule);
+    }
+    pageRule.textContent = `@media print { @page { background: ${bgColor}; } }`;
   }
 
   const TEMPLATE_ALIASES = {
@@ -923,6 +945,11 @@
     style.textContent = `
       [data-i18n="summary_text"] {
         white-space: pre-line;
+      }
+
+      a[download],
+      [data-i18n="download_cv"] {
+        display: none !important;
       }
 
       #ol-print-page-bg {
@@ -2560,7 +2587,13 @@
       @media print {
         @page {
           size: A4 portrait;
-          margin: 0 !important;
+          margin: 12mm 14mm;
+          @top-left { content: none; }
+          @top-center { content: none; }
+          @top-right { content: none; }
+          @bottom-left { content: none; }
+          @bottom-center { content: none; }
+          @bottom-right { content: none; }
         }
 
         * {
@@ -2572,7 +2605,7 @@
           transition: none !important;
         }
 
-        /* Paint the template's exact background edge-to-edge on EVERY printed page */
+        /* Paint the template's exact background edge-to-edge on EVERY printed page (disabled on white paper sheets) */
         #ol-print-page-bg {
           display: block !important;
           position: fixed !important;
@@ -2582,6 +2615,11 @@
           bottom: -50mm !important;
           z-index: -9999 !important;
           pointer-events: none !important;
+        }
+
+        html.tpl-11 #ol-print-page-bg,
+        html.tpl-07[data-theme="light"] #ol-print-page-bg {
+          display: none !important;
         }
 
         html {
@@ -2595,19 +2633,18 @@
 
         body {
           margin: 0 !important;
-          padding: 10mm 12mm !important;
-          -webkit-box-decoration-break: clone !important;
-          box-decoration-break: clone !important;
+          padding: 0 !important;
           width: 100% !important;
           height: auto !important;
           overflow: visible !important;
         }
 
-        /* 1. Hide Interactive Navigation Bars, Dropdowns, Floating Switchers & Upload Prompts */
+        /* 1. Hide Interactive Navigation Bars, Dropdowns, Credential Buttons, Download Links & Floating Switchers */
         #ol-floating-switcher,
         #ol-project-landing-modal,
         #ol-hidden-photo-input,
         .ol-hdr-actions,
+        .pdf-top-actions,
         #spotlight,
         .top-nav,
         .ide-titlebar,
@@ -2621,7 +2658,9 @@
         .spy-nav,
         .filter-pills,
         .ol-photo-overlay,
+        .ol-cert-btn,
         [data-i18n="photo_hint"],
+        [data-i18n="download_cv"],
         [data-open-landing],
         a[download],
         .bento-featured-mini,
@@ -2642,7 +2681,7 @@
           color: #0f172a !important;
         }
 
-        /* 2. Consistent Page-Width Alignment Across All Pages (Zero Margin Drift) */
+        /* 2. Consistent Page-Width Alignment Across All Pages (Zero Gray Canvas Border) */
         .container,
         .wrap,
         .sheet,
@@ -2650,12 +2689,69 @@
         .ide-content,
         .cv-paper,
         .split-layout,
-        .em-grid {
+        .em-grid,
+        .pdf-sheet {
           max-width: 100% !important;
           width: 100% !important;
           margin: 0 !important;
           padding: 0 !important;
           box-shadow: none !important;
+        }
+
+        html.tpl-11,
+        html.tpl-11 body,
+        html.tpl-11 .pdf-sheet {
+          background: #ffffff !important;
+          background-image: none !important;
+          border: none !important;
+          box-shadow: none !important;
+        }
+
+        html.tpl-11 .pdf-thick-rule {
+          margin: 15px 0 18px !important;
+        }
+        html.tpl-11 .pdf-summary {
+          margin-bottom: 18px !important;
+        }
+        html.tpl-11 .pdf-block {
+          margin-bottom: 18px !important;
+        }
+        html.tpl-11 .pdf-col-heading {
+          break-inside: avoid !important;
+          page-break-inside: avoid !important;
+          break-after: avoid !important;
+          page-break-after: avoid !important;
+        }
+        html.tpl-11 .pdf-left-col .pdf-block:last-child {
+          break-inside: avoid !important;
+          page-break-inside: avoid !important;
+        }
+        html.tpl-11 .pdf-exp-item {
+          margin-bottom: 15px !important;
+        }
+        html.tpl-11 .ol-cert-grid {
+          gap: 8px !important;
+        }
+        html.tpl-11 .ol-cert-card {
+          padding: 8px 11px !important;
+        }
+        html.tpl-11 .ol-cert-title {
+          font-size: 13.5px !important;
+        }
+
+        html.tpl-07[data-theme="light"],
+        html.tpl-07[data-theme="light"] body,
+        html.tpl-07[data-theme="light"] .cv-paper,
+        html.tpl-07[data-theme="light"] .cv-main {
+          background: #ffffff !important;
+          background-image: none !important;
+          border: none !important;
+          border-radius: 0 !important;
+          box-shadow: none !important;
+        }
+
+        html.tpl-07[data-theme="light"] .cv-main {
+          padding: 14px 0 0 !important;
         }
 
         /* Template 01: Bento Grid — Compact spacing so it fits on 4 clean pages without orphan footer */
@@ -3302,6 +3398,7 @@
     initAnimatedProgressBars();
     setLanguage(getCurrentLang());
     setTheme(getCurrentTheme(), false);
+    window.requestAnimationFrame(syncPrintBackground);
     loadLiveResumeJson();
 
     window.addEventListener('message', (ev) => {

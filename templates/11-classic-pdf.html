@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Oleksandr Lutskov — Senior Full Stack Software Engineer (Classic PDF Style)</title>
+  <title>Oleksandr Lutskov — Senior Full Stack Software Engineer</title>
   <!-- OL_SEO_HEAD_START -->
   <meta name="description" content="Oleksandr Lutskov — Senior Full Stack Software Engineer (9+ yrs, 2 yrs Tech Lead). .NET 11/C#, Angular 22, React.js, 190+ Microservices, AWS Serverless, Azure, AI Agents &amp; Semantic Kernel. Creator of RedisGUI and Context Platform (Claudy)." />
   <meta name="keywords" content="Oleksandr Lutskov, Senior Full Stack Software Engineer, .NET Engineer, C#, ASP.NET Core, Angular, React.js, TypeScript, Microservices, AWS Lambda, AWS Step Functions, Azure Functions, Semantic Kernel, OpenAI, MCP, AI Agents, RedisGUI, Context Platform, Claudy, Tree-sitter, SQLite FTS5, sqlite-vec, Playwright, RabbitMQ, Kafka, DynamoDB, Docker, Kubernetes, Tech Lead" />
@@ -17,7 +17,7 @@
   <link rel="alternate" hreflang="x-default" href="https://dellik95.github.io/portfolio/" />
   <meta property="og:type" content="profile" />
   <meta property="og:site_name" content="Oleksandr Lutskov — Engineering Portfolio" />
-  <meta property="og:title" content="Oleksandr Lutskov — Senior Full Stack Software Engineer (Classic PDF Style)" />
+  <meta property="og:title" content="Oleksandr Lutskov — Senior Full Stack Software Engineer" />
   <meta property="og:description" content="Oleksandr Lutskov — Senior Full Stack Software Engineer (9+ yrs, 2 yrs Tech Lead). .NET 11/C#, Angular 22, React.js, 190+ Microservices, AWS Serverless, Azure, AI Agents &amp; Semantic Kernel. Creator of RedisGUI and Context Platform (Claudy)." />
   <meta property="og:url" content="https://dellik95.github.io/portfolio/" />
   <meta property="og:image" content="https://dellik95.github.io/portfolio/assets/redis-gui/02_dashboard.png" />
@@ -28,7 +28,7 @@
   <meta property="profile:last_name" content="Lutskov" />
   <meta property="profile:username" content="dellik95" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Oleksandr Lutskov — Senior Full Stack Software Engineer (Classic PDF Style)" />
+  <meta name="twitter:title" content="Oleksandr Lutskov — Senior Full Stack Software Engineer" />
   <meta name="twitter:description" content="Oleksandr Lutskov — Senior Full Stack Software Engineer (9+ yrs, 2 yrs Tech Lead). .NET 11/C#, Angular 22, React.js, 190+ Microservices, AWS Serverless, Azure, AI Agents &amp; Semantic Kernel. Creator of RedisGUI and Context Platform (Claudy)." />
   <meta name="twitter:image" content="https://dellik95.github.io/portfolio/assets/redis-gui/02_dashboard.png" />
   <script type="application/ld+json">
@@ -74,8 +74,7 @@
       "sameAs": [
         "https://github.com/dellik95",
         "https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/",
-        "https://t.me/alexluts",
-        "https://www.youtube.com/@CrafterInCode"
+        "https://t.me/alexluts"
       ],
       "knowsLanguage": [
         {
@@ -775,11 +774,35 @@
       }
     }
 
+    .pdf-left-col .pdf-block > div + div {
+      margin-top: 12px;
+    }
+
     @media print {
-      body {
+      @page {
+        size: A4 portrait;
+        margin: 12mm 14mm;
+      }
+      html, body {
         background: #ffffff !important;
         padding: 0 !important;
       }
+      .pdf-sheet {
+        background: #ffffff !important;
+        box-shadow: none !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .pdf-top-actions,
+      .ol-cert-btn {
+        display: none !important;
+      }
+      .pdf-exp-item,
+      .pdf-edu-item {
+        break-inside: avoid;
+      }
+    }
       .pdf-sheet {
         box-shadow: none !important;
         max-width: 100% !important;
@@ -800,7 +823,7 @@
   <main class="pdf-sheet">
     <!-- Top bar for switcher.js injected EN/UA + Print + Download PDF -->
     <div class="pdf-top-actions">
-      <a class="pdf-download-link" href="../CV_OleksandrLutskov_.NetFull-Stack.pdf" download data-i18n="download_cv">Download PDF CV</a>
+      <!-- hidden download button: <a class="pdf-download-link" href="../CV_OleksandrLutskov_.NetFull-Stack.pdf" download data-i18n="download_cv">Download PDF CV</a> -->
     </div>
 
     <!-- Header Block -->
@@ -852,12 +875,12 @@
           </span>
         </a>
 
-        <a class="pdf-contact-row" href="https://www.youtube.com/@CrafterInCode" target="_blank" rel="noopener" data-contact="youtube">
+        <!-- hidden for now: <a class="pdf-contact-row" href="https://www.youtube.com/@CrafterInCode" target="_blank" rel="noopener" data-contact="youtube">
           <span class="u-link">YouTube (@CrafterInCode)</span>
           <span class="pdf-icon-circle" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.58 7.19a2.5 2.5 0 0 0-1.76-1.77C18.26 5 12 5 12 5s-6.26 0-7.82.42A2.5 2.5 0 0 0 2.42 7.2 26.2 26.2 0 0 0 2 12a26.2 26.2 0 0 0 .42 4.81 2.5 2.5 0 0 0 1.76 1.77C5.74 19 12 19 12 19s6.26 0 7.82-.42a2.5 2.5 0 0 0 1.76-1.77A26.2 26.2 0 0 0 22 12a26.2 26.2 0 0 0-.42-4.81zM10 15V9l5.2 3-5.2 3z"/></svg>
           </span>
-        </a>
+        </a> -->
       </div>
     </header>
 

@@ -7,7 +7,7 @@ import { syncResumeData } from './sync-resume-data.mjs';
 syncResumeData(process.cwd());
 
 function parseArgs(argv) {
-  const args = { target: 'resume', template: '01-bento-glass', out: 'dist' };
+  const args = { target: 'resume', template: '11-classic-pdf', out: 'dist' };
   for (let i = 0; i < argv.length; i++) {
     const k = argv[i];
     if (k === '--target' && argv[i + 1]) args.target = argv[++i];

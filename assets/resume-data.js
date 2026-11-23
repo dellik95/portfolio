@@ -67,8 +67,10 @@ window.__OL_RESUME_DATA__ = {
       "linkedin": "https://www.linkedin.com/in/oleksandr-lutskov-b78a57146/",
       "telegram": "https://t.me/alexluts",
       "telegramHandle": "t.me/alexluts",
-      "youtube": "https://www.youtube.com/@CrafterInCode",
-      "youtubeHandle": "@CrafterInCode",
+      "youtube": "",
+      "youtubeHandle": "",
+      "_hiddenYoutube": "https://www.youtube.com/@CrafterInCode",
+      "_hiddenYoutubeHandle": "@CrafterInCode",
       "pdfCv": "CV_OleksandrLutskov_.NetFull-Stack.pdf"
     }
   },

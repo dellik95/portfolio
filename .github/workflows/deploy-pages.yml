@@ -7,7 +7,7 @@ on:
         description: 'Select resume template to deploy to https://dellik95.github.io/portfolio/'
         required: true
         type: choice
-        default: '02-terminal-ide'
+        default: '11-classic-pdf'
         options:
           - 01-bento-glass
           - 02-terminal-ide

@@ -95,7 +95,6 @@
       id: '11-classic-pdf',
       tplClass: 'tpl-11',
       nativeTheme: 'light',
-      noTheme: true,
       num: '10',
       name: 'Classic PDF',
       tag: 'Serif / Original A4 PDF Style',
@@ -542,10 +541,11 @@
     const printBg = document.getElementById('ol-print-page-bg');
     const meta = getCurrentTemplateMeta();
     const theme = getCurrentTheme();
-    const isWhiteSheetTpl = !!(meta && (meta.tplClass === 'tpl-11' || (meta.tplClass === 'tpl-07' && theme === 'light')));
+    const isWhiteSheetTpl = !!(meta && ((meta.tplClass === 'tpl-11' || meta.tplClass === 'tpl-07') && theme === 'light'));
+    const isDarkClassicPdf = !!(meta && meta.tplClass === 'tpl-11' && theme === 'dark');
     const bodyStyle = window.getComputedStyle(document.body);
-    const bgColor = isWhiteSheetTpl ? '#ffffff' : (bodyStyle.backgroundColor || '#ffffff');
-    const bgImage = isWhiteSheetTpl ? 'none' : (bodyStyle.backgroundImage || 'none');
+    const bgColor = isWhiteSheetTpl ? '#ffffff' : (isDarkClassicPdf ? '#14171f' : (bodyStyle.backgroundColor || '#ffffff'));
+    const bgImage = (isWhiteSheetTpl || isDarkClassicPdf) ? 'none' : (bodyStyle.backgroundImage || 'none');
 
     if (printBg) {
       printBg.style.backgroundColor = bgColor;
@@ -2581,6 +2581,61 @@
         color: #047857 !important;
       }
 
+      /* Classic PDF Dark Theme (tpl-11) */
+      html.tpl-11[data-theme="dark"] {
+        --canvas: #0b0d11;
+        --paper: #14171f;
+        --ink-strong: #f3f4f6;
+        --ink: #d1d5db;
+        --ink-muted: #9ca3af;
+        --rule: #4b5563;
+        --rule-light: #374151;
+        --badge: #374151;
+        --hover: #ffffff;
+      }
+      html.tpl-11[data-theme="dark"] body {
+        background: var(--canvas);
+        color: var(--ink);
+      }
+      html.tpl-11[data-theme="dark"] .pdf-sheet {
+        background: var(--paper);
+        box-shadow: 0 4px 32px rgba(0, 0, 0, 0.45);
+      }
+      html.tpl-11[data-theme="dark"] .ol-hdr-seg {
+        background: #1a1f29;
+        border-color: #374151;
+      }
+      html.tpl-11[data-theme="dark"] .ol-hdr-btn,
+      html.tpl-11[data-theme="dark"] .ol-hdr-print {
+        color: #d1d5db;
+        border-color: #374151;
+      }
+      html.tpl-11[data-theme="dark"] .ol-hdr-btn:hover {
+        background: #252c3a;
+        color: #ffffff;
+      }
+      html.tpl-11[data-theme="dark"] .ol-hdr-btn.active,
+      html.tpl-11[data-theme="dark"] .ol-hdr-print:hover {
+        background: #e5e7eb;
+        border-color: #e5e7eb;
+        color: #111827;
+      }
+      html.tpl-11[data-theme="dark"] .ol-cert-card {
+        background: #181c26;
+        border-color: #2d3444;
+      }
+      html.tpl-11[data-theme="dark"] .ol-cert-issuer {
+        background: #252b38;
+        color: #e5e7eb;
+      }
+      html.tpl-11[data-theme="dark"] .ol-cert-title {
+        color: #f3f4f6;
+      }
+      html.tpl-11[data-theme="dark"] .ol-cert-skill {
+        border-color: #374151;
+        color: #cbd5e1;
+      }
+
       /* ==========================================================================
          AUTHENTIC FULL-STYLE A4 PRINT ARCHITECTURE (PRESERVES ACTIVE LIGHT OR DARK THEME!)
          ========================================================================== */
@@ -2620,6 +2675,9 @@
         html.tpl-11 #ol-print-page-bg,
         html.tpl-07[data-theme="light"] #ol-print-page-bg {
           display: none !important;
+        }
+        html.tpl-11[data-theme="dark"] #ol-print-page-bg {
+          display: block !important;
         }
 
         html {
@@ -2705,6 +2763,11 @@
           background-image: none !important;
           border: none !important;
           box-shadow: none !important;
+        }
+        html.tpl-11[data-theme="dark"],
+        html.tpl-11[data-theme="dark"] body,
+        html.tpl-11[data-theme="dark"] .pdf-sheet {
+          background: #14171f !important;
         }
 
         html.tpl-11 .pdf-thick-rule {

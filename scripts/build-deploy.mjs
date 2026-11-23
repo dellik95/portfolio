@@ -73,8 +73,14 @@ const TEMPLATE_ALIASES = {
   'all-templates-hub': 'hub'
 };
 
+const BUILD_VERSION = Date.now().toString(36);
+
+function bustAssetCache(html) {
+  return html.replace(/(assets\/(?:switcher|resume-data)\.js)(?:\?v=[^"']*)?/g, `$1?v=${BUILD_VERSION}`);
+}
+
 function injectRouteMeta(html, { standalone = false, templateFile = '', assetRoot = '', ensureTrailingSlash = false } = {}) {
-  let out = html;
+  let out = bustAssetCache(html);
   if (ensureTrailingSlash && !out.includes('ol-slash-normalizer')) {
     const slashScript = '  <script id="ol-slash-normalizer">(function(){var p=location.pathname;if(!p.endsWith("/")&&!/\\.html$/i.test(p)){location.replace(p+"/"+location.search+location.hash);}})();</script>';
     out = out.replace(/<head(\b[^>]*)>/i, `<head$1>\n${slashScript}`);
@@ -323,6 +329,10 @@ copyRecursive(path.join(root, 'CV_OleksandrLutskov_.NetFull-Stack.pdf'), path.jo
 copyRecursive(path.join(root, 'assets'), path.join(outDir, 'assets'));
 copyRecursive(path.join(root, 'data'), path.join(outDir, 'data'));
 copyRecursive(templatesDir, path.join(outDir, 'templates'));
+for (const tplFile of templateFiles) {
+  const destTpl = path.join(outDir, 'templates', tplFile);
+  fs.writeFileSync(destTpl, bustAssetCache(fs.readFileSync(destTpl, 'utf8')), 'utf8');
+}
 const kadexDir = path.join(outDir, 'kadex-ui');
 fs.mkdirSync(kadexDir, { recursive: true });
 execFileSync('tar', ['-xzf', path.join(root, 'showcases', 'kadex-showcase.tgz'), '-C', kadexDir]);

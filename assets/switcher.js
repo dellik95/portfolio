@@ -2636,19 +2636,18 @@
         color: #cbd5e1;
       }
 
+      @page {
+        size: A4 portrait;
+        margin: 13mm 14mm;
+      }
+
       /* ==========================================================================
          AUTHENTIC FULL-STYLE A4 PRINT ARCHITECTURE (PRESERVES ACTIVE LIGHT OR DARK THEME!)
          ========================================================================== */
       @media print {
         @page {
           size: A4 portrait;
-          margin: 12mm 14mm;
-          @top-left { content: none; }
-          @top-center { content: none; }
-          @top-right { content: none; }
-          @bottom-left { content: none; }
-          @bottom-center { content: none; }
-          @bottom-right { content: none; }
+          margin: 13mm 14mm;
         }
 
         * {
